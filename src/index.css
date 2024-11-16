@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Ubuntu Mono', monospace;
+}
+
+/* Add this in a custom CSS file or in a <style> block */
+.blur-background::before {
+  content: '';
+  @apply absolute inset-0 bg-inherit blur-md;
+}
+
