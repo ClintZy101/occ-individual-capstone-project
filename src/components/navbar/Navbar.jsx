@@ -24,7 +24,7 @@ export default function Navbar({ bannerIsHidden }) {
       <div
         className={`${
           bannerIsHidden ? "-translate-y-8" : ""
-        } rounded-xl w-5/6 h-10 bg-white text-black bg-opacity-80 flex justify-between  mx-auto px-5  items-center   transform transition-transform duration-500 ease-in-out shadow-md`}
+        } rounded-xl w-5/6 h-10 bg-white text-black  flex justify-between  mx-auto px-5  items-center   transform transition-transform duration-500 ease-in-out shadow-md`}
       >
         <div>MyShop</div>
         <div className="flex space-x-8 uppercase">

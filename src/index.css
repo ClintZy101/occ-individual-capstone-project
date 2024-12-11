@@ -4,6 +4,7 @@
 
 body {
   font-family: 'Ubuntu Mono', monospace;
+  user-select: none;
 }
 
 /* Add this in a custom CSS file or in a <style> block */
