@@ -14,6 +14,7 @@ import Footer from "./components/footer/Footer";
 import Cart from "./pages/Cart";
 import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   const { bannerIsHidden } = scrollHook();
@@ -36,6 +37,7 @@ function App() {
         <Route path="/shop/product/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       {shouldShowNavbarAndFooter && <Footer />}
     </>

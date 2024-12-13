@@ -37,7 +37,9 @@ export default function Navbar({ bannerIsHidden }) {
           <span className="hover:underline cursor-pointer">Sale</span>
         </div>
         <div className="space-x-3 flex items-center">
+          <Link to={'/login'}>
           <span>Login</span>
+          </Link>
           <Link to={"/cart"}>
           <span className="relative grid place-items-center">
             <BsCart className="text-xl" />
