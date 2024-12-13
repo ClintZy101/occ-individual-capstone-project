@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Hero2() {
   return (
-    <div className="relative -mt-10  bg-[url('https://images.pexels.com/photos/3756941/pexels-photo-3756941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')] w-screen h-screen bg-cover grid place-items-center bg-center">
+    <div className="relative -mt-12  bg-[url('https://images.pexels.com/photos/3756941/pexels-photo-3756941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')] w-screen h-screen bg-cover grid place-items-center bg-center">
 
       <div className="bg-black w-full h-full text-white   bg-opacity-50 p-5  text-center grid gap-2 ">
         <div>

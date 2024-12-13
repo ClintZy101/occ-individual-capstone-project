@@ -9,7 +9,6 @@ const SignupForm = () => {
     email: "",
     role: "",
     password: "",
-    confirmPassword: "",
   });
 
   const [error, setError] = useState(null);
@@ -25,14 +24,17 @@ const SignupForm = () => {
     if (!formData.email) {
       return "Email is required.";
     }
+    if(!formData.role){
+      return "Please Select Your Role"
+    }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       return "Please enter a valid email address.";
     }
     if (!formData.password) {
       return "Password is required.";
     }
-    if (formData.password.length < 6) {
-      return "Password must be at least 6 characters long.";
+    if (formData.password.length < 7) {
+      return "Password must be at least 7 characters long.";
     }
     if (formData.password !== formData.confirmPassword) {
       return "Passwords do not match.";
@@ -75,17 +77,7 @@ const SignupForm = () => {
       {error && <div className="text-red-500 mb-4">{error}</div>}
       <p>Choose your Role:</p>
       <div className="flex items-center space-x-10 mb-5" >
-      
-        <div className="flex space-x-5">
-          <input
-            type="radio"
-            id="admin"
-            name="role"
-            value="admin"
-            onChange={handleChange}
-          />
-          <label htmlFor="admin">Admin</label>
-        </div>
+
         <div className="flex space-x-5">
           <input
             type="radio"
@@ -133,11 +125,13 @@ const SignupForm = () => {
         value={formData.confirmPassword}
         onChange={handleChange}
       />
+      <div className="mt-10">
       <GlowButton
         loading={loading}
         loadingTitle={"Creating Account..."}
         title={"Sign Up"}
       />
+      </div>
     </form>
   );
 };

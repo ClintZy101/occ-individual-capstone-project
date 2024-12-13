@@ -77,8 +77,9 @@ const LoginForm = () => {
         value={formData.password}
         onChange={handleChange}
       />
-      
+      <div className="mt-10">
       <GlowButton loading={loading} loadingTitle={"Signing In"} title={"Sign In"} />
+      </div>
     </form>
   );
 };

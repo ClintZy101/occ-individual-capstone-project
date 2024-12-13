@@ -3,11 +3,15 @@ import { BsCart } from "react-icons/bs";
 import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import useCartStore from "../../store/useCartLocalStorage";
+import GlowButton from "../buttons/GlowButton";
 // import useCartStore from "../../store/useCart";
 
 export default function Navbar({ bannerIsHidden }) {
-  const { cartItems} = useCartStore();
-  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const { cartItems } = useCartStore();
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   return (
     <div className="sticky top-0 z-50">
@@ -24,7 +28,7 @@ export default function Navbar({ bannerIsHidden }) {
       <div
         className={`${
           bannerIsHidden ? "-translate-y-8" : ""
-        } rounded-xl w-5/6 h-10 bg-white text-black  flex justify-between  mx-auto px-5  items-center   transform transition-transform duration-500 ease-in-out shadow-md`}
+        } rounded-xl w-5/6 h-12 bg-white text-black  flex justify-between  mx-auto px-5  items-center   transform transition-transform duration-500 ease-in-out shadow-md`}
       >
         <div>MyShop</div>
         <div className="flex space-x-8 uppercase">
@@ -37,14 +41,16 @@ export default function Navbar({ bannerIsHidden }) {
           <span className="hover:underline cursor-pointer">Sale</span>
         </div>
         <div className="space-x-3 flex items-center">
-          <Link to={'/login'}>
-          <span>Login</span>
-          </Link>
           <Link to={"/cart"}>
-          <span className="relative grid place-items-center">
-            <BsCart className="text-xl" />
-            <span className="rounded-full absolute -right-2 -top-2 bg-black w-4 h-4 text-xs text-white grid place-items-center">{cartItems.length === 0 ? '0': totalQuantity}</span>
-          </span>
+            <span className="relative grid place-items-center">
+              <BsCart className="text-xl" />
+              <span className="rounded-full absolute -right-2 -top-2 bg-black w-4 h-4 text-xs text-white grid place-items-center">
+                {cartItems.length === 0 ? "0" : totalQuantity}
+              </span>
+            </span>
+          </Link>
+          <Link to={"/login"} className="">
+            <GlowButton title={"Login"} />
           </Link>
         </div>
       </div>
