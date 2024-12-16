@@ -8,13 +8,19 @@ import Subscribe from "../components/subscription/Subscribe";
 import Footer from "../components/footer/Footer";
 import { products } from "../data/allproducts";
 import Trending from "../components/trending-products/Trending";
+import {motion} from 'framer-motion'
 
 
 export default function Home() {
   const trendingProducts = products.slice(0, 4);
 
   return (
-    <div className="bg-black tracking-widest -mt-12 ">
+    <motion.div 
+    // initial={{ opacity: 0, scale: 0.9 }}
+    // animate={{ opacity: 1, scale: 1 }}
+    // exit={{ opacity: 0, scale: 0.9 }}
+    // transition={{ duration: 0.5 }}
+    className="bg-black tracking-widest -mt-12 ">
 
       {/*  Hero */}
       <Hero2 />
@@ -38,6 +44,6 @@ export default function Home() {
       {/* Subscription Email */}
       <Subscribe />
 
-    </div>
+    </motion.div>
   );
 }

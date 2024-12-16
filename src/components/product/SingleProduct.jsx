@@ -46,7 +46,7 @@ export default function SingleProduct() {
 
   // console.log(updatedProduct)
   return (
-    <div className="flex space-x-10 -mt-10 pt-20 p-10 min-h-[900px] bg-black tracking-widest">
+    <div className="flex space-x-10 -mt-12 pt-20 p-10 min-h-[900px] bg-black tracking-widest">
       <div className="w-1/2 text-white">
         <h2 className="mb-5">{product.title}</h2>
         <img src={product.src} alt="" />
