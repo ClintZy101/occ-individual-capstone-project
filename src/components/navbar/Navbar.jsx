@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BsCart } from "react-icons/bs";
 import { IoCartOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useCartStore from "../../store/useCartLocalStorage";
 import GlowButton from "../buttons/GlowButton";
 import { useAuthStore } from "../../store/useAuthStore";
@@ -13,7 +13,7 @@ import AccountDropdown from "./AccountDropdown";
 export default function Navbar({ bannerIsHidden }) {
   const { user, signOut } = useAuthStore();
   const [userName, setUserName] = useState('')
-
+  const location = useLocation();
 
   const getUserName = () =>{
    if(user){
@@ -59,13 +59,13 @@ export default function Navbar({ bannerIsHidden }) {
         <div>MyShop</div>
         <div className="flex space-x-8 uppercase">
           <Link to={"/"}>
-            <span className="hover:underline cursor-pointer">Home</span>
+            <span className={`${location.pathname === '/' && 'bg-gray-200  rounded-md'} hover:underline cursor-pointer py-2 px-5`}>Home</span>
           </Link>
           <Link to={"/shop"}>
-            <span className="hover:underline cursor-pointer">Shop</span>
+            <span className={`${location.pathname === '/shop' && 'bg-gray-200  rounded-md'} hover:underline cursor-pointer py-2 px-5`}>Shop</span>
           </Link>
           <Link to={'/seller-dashboard'}>
-          <span className="hover:underline cursor-pointer">Dashboard</span>
+          <span className={`${location.pathname === '/seller-dashboard' && 'bg-gray-200  rounded-md'} hover:underline cursor-pointer py-2 px-5`}>Dashboard</span>
           </Link>
         </div>
         <div className="space-x-3 flex items-center">
