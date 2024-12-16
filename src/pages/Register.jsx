@@ -28,8 +28,8 @@ export default function Register() {
         <div className="w-5/6  max-w-[700px]">
           <SignupForm />
         <Link to={'/login'}>
-          <button className="mt-7 text-lg  text-black hover:underline   text-center w-full">
-            "Already have an account? Sign in"
+          <button className="  mt-7 text-lg  text-black hover:underline   text-center w-full">
+            Already have an account? Sign in!
           </button>
           </Link>
         </div>

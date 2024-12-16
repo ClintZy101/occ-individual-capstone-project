@@ -14,7 +14,7 @@ export default function Home() {
   const trendingProducts = products.slice(0, 4);
 
   return (
-    <div className="bg-black tracking-widest">
+    <div className="bg-black tracking-widest -mt-12 ">
 
       {/*  Hero */}
       <Hero2 />

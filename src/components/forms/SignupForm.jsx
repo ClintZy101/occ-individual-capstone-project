@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "./Input";
-
+import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import GlowButton from "../buttons/GlowButton";
+import { API_ENDPOINTS } from "../../api/endpoint";
+
+const localhost = 'http://localhost:1234'
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -53,14 +56,22 @@ const SignupForm = () => {
     try {
       setError(null);
       setLoading(true);
+
       console.log(formData)
+     const response = axios.post(`http://localhost:1234/api/auth/register`, formData)
+     console.log("response data",response)
+     alert(`Email: ${formData.email} registered successfully!`)
     } catch (err) {
       setError("Failed to sign up. Please try again.");
     } finally {
       setLoading(false); // Reset loading state
-      navigate("/");
+      navigate("/login");
     }
   };
+
+  // useEffect(()=>{
+  //   console.log(formData)
+  // },[formData])
 
   return (
     <form

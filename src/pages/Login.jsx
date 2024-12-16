@@ -30,7 +30,7 @@ export default function Login() {
         <LoginForm />
       <Link to={'/register'}>
         <button className="mt-7 text-lg  text-black hover:underline   text-center w-full">
-          "Don't have an account yet? Sign up!"
+          Don't have an account yet? Sign up!
         </button>
         </Link>
       </div>

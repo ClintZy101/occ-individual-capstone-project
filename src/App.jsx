@@ -23,7 +23,7 @@ function App() {
     location.pathname !== "/login" && location.pathname !== "/register";
 
   return (
-    <>
+    <div className="">
       {shouldShowNavbarAndFooter && (
         <>
           <ScrollToTop />
@@ -40,7 +40,7 @@ function App() {
         <Route path="/register" element={<Register />} />
       </Routes>
       {shouldShowNavbarAndFooter && <Footer />}
-    </>
+    </div>
   );
 }
 

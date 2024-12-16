@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "./Input";
-
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import GlowButton from "../buttons/GlowButton";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const LoginForm = () => {
+  const { setUser, user } = useAuthStore();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -39,14 +41,25 @@ const LoginForm = () => {
 
     try {
       setLoading(true);
+      const response = await axios.post(
+        "http://localhost:1234/api/auth/login",
+        formData
+      );
+      setUser(response.data);
 
-      // Only navigate if login is successful
+      navigate("/"); // Only navigate if login is successful
     } catch (err) {
       setError("Failed to sign in. Please check your credentials.");
     } finally {
       setLoading(false); // Reset loading state
     }
   };
+
+  useEffect(() => {
+    // const {token, user} = user
+    console.log("user:", user.user);
+    console.log("token:", user.token);
+  }, [user]);
 
   return (
     <form
@@ -78,7 +91,11 @@ const LoginForm = () => {
         onChange={handleChange}
       />
       <div className="mt-10">
-      <GlowButton loading={loading} loadingTitle={"Signing In"} title={"Sign In"} />
+        <GlowButton
+          loading={loading}
+          loadingTitle={"Signing In"}
+          title={"Sign In"}
+        />
       </div>
     </form>
   );

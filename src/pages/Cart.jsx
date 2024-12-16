@@ -32,7 +32,7 @@ export default function Cart() {
 
   return (
     // cart container
-    <div className="grid lg:flex gap-5  bg-black -mt-10 pt-[100px] pb-[100px] text-white">
+    <div className="-mt-12 grid lg:flex gap-5  bg-black pt-[100px] pb-[100px] text-white">
       {/* product details */}
       <div className="w-3/4  md:grid px-5">
         <h2 className="text-xl text-center mb-5">My Cart</h2>

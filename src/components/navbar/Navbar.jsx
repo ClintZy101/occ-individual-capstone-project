@@ -4,9 +4,11 @@ import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import useCartStore from "../../store/useCartLocalStorage";
 import GlowButton from "../buttons/GlowButton";
+import { useAuthStore } from "../../store/useAuthStore";
 // import useCartStore from "../../store/useCart";
 
 export default function Navbar({ bannerIsHidden }) {
+  const { setUser, user } = useAuthStore();
   const { cartItems } = useCartStore();
   const totalQuantity = cartItems.reduce(
     (total, item) => total + item.quantity,
@@ -49,9 +51,13 @@ export default function Navbar({ bannerIsHidden }) {
               </span>
             </span>
           </Link>
-          <Link to={"/login"} className="">
-            <GlowButton title={"Login"} />
-          </Link>
+          {user ? (
+            user.user.email
+          ) : (
+            <Link to={"/login"} className="">
+              <GlowButton title={"Login"} />
+            </Link>
+          )}
         </div>
       </div>
     </div>
