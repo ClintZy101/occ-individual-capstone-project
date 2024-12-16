@@ -20,6 +20,7 @@ import { useAuthStore } from "./store/useAuthStore";
 import { useEffect, useState } from "react";
 import WelcomeUser from "./components/modals/WelcomeUser";
 import { AnimatePresence, motion } from "framer-motion";
+import SellerDashboard from "./pages/SellerDashboard";
 
 function App() {
   const { bannerIsHidden } = scrollHook();
@@ -168,6 +169,20 @@ function App() {
                 transition={{ duration: 0.5 }}
               >
                   <Register />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/seller-dashboard"
+            element={
+              <motion.div
+                variants={pageVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{ duration: 0.5 }}
+              >
+                  <SellerDashboard />
               </motion.div>
             }
           />

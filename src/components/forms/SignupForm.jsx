@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import Input from "./Input";
-import axios from "axios"
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import GlowButton from "../buttons/GlowButton";
 import { API_ENDPOINTS } from "../../api/endpoint";
 
-const localhost = 'http://localhost:1234'
+const localhost = "http://localhost:1234";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
+    username: "",
     email: "",
     role: "",
     password: "",
   });
 
   const [error, setError] = useState(null);
+  const [registerResponse, setRegisterResponse] = useState(null)
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -24,11 +26,14 @@ const SignupForm = () => {
   };
 
   const validateForm = () => {
+    if (!formData.username) {
+      return "Username is required.";
+    }
     if (!formData.email) {
       return "Email is required.";
     }
-    if(!formData.role){
-      return "Please Select Your Role"
+    if (!formData.role) {
+      return "Please Select Your Role";
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       return "Please enter a valid email address.";
@@ -56,22 +61,42 @@ const SignupForm = () => {
     try {
       setError(null);
       setLoading(true);
+      // console.log(formData)
+      // check availability before registering user via useEffect
+      // const availabilityResponse = await axios.post(
+      //   `http://localhost:1234/api/auth/check-availability`,
+      //   {
+      //     email: formData.email,
+      //     username: formData.username,
+      //   }
+      // );
+      // console.log(availabilityResponse.data)
 
-      console.log(formData)
-     const response = axios.post(`http://localhost:1234/api/auth/register`, formData)
-     console.log("response data",response)
-     alert(`Email: ${formData.email} registered successfully!`)
+      // if(availabilityResponse.status === 400) {
+      //   setError(availabilityResponse.data.message)
+      //   console.log(availabilityResponse.data.message)
+      // }
+
+
+        const registerResponse = await axios.post(
+          `${localhost}/api/auth/register`,
+          formData
+        )
+        setRegisterResponse(registerResponse)
+
+        console.log("Register response:", registerResponse);
+
+        alert(`Email: ${formData.email} registered successfully!`);
+        navigate("/login");
+
     } catch (err) {
-      setError("Failed to sign up. Please try again.");
+      setError("Failed to sign up. Please choose a unique email and username");
+      console.log(err);
+
     } finally {
       setLoading(false); // Reset loading state
-      navigate("/login");
     }
   };
-
-  // useEffect(()=>{
-  //   console.log(formData)
-  // },[formData])
 
   return (
     <form
@@ -87,8 +112,7 @@ const SignupForm = () => {
 
       {error && <div className="text-red-500 mb-4">{error}</div>}
       <p>Choose your Role:</p>
-      <div className="flex items-center space-x-10 mb-5" >
-
+      <div className="flex items-center space-x-10 mb-5">
         <div className="flex space-x-5">
           <input
             type="radio"
@@ -109,8 +133,15 @@ const SignupForm = () => {
           />
           <label htmlFor="buyer">Buyer</label>
         </div>
-
       </div>
+      <Input
+        label="Username"
+        type="text"
+        name="username"
+        placeholder="Enter your Username"
+        value={formData.username}
+        onChange={handleChange}
+      />
       <Input
         label="Email"
         type="email"
@@ -137,11 +168,11 @@ const SignupForm = () => {
         onChange={handleChange}
       />
       <div className="mt-10">
-      <GlowButton
-        loading={loading}
-        loadingTitle={"Creating Account..."}
-        title={"Sign Up"}
-      />
+        <GlowButton
+          loading={loading}
+          loadingTitle={"Creating Account..."}
+          title={"Sign Up"}
+        />
       </div>
     </form>
   );

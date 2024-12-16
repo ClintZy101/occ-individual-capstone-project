@@ -64,7 +64,9 @@ export default function Navbar({ bannerIsHidden }) {
           <Link to={"/shop"}>
             <span className="hover:underline cursor-pointer">Shop</span>
           </Link>
+          <Link to={'/seller-dashboard'}>
           <span className="hover:underline cursor-pointer">Dashboard</span>
+          </Link>
         </div>
         <div className="space-x-3 flex items-center">
           <Link to={"/cart"}>
