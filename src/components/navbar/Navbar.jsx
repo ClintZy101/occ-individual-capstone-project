@@ -60,7 +60,10 @@ export default function Navbar({
           bannerIsHidden ? "-translate-y-8" : ""
         } rounded-xl w-5/6 h-12 bg-white text-black  flex justify-between  mx-auto px-5  items-center   transform transition-transform duration-500 ease-in-out shadow-md`}
       >
-        <div>MyShop</div>
+        <Link to={'/'}>
+        <div className={`${location.pathname === '/' && "font-semibold"}`}>MyShop</div>
+        </Link>
+      
         <span onClick={handleSidebar} className="cursor-pointer lg:hidden">
           <CiMenuBurger className="text-2xl" />
         </span>

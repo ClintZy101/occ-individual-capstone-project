@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function Sidebar({ sidebarIsShown, handleSidebar }) {
   const links = [
     { name: "Home", link: "/" },
-    { name: "Shop", link: "/products" },
+    { name: "Shop", link: "/shop" },
     // { name: "Contact Us", link: "/contactus" },
     { name: "Cart", link: "/cart" },
     // { name: "My Orders & Reviews", link: "/account/myorders" },
