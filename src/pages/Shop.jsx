@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import Sidebar from "../components/sidebar/Sidebar";
+import ProductsGallerySidebar from "../components/sidebar/ProductsGallerySidebar";
 import Gallery from "../components/gallery/Gallery";
 import useCategory from "../utils/useCategory";
 import usePriceRangeStore from "../store/usePriceRange";
@@ -42,7 +42,7 @@ export default function Shop() {
     <div className="-mt-12  md:flex bg-black -mt-10 p-5 pt-[70px]">
       {/* Sidebar */}
       <div className="">
-        <Sidebar
+        <ProductsGallerySidebar
           chosenCategory={chosenCategory}
           setChosenCategory={setChosenCategory}
         />

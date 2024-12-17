@@ -3,10 +3,8 @@ import {
   Routes,
   Route,
   useLocation,
-  useNavigate,
 } from "react-router-dom";
 import Home from "./pages/Home";
-import "@fontsource/ubuntu-mono";
 import Navbar from "./components/navbar/Navbar";
 import Shop from "./pages/Shop";
 import scrollHook from "./utils/scrollHook";
@@ -21,55 +19,55 @@ import { useEffect, useState } from "react";
 import WelcomeUser from "./components/modals/WelcomeUser";
 import { AnimatePresence, motion } from "framer-motion";
 import SellerDashboard from "./pages/SellerDashboard";
+import Sidebar from "./components/navbar/Sidebar";
 
 function App() {
   const { bannerIsHidden } = scrollHook();
   const location = useLocation();
-  const shouldShowNavbarAndFooter =
-    location.pathname !== "/login" && location.pathname !== "/register";
+  const hiddenPaths = ["/login", "/register"];
+  const shouldShowNavbarAndFooter = !hiddenPaths.includes(location.pathname);
 
-    const { user } = useAuthStore();
+  const { user } = useAuthStore();
 
   const [showModal, setShowModal] = useState(false);
+  const [sidebarIsActive, setSidebarIsActive] = useState(false);
 
-  const pageVariants = {
-    initial: { opacity: 0, y: -50 },
-    animate: { opacity: 1, y: 0, },
-    exit: { opacity: 0, y: 50 },
-  };
+  const handleSidebar = () => setSidebarIsActive(!sidebarIsActive);
 
   useEffect(() => {
     if (user) {
-      setShowModal(true); // Show the modal
-      const timer = setTimeout(() => {
-        setShowModal(false); // Hide the modal after 3 seconds
-
-      }, 3000); // 3000 ms = 3 seconds
-
-      return () => clearTimeout(timer); // Cleanup the timer
+      setShowModal(true);
+      const timer = setTimeout(() => setShowModal(false), 3000);
+      return () => clearTimeout(timer);
     }
-  }, [user]); // Listen for changes to `user` and ensure `navigate` is up to date
- 
+  }, [user]);
+
+  const pageVariants = {
+    initial: { opacity: 0, y: -50 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 50 },
+  };
+
   return (
-    <div 
-    className="bg-black">
+    <div className="bg-black min-h-screen">
       {showModal && <WelcomeUser />}
 
       {shouldShowNavbarAndFooter && (
         <>
           <ScrollToTop />
-          <Navbar bannerIsHidden={bannerIsHidden} />
+          <Navbar
+            bannerIsHidden={bannerIsHidden}
+            sidebarIsActive={sidebarIsActive}
+            handleSidebar={handleSidebar}
+          />
+           <Sidebar
+              sidebarIsShown={sidebarIsActive}
+              handleSidebar={handleSidebar}
+            />
         </>
       )}
 
-      {/* <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/shop/product/:id" element={<SingleProduct />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes> */}
+
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route
@@ -86,22 +84,6 @@ function App() {
               </motion.div>
             }
           />
-          <Route
-            path="/"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <Home />
-              </motion.div>
-            }
-          />
-       
-        
           <Route
             path="/shop"
             element={
@@ -140,11 +122,11 @@ function App() {
                 exit="exit"
                 transition={{ duration: 0.5 }}
               >
-                  <Cart />
+                <Cart />
               </motion.div>
             }
           />
-            <Route
+          <Route
             path="/login"
             element={
               <motion.div
@@ -168,7 +150,7 @@ function App() {
                 exit="exit"
                 transition={{ duration: 0.5 }}
               >
-                  <Register />
+                <Register />
               </motion.div>
             }
           />
@@ -182,43 +164,13 @@ function App() {
                 exit="exit"
                 transition={{ duration: 0.5 }}
               >
-                  <SellerDashboard />
+                <SellerDashboard />
               </motion.div>
             }
           />
-        
-
-          {/* <Route
-            path="/contactus"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <ContactUs />
-              </motion.div>
-            }
-          /> */}
-          {/* <Route
-            path="/checkout"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <Checkout />
-              </motion.div>
-            }
-          /> */}
-        
         </Routes>
       </AnimatePresence>
+
       {shouldShowNavbarAndFooter && <Footer />}
     </div>
   );

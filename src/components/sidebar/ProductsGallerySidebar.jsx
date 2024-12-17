@@ -9,7 +9,7 @@ import { TfiPlus } from "react-icons/tfi";
 import usePriceRangeStore from "../../store/usePriceRange";
 
 
-export default function Sidebar({ chosenCategory, setChosenCategory }) {
+export default function ProductsGallerySidebar({ chosenCategory, setChosenCategory }) {
   // cat type is object with properties: cat, link
   const [showCategory, setShowCategory] = useState(false);
   const [sliderIsShown, setSliderIsShown] = useState(false);

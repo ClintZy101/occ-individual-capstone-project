@@ -8,18 +8,23 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { truncateBeforeChar } from "../../utils/helpers";
 import useOutsideAlerter from "../../utils/useOutsideAlerter";
 import AccountDropdown from "./AccountDropdown";
+import { CiMenuBurger } from "react-icons/ci";
 // import useCartStore from "../../store/useCart";
 
-export default function Navbar({ bannerIsHidden }) {
+export default function Navbar({
+  bannerIsHidden,
+  sidebarIsActive,
+  handleSidebar,
+}) {
   const { user, signOut } = useAuthStore();
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState("");
   const location = useLocation();
 
-  const getUserName = () =>{
-   if(user){
-    setUserName(truncateBeforeChar(user?.email, '@'))
-   }
-  }
+  const getUserName = () => {
+    if (user) {
+      setUserName(user.username || truncateBeforeChar(user?.email, "@"));
+    }
+  };
 
   const { cartItems } = useCartStore();
   const totalQuantity = cartItems.reduce(
@@ -34,10 +39,9 @@ export default function Navbar({ bannerIsHidden }) {
     accountDropdownIsActive
   );
 
-  useEffect(()=>{
-  getUserName()
-  },[user])
-
+  useEffect(() => {
+    getUserName();
+  }, [user]);
 
   return (
     <div className="sticky top-0 z-50">
@@ -57,15 +61,37 @@ export default function Navbar({ bannerIsHidden }) {
         } rounded-xl w-5/6 h-12 bg-white text-black  flex justify-between  mx-auto px-5  items-center   transform transition-transform duration-500 ease-in-out shadow-md`}
       >
         <div>MyShop</div>
-        <div className="flex space-x-8 uppercase">
+        <span onClick={handleSidebar} className="cursor-pointer lg:hidden">
+          <CiMenuBurger className="text-2xl" />
+        </span>
+        <div className="lg:flex space-x-8 uppercase hidden">
           <Link to={"/"}>
-            <span className={`${location.pathname === '/' && 'bg-gray-200  rounded-md'} hover:underline cursor-pointer py-2 px-5`}>Home</span>
+            <span
+              className={`${
+                location.pathname === "/" && "bg-gray-200  rounded-md"
+              } hover:underline cursor-pointer py-2 px-5 transition-all ease-out duration-700`}
+            >
+              Home
+            </span>
           </Link>
           <Link to={"/shop"}>
-            <span className={`${location.pathname === '/shop' && 'bg-gray-200  rounded-md'} hover:underline cursor-pointer py-2 px-5`}>Shop</span>
+            <span
+              className={`${
+                location.pathname === "/shop" && "bg-gray-200  rounded-md"
+              } hover:underline cursor-pointer py-2 px-5 transition-all ease-out duration-700`}
+            >
+              Shop
+            </span>
           </Link>
-          <Link to={'/seller-dashboard'}>
-          <span className={`${location.pathname === '/seller-dashboard' && 'bg-gray-200  rounded-md'} hover:underline cursor-pointer py-2 px-5`}>Dashboard</span>
+          <Link to={"/seller-dashboard"}>
+            <span
+              className={`${
+                location.pathname === "/seller-dashboard" &&
+                "bg-gray-200  rounded-md"
+              } hover:underline cursor-pointer py-2 px-5 transition-all ease-out duration-700`}
+            >
+              Dashboard
+            </span>
           </Link>
         </div>
         <div className="space-x-3 flex items-center">
@@ -77,7 +103,7 @@ export default function Navbar({ bannerIsHidden }) {
               </span>
             </span>
           </Link>
-        
+
           {user ? (
             <div className={` relative group flex `}>
               {/* Dropdown */}
@@ -101,15 +127,13 @@ export default function Navbar({ bannerIsHidden }) {
                   alt=""
                   className="w-10 h-10 rounded-full "
                 />
-                <p className="text-xs hidden md:flex">
-                  Welcome, <br /> {userName}
-                </p>
+                <p className="text-xs hidden md:flex">{userName}</p>
               </div>
             </div>
           ) : (
             <Link to={"/login"} className="">
-            <GlowButton title={"Login"} />
-          </Link>
+              <GlowButton title={"Login"} />
+            </Link>
           )}
         </div>
       </div>

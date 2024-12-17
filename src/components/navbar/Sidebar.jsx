@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 export default function Sidebar({ sidebarIsShown, handleSidebar }) {
   const links = [
     { name: "Home", link: "/" },
-    { name: "Products", link: "/products" },
-    { name: "Contact Us", link: "/contactus" },
-    { name: "Checkout", link: "/checkout" },
-    { name: "My Orders & Reviews", link: "/account/myorders" },
+    { name: "Shop", link: "/products" },
+    // { name: "Contact Us", link: "/contactus" },
+    { name: "Cart", link: "/cart" },
+    // { name: "My Orders & Reviews", link: "/account/myorders" },
   ];
 
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export default function Sidebar({ sidebarIsShown, handleSidebar }) {
       >
         <RiCloseLargeFill className="transition-transform duration-300 group-hover:rotate-180" />
       </span>
-      <div className="grid place-items-center  bg-customBrown-dark text-white md:w-1/2  w-screen h-full ">
+      <div className="grid place-items-center  bg-black text-white md:w-1/2  w-screen h-full ">
         <div className="grid gap-10 ">
           {links.map((link, index) => (
             <span

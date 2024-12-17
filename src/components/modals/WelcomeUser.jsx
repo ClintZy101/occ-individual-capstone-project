@@ -20,8 +20,8 @@ export default function WelcomeUser() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.5 }}
-        className='bg-black text-white z-50 w-[500px] h-[200px] grid place-items-center rounded-2xl'>
-                <h2 className='text-2xl text-center font-medium'>Welcome Back!<br />  Dear "{user?.email}"</h2>
+        className='bg-white shadow-md text-black z-50 w-[500px] h-[200px] grid place-items-center rounded-2xl'>
+                <h2 className='text-2xl text-center font-medium'>Welcome Back<br />   <strong>{user?.username || user?.email}</strong>!</h2>
         </motion.div>
     </motion.div>
   )
