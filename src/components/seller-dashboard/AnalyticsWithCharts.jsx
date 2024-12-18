@@ -117,17 +117,17 @@ export default function AnalyticsWithCharts() {
       transition={{ duration: 2 }}
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="bg-white p-5 rounded-lg shadow-md">
-          <h3 className="text-sm text-gray-500">Total Sales (Year)</h3>
+          <h3 className="text-sm text-gray-900">Total Sales (Year)</h3>
           <p className="text-2xl font-bold text-gray-800">${totalSales}</p>
         </div>
         <div className="bg-white p-5 rounded-lg shadow-md">
-          <h3 className="text-sm text-gray-500">Average Monthly Sales</h3>
+          <h3 className="text-sm text-gray-900">Average Monthly Sales</h3>
           <p className="text-2xl font-bold text-gray-800">
             ${averageMonthlySales}
           </p>
         </div>
         <div className="bg-white p-5 rounded-lg shadow-md">
-          <h3 className="text-sm text-gray-500">Best Performing Month</h3>
+          <h3 className="text-sm text-gray-900">Best Performing Month</h3>
           <p className="text-2xl font-bold text-gray-800">{bestMonth}</p>
         </div>
         <div
@@ -135,7 +135,7 @@ export default function AnalyticsWithCharts() {
             percentageGrowth >= 0 ? "text-green-600" : "text-red-600"
           }`}
         >
-          <h3 className="text-sm text-gray-500">Year-to-Date Growth</h3>
+          <h3 className="text-sm text-gray-900">Year-to-Date Growth</h3>
           <p className="text-2xl font-bold">
             {percentageGrowth >= 0 ? "+" : ""}
             {percentageGrowth.toFixed(2)}%

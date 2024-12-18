@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 
-export default function useOutsideAlerter(ref, setAccountDropdownIsActive, accountDropdownIsActive) {
+export default function useOutsideAlerter(ref, setIsActive, isActive) {
   
     useEffect(() => {
  
       function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target) && accountDropdownIsActive === true) {
-          setAccountDropdownIsActive(false)
+        if (ref.current && !ref.current.contains(event.target) && isActive === true) {
+          setIsActive(false)
         //   alert('clicked outside dropdown')
         } 
       }
@@ -14,6 +14,6 @@ export default function useOutsideAlerter(ref, setAccountDropdownIsActive, accou
     //   listen to clicks outside dropdown component
         document.addEventListener("mousedown", handleClickOutside);
       
-    }, [ref, setAccountDropdownIsActive, accountDropdownIsActive]);
+    }, [ref, setIsActive, isActive]);
   }
   

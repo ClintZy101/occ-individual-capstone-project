@@ -5,7 +5,8 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import DashboardMain from "../components/seller-dashboard/DashboardMain";
 import AnalyticsWithCharts from "../components/seller-dashboard/AnalyticsWithCharts";
-
+import { MdShoppingCartCheckout } from "react-icons/md";
+import Listings from "../components/seller-dashboard/listings/Listings";
 // Menu Item Component
 const Menu = ({ Icon, label, handleChosenMenu, chosenMenu }) => {
   return (
@@ -28,7 +29,6 @@ const Menu = ({ Icon, label, handleChosenMenu, chosenMenu }) => {
 export default function SellerDashboard() {
   const [chosenMenu, setChosenMenu] = useState("Dashboard");
 
-
   const handleChosenMenu = (menu) => {
     setChosenMenu(menu);
   };
@@ -42,8 +42,10 @@ export default function SellerDashboard() {
     switch (chosenMenu) {
       case "Dashboard":
         return <DashboardMain />;
-      case "Products":
-        return <div>Here are your products.</div>;
+      case "Listings":
+        return <Listings />;
+        case "Orders":
+          return <div>Orders</div>
       case "Analytics":
         return <AnalyticsWithCharts/>;
       default:
@@ -63,7 +65,13 @@ export default function SellerDashboard() {
         />
         <Menu
           Icon={<BsBoxSeam />}
-          label="Products"
+          label="Listings"
+          handleChosenMenu={handleChosenMenu}
+          chosenMenu={chosenMenu}
+        />
+        <Menu
+          Icon={<MdShoppingCartCheckout />}
+          label="Orders"
           handleChosenMenu={handleChosenMenu}
           chosenMenu={chosenMenu}
         />
