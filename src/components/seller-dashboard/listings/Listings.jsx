@@ -13,7 +13,7 @@ export default function Listings() {
       <div>
         {products.map((item, i) => (
           <div>
-            <SingleProduct item={item} key={item.id} setOpenInfo={setOpenInfo}/>
+            <SingleProduct item={item} key={item.id} setOpenInfo={setOpenInfo} openInfo={openInfo}/>
           </div>
         ))}
       </div>
