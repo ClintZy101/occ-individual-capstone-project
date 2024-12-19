@@ -60,10 +60,12 @@ export default function Navbar({
           bannerIsHidden ? "-translate-y-8" : ""
         } rounded-xl w-5/6 h-12 bg-white text-black  flex justify-between  mx-auto px-5  items-center   transform transition-transform duration-500 ease-in-out shadow-md`}
       >
-        <Link to={'/'}>
-        <div className={`${location.pathname === '/' && "font-semibold"}`}>MyShop</div>
+        <Link to={"/"}>
+          <div className={`${location.pathname === "/" && "font-semibold"}`}>
+            MyShop
+          </div>
         </Link>
-      
+
         <span onClick={handleSidebar} className="cursor-pointer lg:hidden">
           <CiMenuBurger className="text-2xl" />
         </span>
@@ -86,16 +88,18 @@ export default function Navbar({
               Shop
             </span>
           </Link>
-          <Link to={"/seller-dashboard"}>
-            <span
-              className={`${
-                location.pathname === "/seller-dashboard" &&
-                "bg-gray-200  rounded-md"
-              } hover:underline cursor-pointer py-2 px-5 transition-all ease-out duration-700`}
-            >
-              Dashboard
-            </span>
-          </Link>
+          {(user?.role === "seller" || user?.role === "admin") && (
+            <Link to={"/seller-dashboard"}>
+              <span
+                className={`${
+                  location.pathname === "/seller-dashboard" &&
+                  "bg-gray-200 rounded-md"
+                } hover:underline cursor-pointer py-2 px-5 transition-all ease-out duration-700`}
+              >
+                Dashboard
+              </span>
+            </Link>
+          )}
         </div>
         <div className="space-x-3 flex items-center">
           <Link to={"/cart"}>

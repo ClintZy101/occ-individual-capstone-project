@@ -9,11 +9,13 @@ import Footer from "../components/footer/Footer";
 import { products } from "../data/allproducts";
 import Trending from "../components/trending-products/Trending";
 import {motion} from 'framer-motion'
+import { useAuthStore } from "../store/useAuthStore";
 
 
 export default function Home() {
   const trendingProducts = products.slice(0, 4);
-
+  const {user} = useAuthStore();
+  console.log(user)
   return (
     <motion.div 
     // initial={{ opacity: 0, scale: 0.9 }}
