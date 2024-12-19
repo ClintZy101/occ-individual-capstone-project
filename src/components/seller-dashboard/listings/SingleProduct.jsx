@@ -6,11 +6,14 @@ import { PiInfoThin } from "react-icons/pi";
 import { AnimatePresence, motion } from "framer-motion";
 import useOutsideAlerter from "../../../utils/useOutsideAlerter";
 import { TiMinusOutline } from "react-icons/ti";
+import EditProductDialog from "./EditModal";
 
 export default function SingleProduct({ item }) {
   const [showOptions, setShowOptions] = useState(false);
   const [openInfo, setOpenInfo] = useState(null); // Track which item's info is open
+  const [openEditModal, setOpenEditModal] = React.useState(false);
 
+  const handleOpenEditModal = () => setOpenEditModal(!openEditModal);
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef, setShowOptions, showOptions);
 
@@ -54,7 +57,9 @@ export default function SingleProduct({ item }) {
               exit={{ opacity: 0, y: -5 }}
               className="grid gap-2 border rounded p-2 shadow-md shadow-white absolute right-0"
             >
-              <span className="cursor-pointer">
+              <span 
+              onClick={handleOpenEditModal}
+              className="cursor-pointer">
                 <CiEdit className="text-xl hover:text-purple-400 text-gray-500" />
               </span>
               <span
@@ -87,6 +92,7 @@ export default function SingleProduct({ item }) {
           </motion.div>
         )}
       </AnimatePresence>
+      <EditProductDialog openEditModal={openEditModal} handleOpenEditModal={handleOpenEditModal} item={item}/>
     </div>
   );
 }

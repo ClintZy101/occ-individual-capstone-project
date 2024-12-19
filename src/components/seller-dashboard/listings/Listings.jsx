@@ -4,7 +4,7 @@ import { products } from "../../../data/allproducts";
 
 
 export default function Listings() {
-  const [openInfo, setOpenInfo] = useState(false);
+  const [openInfo, setOpenInfo] = useState(null);
   const [item, setItem] = useState({})
   return (
     <div>
@@ -13,7 +13,7 @@ export default function Listings() {
       <div>
         {products.map((item, i) => (
           <div>
-            <SingleProduct item={item} key={item.id} setOpenInfo={setOpenInfo} openInfo={openInfo}/>
+            <SingleProduct item={item} key={item.id} />
           </div>
         ))}
       </div>
