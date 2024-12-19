@@ -87,8 +87,8 @@ export default function DashboardMain() {
 
   // Stat Component
   const StatCard = ({ label, value, change }) => (
-    <motion.div className="w-[300px] bg-white text-black p-4 rounded-lg shadow-md">
-      <p className="font-semibold text-gray-800 ">{label}</p>
+    <motion.div className="w-[300px] bg-gray-800 text-white p-4 rounded-lg shadow-md">
+      <p className="font-semibold text-white ">{label}</p>
       <motion.div
         initial={{ opacity: 0, y: 5 }}
         animate={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ export default function DashboardMain() {
         </label>
         <select
           id="month"
-          className="ml-2 p-2   rounded-md text-white bg-purple-500"
+          className="ml-2 p-2   rounded-md text-white bg-blue-500"
           value={currentMonth}
           onChange={(e) => setCurrentMonth(e.target.value)}
         >
@@ -162,8 +162,6 @@ export default function DashboardMain() {
       <div className="mt-10">
         <MaterialChart months={months} salesValues={salesValues} />
       </div>
-      {/* <AnalyticsWithCharts /> */}
-      {/* <Analytics /> */}
     </div>
   );
 }

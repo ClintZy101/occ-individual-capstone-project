@@ -6,26 +6,28 @@ import { PiInfoThin } from "react-icons/pi";
 import { AnimatePresence, motion } from "framer-motion";
 import useOutsideAlerter from "../../../utils/useOutsideAlerter";
 
-export default function SingleProduct({ item }) {
+
+export default function SingleProduct({ item, setOpenInfo }) {
   const [showOptions, setShowOptions] = useState(false);
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef, setShowOptions, showOptions);
 
 
   return (
-    <div className="grid gap-5 grid-cols-5 border-t border-t-gray-500 py-2 px-2">
+    <div className="grid gap-5 grid-cols-5 border-t-[0.5px] border-t-gray-500 py-2 px-2">
+     
       <img src={item.src} alt={item.title} className="w-[150px] h-[150px]" />
       <div>
-        <p className="font-semibold text-purple-400">Title</p>
+        <p className="font-semibold text-blue-400">Title</p>
         <p>{item.title}</p>
-        <p className="text-lg text-purple-400">${item.price}</p>
+        <p className="text-lg text-blue-400">${item.price}</p>
       </div>
       <div>
-        <p className="font-semibold text-purple-400">Category</p>
+        <p className="font-semibold text-blue-400">Category</p>
         {item.category[0]}
       </div>
       <div>
-        <p className="font-semibold text-purple-400">Available in Stock:</p>
+        <p className="font-semibold text-blue-400">Available in Stock:</p>
         <p>100</p>
       </div>
 
@@ -34,7 +36,7 @@ export default function SingleProduct({ item }) {
           onClick={() => setShowOptions((prev) => !prev)}
           className="cursor-pointer"
         >
-          <PiDotsThreeOutlineThin className="text-3xl text-white hover:text-purple-400" />
+          <PiDotsThreeOutlineThin className="text-3xl text-white hover:text-blue-400" />
         </span>
 
         <AnimatePresence>
@@ -51,7 +53,9 @@ export default function SingleProduct({ item }) {
               <span className="cursor-pointer">
                 <CiEdit className="text-xl hover:text-purple-400 text-gray-500" />
               </span>
-              <span className="cursor-pointer">
+              <span 
+              onClick={()=>setOpenInfo(prev => !prev)}
+              className="cursor-pointer">
                 <PiInfoThin className="text-xl hover:text-purple-400 text-gray-500" />
               </span>
               <span className="cursor-pointer">

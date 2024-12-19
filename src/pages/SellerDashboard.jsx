@@ -56,7 +56,7 @@ export default function SellerDashboard() {
   return (
     <div className="flex pt-5">
       {/* Sidebar */}
-      <div className="w-[150px] h-screen text-white border-r border-r-gray-500">
+      <div className="w-[170px] h-screen text-white border-r-[0.5px] border-r-gray-500 px-2">
         <Menu
           Icon={<LuLayoutDashboard />}
           label="Dashboard"

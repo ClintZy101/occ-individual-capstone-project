@@ -1,6 +1,6 @@
 import React from "react";
 import Chart from "react-apexcharts";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 
 export default function AnalyticsWithCharts() {
   const salesData = {
@@ -20,6 +20,7 @@ export default function AnalyticsWithCharts() {
 
   const months = Object.keys(salesData);
   const salesValues = Object.values(salesData);
+  const [year] = React.useState(2024);
 
   // Calculate analytics
   const totalSales = salesValues.reduce((sum, value) => sum + value, 0);
@@ -27,8 +28,7 @@ export default function AnalyticsWithCharts() {
   const bestMonthIndex = salesValues.indexOf(Math.max(...salesValues));
   const bestMonth = months[bestMonthIndex];
   const percentageGrowth =
-    ((salesValues[salesValues.length - 1] - salesValues[0]) /
-      salesValues[0]) *
+    ((salesValues[salesValues.length - 1] - salesValues[0]) / salesValues[0]) *
     100;
 
   // Chart Configurations
@@ -59,7 +59,7 @@ export default function AnalyticsWithCharts() {
         categories: months,
         labels: {
           style: {
-            colors: "#64748b",
+            colors: "#ffffff",
             fontSize: "12px",
           },
         },
@@ -67,7 +67,7 @@ export default function AnalyticsWithCharts() {
       yaxis: {
         labels: {
           style: {
-            colors: "#64748b",
+            colors: "#ffffff",
             fontSize: "12px",
           },
         },
@@ -102,40 +102,50 @@ export default function AnalyticsWithCharts() {
       ],
       legend: {
         position: "bottom",
+        labels: {
+          colors: "white", // Change the legend text color to white
+        },
+      },
+      dataLabels: {
+        style: {
+          colors: ["white"], // Change the text color inside the pie slices to white
+        },
       },
     },
   };
+  
 
   return (
     <div className="p-5 rounded-lg shadow-lg space-y-8">
       <h2 className="text-lg font-semibold">Analytics Overview</h2>
 
       {/* Total Sales and Average Sales */}
-      <motion.div 
-      initial={{ opacity: 0, y: 5 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 2 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div className="bg-white p-5 rounded-lg shadow-md">
-          <h3 className="text-sm text-gray-900">Total Sales (Year)</h3>
-          <p className="text-2xl font-bold text-gray-800">${totalSales}</p>
+      <motion.div
+        initial={{ opacity: 0, y: 5 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 2 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
+      >
+        <div className="bg-gray-800 p-5 rounded-lg shadow-md">
+          <h3 className="text-sm  text-white">Total Sales {year}</h3>
+          <p className="text-2xl font-bold text-white">${totalSales}</p>
         </div>
-        <div className="bg-white p-5 rounded-lg shadow-md">
-          <h3 className="text-sm text-gray-900">Average Monthly Sales</h3>
-          <p className="text-2xl font-bold text-gray-800">
+        <div className="bg-gray-800 p-5 rounded-lg shadow-md">
+          <h3 className="text-sm text-white">Average Monthly Sales</h3>
+          <p className="text-2xl font-bold text-white">
             ${averageMonthlySales}
           </p>
         </div>
-        <div className="bg-white p-5 rounded-lg shadow-md">
-          <h3 className="text-sm text-gray-900">Best Performing Month</h3>
-          <p className="text-2xl font-bold text-gray-800">{bestMonth}</p>
+        <div className="bg-gray-800 p-5 rounded-lg shadow-md">
+          <h3 className="text-sm text-white">Best Performing Month</h3>
+          <p className="text-2xl font-bold text-white">{bestMonth}</p>
         </div>
         <div
-          className={`bg-white p-5 rounded-lg shadow-md ${
+          className={`bg-gray-800 p-5 rounded-lg shadow-md ${
             percentageGrowth >= 0 ? "text-green-600" : "text-red-600"
           }`}
         >
-          <h3 className="text-sm text-gray-900">Year-to-Date Growth</h3>
+          <h3 className="text-sm text-white">Year-to-Date Growth</h3>
           <p className="text-2xl font-bold">
             {percentageGrowth >= 0 ? "+" : ""}
             {percentageGrowth.toFixed(2)}%
@@ -143,17 +153,28 @@ export default function AnalyticsWithCharts() {
         </div>
       </motion.div>
 
-      {/* Line Chart */}
-      <div className="bg-white p-5 rounded-lg shadow-md">
-        <h3 className="text-sm text-gray-500">Sales Trends (Monthly)</h3>
-        <Chart options={lineChartConfig.options} series={lineChartConfig.series} type="line" height={300} />
-      </div>
-
       {/* Pie Chart */}
-      <div className="bg-white p-5 rounded-lg shadow-md">
-        <h3 className="text-sm text-gray-500">Sales Distribution</h3>
-        <Chart options={pieChartConfig.options} series={pieChartConfig.series} type="pie" height={300} />
+      <div className="bg-gray-800 p-5 rounded-lg shadow-md">
+        <h3 className="text-sm text-white">Sales Distribution</h3>
+        <Chart
+          options={pieChartConfig.options}
+          series={pieChartConfig.series}
+          type="pie"
+          height={300}
+        />
+      </div>
+      {/* Line Chart */}
+      <div className="bg-gray-800 p-5 rounded-lg shadow-md">
+        <h3 className="text-sm text-white">Sales Trends (Monthly)</h3>
+        <Chart
+          options={lineChartConfig.options}
+          series={lineChartConfig.series}
+          type="line"
+          height={300}
+        />
       </div>
     </div>
   );
 }
+
+
