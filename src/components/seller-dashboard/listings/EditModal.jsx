@@ -1,11 +1,28 @@
 import React, { useState } from "react";
-import { Dialog, DialogHeader, DialogBody, DialogFooter, Button } from "@material-tailwind/react";
+import {
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+  Button,
+} from "@material-tailwind/react";
+import axios from "axios";
+import { LOCALHOST } from "../../../api/endpoint";
+import { useAuthStore } from "../../../store/useAuthStore";
+import useFetchProducts from "../../../api/useFetch";
 
-export default function EditProductDialog({ openEditModal, handleOpenEditModal, item }) {
+export default function EditProductDialog({
+  openEditModal,
+  handleOpenEditModal,
+  item,
+}) {
+  const { fetchUserProducts, setUserProducts, setTrigger } = useFetchProducts();
+  const productId = item._id;
+  const { token } = useAuthStore();
   const [formData, setFormData] = useState({
     title: item.title,
     price: item.price,
-    stock:item.stock,
+    stock: item.stock,
     on_sale: item.on_sale,
     category: item.category.join(", "),
     overview: item.overview,
@@ -64,9 +81,41 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
     setUploadType("url"); // Switch to URL mode
   };
 
-  const handleSave = () => {
-    console.log("Updated Product Data:", formData);
-    alert("Product updated successfully!");
+  const handleSave = async () => {
+    try {
+      const response = await axios.put(
+        `${LOCALHOST}api/products/edit/${productId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Pass the token
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Product updated successfully!");
+        console.log("Updated Product:", response.data.product);
+        // Optimistically update the product list
+        // setUserProducts((prevProducts) =>
+        //   prevProducts.map((product) =>
+        //     product._id === productId ? response.data.product : product
+        //   )
+        // );
+        // set Trigger to fetch data
+      } else {
+        alert(response.data.message || "Failed to update product.");
+      }
+      
+      setTrigger((prev) => prev + 1);
+    } catch (error) {
+      console.error("Error updating product:", error);
+      alert(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
+    }
+
     handleOpenEditModal(); // Close modal after saving
   };
 
@@ -129,23 +178,23 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
 
           {/* Image Section */}
 
-            <div>
-              <label className="block text-gray-400">Image URL</label>
-              <input
-                type="text"
-                name="src"
-                value={formData.src}
-                onChange={handleURLInput}
-                className="w-full px-3 py-2 text-black rounded-md"
-              />
-              {/* <button
+          <div>
+            <label className="block text-gray-400">Image URL</label>
+            <input
+              type="text"
+              name="src"
+              value={formData.src}
+              onChange={handleURLInput}
+              className="w-full px-3 py-2 text-black rounded-md"
+            />
+            {/* <button
                 type="button"
                 onClick={() => setUploadType("drag")}
                 className="mt-2 text-sm text-gray-400 underline"
               >
                 Upload Image instead
               </button> */}
-            </div>
+          </div>
 
           {formData.src && (
             <img

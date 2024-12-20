@@ -1,51 +1,18 @@
 import React, { useEffect, useState } from "react";
 import SingleProduct from "./SingleProduct";
-import { products } from "../../../data/allproducts";
+// import { products } from "../../../data/allproducts";
 import AddProductModal from "./AddProductModal";
 import { Button } from "@material-tailwind/react";
 import axios from "axios";
 import { LOCALHOST } from "../../../api/endpoint";
 import { useAuthStore } from "../../../store/useAuthStore";
-import { ImagePlacehoderSkeleton } from "../../loader/ImageSkeleton";
 import SingleProductSkeleton from "../../loader/SingleProductListingSkeleton";
+import useFetchProducts from "../../../api/useFetch";
 
 export default function Listings() {
-  const [openInfo, setOpenInfo] = useState(null);
-  const [item, setItem] = useState({});
-  const [userProducts, setUserProducts] = useState([]);
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const { token } = useAuthStore();
-
-  const fetchUserProducts = async () => {
-    if (!token) {
-      alert("Please Login to see your product listing.");
-      return;
-    }
-
-    setIsLoading(true); // Start loading
-
-    try {
-      const response = await axios.get(
-        `${LOCALHOST}api/products/user-products`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Pass the token in the header
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        setUserProducts(response.data.products);
-      } else {
-        console.log("No products found");
-      }
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    } finally {
-      setIsLoading(false); // Ensure loading state is always reset
-    }
-  };
+  const {userProducts, isLoading, fetchUserProducts, setTrigger} = useFetchProducts();
 
   const handleOpenAddModal = () => {
     setOpenAddModal((prev) => !prev);
@@ -68,7 +35,8 @@ export default function Listings() {
       if (response.status === 201) {
         alert("Product added successfully!");
         console.log("Added Product:", response.data.product);
-        fetchUserProducts();
+        // setTrigger is for triggering fetchdata userProducts
+        setTrigger((prev) => prev + 1);
       } else {
         alert(response.data.message || "Failed to add product.");
       }
@@ -79,16 +47,6 @@ export default function Listings() {
       );
     }
   };
-
-  useEffect(() => {
-    fetchUserProducts();
-
-    // const fetchAllProducts = async () => {
-    //   const response = await axios.get(`${LOCALHOST}api/products/`);
-    //   console.log("all products with users", response.data);
-    // };
-    // fetchAllProducts();
-  }, []);
 
   console.log("User Products:", userProducts);
 
