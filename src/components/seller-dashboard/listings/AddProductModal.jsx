@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Dialog, DialogHeader, DialogBody, DialogFooter, Button } from "@material-tailwind/react";
 
-export default function EditProductDialog({ openEditModal, handleOpenEditModal, item }) {
+export default function AddProductModal({ openAddModal, handleOpenAddModal, handleAddProduct }) {
   const [formData, setFormData] = useState({
-    title: item.title,
-    price: item.price,
-    on_sale: item.on_sale,
-    category: item.category.join(", "),
-    overview: item.overview,
-    prod_info: item.prod_info,
-    src: item.src,
+    title: "",
+    price: 0,
+    on_sale: false,
+    category: "",
+    overview: "",
+    prod_info: "",
+    src: "",
   });
   const [dragging, setDragging] = useState(false);
   const [uploadType, setUploadType] = useState("drag"); // 'drag' or 'url'
@@ -63,19 +63,31 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
     setUploadType("url"); // Switch to URL mode
   };
 
-  const handleSave = () => {
-    console.log("Updated Product Data:", formData);
-    alert("Product updated successfully!");
-    handleOpenEditModal(); // Close modal after saving
+  const handleAdd = () => {
+    if (!formData.title || !formData.price || !formData.src) {
+      alert("Please fill in all required fields!");
+      return;
+    }
+    handleAddProduct(formData); // Pass data to parent
+    // handleOpenAddModal(); // Close modal
+    // setFormData({
+    //   title: "",
+    //   price: null,
+    //   on_sale: false,
+    //   category: "",
+    //   overview: "",
+    //   prod_info: "",
+    //   src: "",
+    // });
   };
 
   return (
     <Dialog
-      open={openEditModal}
-      handler={handleOpenEditModal}
+      open={openAddModal}
+      handler={handleOpenAddModal}
       className="bg-gray-900 text-white"
     >
-      <DialogHeader>Edit Product Details</DialogHeader>
+      <DialogHeader>Add New Product</DialogHeader>
       <DialogBody className="overflow-y-auto max-h-[75vh]">
         <form className="grid gap-4">
           {/* Title */}
@@ -87,6 +99,7 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
               value={formData.title}
               onChange={handleChange}
               className="w-full px-3 py-2 text-black rounded-md"
+              required
             />
           </div>
 
@@ -99,6 +112,7 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
               value={formData.price}
               onChange={handleChange}
               className="w-full px-3 py-2 text-black rounded-md"
+              required
             />
           </div>
 
@@ -154,6 +168,7 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
                 value={formData.src}
                 onChange={handleURLInput}
                 className="w-full px-3 py-2 text-black rounded-md"
+                required
               />
               <button
                 type="button"
@@ -212,11 +227,11 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
         </form>
       </DialogBody>
       <DialogFooter>
-        <Button onClick={handleOpenEditModal} color="red">
+        <Button onClick={handleOpenAddModal} color="red">
           Cancel
         </Button>
-        <Button onClick={handleSave} color="green">
-          Save
+        <Button type="submit" onClick={handleAdd} color="green">
+          Add Product
         </Button>
       </DialogFooter>
     </Dialog>

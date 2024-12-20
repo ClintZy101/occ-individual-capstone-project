@@ -14,7 +14,7 @@ export default function WelcomeUser() {
   return (
     <motion.div 
   
-    className='absolute w-screen h-screen bg-black bg-opacity-80 grid place-items-center z-50'>
+    className='absolute top-0 w-screen h-full bg-black bg-opacity-80 grid place-items-center z-50'>
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}

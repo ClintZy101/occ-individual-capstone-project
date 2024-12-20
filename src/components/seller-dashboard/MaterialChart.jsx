@@ -104,7 +104,7 @@ export default function MaterialChart({ salesValues, months }) {
           <Square3Stack3DIcon className="h-6 w-6 text-white " />
         </div>
         <div>
-          <Typography variant="h6" color="blue-gray text" className="text-white">
+          <Typography variant="h6" className="text-white">
             Sales Chart
           </Typography>
           <Typography

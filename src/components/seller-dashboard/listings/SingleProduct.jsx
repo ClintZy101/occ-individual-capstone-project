@@ -82,11 +82,11 @@ export default function SingleProduct({ item }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
             exit={{ opacity: 0, y: -5 }}
-            className="col-span-full mt-4 bg-gray-800 text-white p-4 rounded-md"
+            className="col-span-full  bg-gray-800 text-white p-4 rounded-md"
           >
             <TiMinusOutline
               onClick={() => toggleInfo(item.id)}
-              className="text-xl text-gray-200 cursor-pointer justify-self-end mb-2"
+              className="text-xl text-gray-200 cursor-pointer justify-self-end"
             />
             <p>{item.prod_info}</p>
           </motion.div>
