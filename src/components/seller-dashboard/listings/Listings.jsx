@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SingleProduct from "./SingleProduct";
 import { products } from "../../../data/allproducts";
-import AddProductModal from './AddProductModal'
+import AddProductModal from "./AddProductModal";
 import { Button } from "@material-tailwind/react";
 import axios from "axios";
 import { LOCALHOST } from "../../../api/endpoint";
@@ -11,35 +11,75 @@ export default function Listings() {
   const [openInfo, setOpenInfo] = useState(null);
   const [item, setItem] = useState({});
   const [openAddModal, setOpenAddModal] = useState(false);
-  const {token} = useAuthStore();
- console.log(token)
+  const { token } = useAuthStore();
   const handleOpenAddModal = () => {
     setOpenAddModal((prev) => !prev);
   };
 
-const handleAddProduct = async (newProduct) => {
-  try {
-    // const userToken = token; // Get the user token from localStorage
+  const handleAddProduct = async (newProduct) => {
+    try {
+      // Make a POST request to your backend API
+      const response = await axios.post(
+        `${LOCALHOST}api/products/add`,
+        newProduct,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    // Make a POST request to your backend API
-    const response = await axios.post(`${LOCALHOST}api/products/add`, newProduct, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.status === 201) {
-      alert("Product added successfully!");
-      console.log("Added Product:", response.data.product);
-    } else {
-      alert(response.data.message || "Failed to add product.");
+      if (response.status === 201) {
+        alert("Product added successfully!");
+        console.log("Added Product:", response.data.product);
+      } else {
+        alert(response.data.message || "Failed to add product.");
+      }
+    } catch (error) {
+      console.error("Error adding product:", error);
+      alert(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
     }
-  } catch (error) {
-    console.error("Error adding product:", error);
-    alert(error.response?.data?.message || "An error occurred. Please try again.");
-  }
-};
+  };
+
+  const [userProducts, setUserProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchUserProducts = async () => {
+      if(!token){
+        return alert('Please Login to see your product listing.')
+      }
+      try {
+        const response = await axios.get(
+          `${LOCALHOST}api/products/user-products`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Pass the token in the header
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          setUserProducts(response.data.products);
+          console.log("User Products:", response.data.products);
+        } else {
+          console.log("No products found");
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchUserProducts();
+
+    const fetchAllProducts = async () => {
+      const response = await axios.get(`${LOCALHOST}api/products/`);
+      console.log("all products with users",response.data);
+    };
+    fetchAllProducts();
+  }, []);
 
   return (
     <div>

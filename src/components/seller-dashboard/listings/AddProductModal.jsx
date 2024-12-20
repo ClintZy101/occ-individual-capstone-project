@@ -69,16 +69,16 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
       return;
     }
     handleAddProduct(formData); // Pass data to parent
-    // handleOpenAddModal(); // Close modal
-    // setFormData({
-    //   title: "",
-    //   price: null,
-    //   on_sale: false,
-    //   category: "",
-    //   overview: "",
-    //   prod_info: "",
-    //   src: "",
-    // });
+    handleOpenAddModal(); // Close modal
+    setFormData({
+      title: "",
+      price: null,
+      on_sale: false,
+      category: "",
+      overview: "",
+      prod_info: "",
+      src: "",
+    });
   };
 
   return (
@@ -129,37 +129,7 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
           </div>
 
           {/* Image Section */}
-          {uploadType === "drag" ? (
-            <div
-              className={`border-2 ${
-                dragging ? "border-purple-500 bg-purple-100" : "border-gray-500"
-              } rounded-md p-4 flex flex-col items-center justify-center`}
-              onDrop={handleImageDrop}
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-            >
-              <p className="text-gray-400">
-                Drag and drop an image here, or click to select a file.
-              </p>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageSelect}
-                className="hidden"
-                id="image-upload"
-              />
-              <label htmlFor="image-upload" className="text-blue-400 cursor-pointer mt-2">
-                Browse Image
-              </label>
-              <button
-                type="button"
-                onClick={() => setUploadType("url")}
-                className="mt-2 text-sm text-gray-400 underline"
-              >
-                Enter URL instead
-              </button>
-            </div>
-          ) : (
+
             <div>
               <label className="block text-gray-400">Image URL</label>
               <input
@@ -170,15 +140,14 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
                 className="w-full px-3 py-2 text-black rounded-md"
                 required
               />
-              <button
+              {/* <button
                 type="button"
                 onClick={() => setUploadType("drag")}
                 className="mt-2 text-sm text-gray-400 underline"
               >
                 Upload Image instead
-              </button>
+              </button> */}
             </div>
-          )}
 
           {formData.src && (
             <img
