@@ -5,6 +5,7 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
   const [formData, setFormData] = useState({
     title: item.title,
     price: item.price,
+    stock:item.stock,
     on_sale: item.on_sale,
     category: item.category.join(", "),
     overview: item.overview,
@@ -75,7 +76,7 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
       handler={handleOpenEditModal}
       className="bg-gray-900 text-white"
     >
-      <DialogHeader>Edit Product Details</DialogHeader>
+      <DialogHeader className="text-white">Edit Product Details</DialogHeader>
       <DialogBody className="overflow-y-auto max-h-[75vh]">
         <form className="grid gap-4">
           {/* Title */}
@@ -102,6 +103,18 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
             />
           </div>
 
+          {/* Stock */}
+          <div>
+            <label className="block text-gray-400">Stock</label>
+            <input
+              type="number"
+              name="stock"
+              value={formData.stock}
+              onChange={handleChange}
+              className="w-full px-3 py-2 text-black rounded-md"
+            />
+          </div>
+
           {/* On Sale */}
           <div className="flex items-center gap-2">
             <label className="block text-gray-400">On Sale</label>
@@ -115,37 +128,7 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
           </div>
 
           {/* Image Section */}
-          {uploadType === "drag" ? (
-            <div
-              className={`border-2 ${
-                dragging ? "border-purple-500 bg-purple-100" : "border-gray-500"
-              } rounded-md p-4 flex flex-col items-center justify-center`}
-              onDrop={handleImageDrop}
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-            >
-              <p className="text-gray-400">
-                Drag and drop an image here, or click to select a file.
-              </p>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageSelect}
-                className="hidden"
-                id="image-upload"
-              />
-              <label htmlFor="image-upload" className="text-blue-400 cursor-pointer mt-2">
-                Browse Image
-              </label>
-              <button
-                type="button"
-                onClick={() => setUploadType("url")}
-                className="mt-2 text-sm text-gray-400 underline"
-              >
-                Enter URL instead
-              </button>
-            </div>
-          ) : (
+
             <div>
               <label className="block text-gray-400">Image URL</label>
               <input
@@ -155,15 +138,14 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
                 onChange={handleURLInput}
                 className="w-full px-3 py-2 text-black rounded-md"
               />
-              <button
+              {/* <button
                 type="button"
                 onClick={() => setUploadType("drag")}
                 className="mt-2 text-sm text-gray-400 underline"
               >
                 Upload Image instead
-              </button>
+              </button> */}
             </div>
-          )}
 
           {formData.src && (
             <img
@@ -211,11 +193,11 @@ export default function EditProductDialog({ openEditModal, handleOpenEditModal, 
           </div>
         </form>
       </DialogBody>
-      <DialogFooter>
+      <DialogFooter className="space-x-5">
         <Button onClick={handleOpenEditModal} color="red">
           Cancel
         </Button>
-        <Button onClick={handleSave} color="green">
+        <Button onClick={handleSave} color="blue-gray">
           Save
         </Button>
       </DialogFooter>

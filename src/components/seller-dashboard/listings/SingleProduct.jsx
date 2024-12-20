@@ -36,7 +36,7 @@ export default function SingleProduct({ item }) {
       </div>
       <div>
         <p className="font-semibold text-blue-400">Available in Stock:</p>
-        <p>100</p>
+        <p>{item.stock || 100}</p>
       </div>
 
       <div className="justify-self-end relative">

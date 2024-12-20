@@ -72,7 +72,8 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
     handleOpenAddModal(); // Close modal
     setFormData({
       title: "",
-      price: null,
+      price: 0,
+      stock: 0,
       on_sale: false,
       category: "",
       overview: "",
@@ -110,6 +111,18 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
               type="number"
               name="price"
               value={formData.price}
+              onChange={handleChange}
+              className="w-full px-3 py-2 text-black rounded-md"
+              required
+            />
+          </div>
+          {/* Stock Available*/}
+          <div>
+            <label className="block text-gray-400">Stock</label>
+            <input
+              type="number"
+              name="stock"
+              value={formData.stock}
               onChange={handleChange}
               className="w-full px-3 py-2 text-black rounded-md"
               required
