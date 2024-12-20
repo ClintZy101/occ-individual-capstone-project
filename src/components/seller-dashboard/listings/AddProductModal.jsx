@@ -87,7 +87,7 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
       handler={handleOpenAddModal}
       className="bg-gray-900 text-white"
     >
-      <DialogHeader>Add New Product</DialogHeader>
+      <DialogHeader className="text-white">Add New Product</DialogHeader>
       <DialogBody className="overflow-y-auto max-h-[75vh]">
         <form className="grid gap-4">
           {/* Title */}
@@ -195,11 +195,11 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
           </div>
         </form>
       </DialogBody>
-      <DialogFooter>
+      <DialogFooter className="space-x-5">
         <Button onClick={handleOpenAddModal} color="red">
           Cancel
         </Button>
-        <Button type="submit" onClick={handleAdd} color="green">
+        <Button type="submit" onClick={handleAdd} color="blue">
           Add Product
         </Button>
       </DialogFooter>
