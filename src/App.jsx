@@ -20,8 +20,10 @@ import WelcomeUser from "./components/modals/WelcomeUser";
 import { AnimatePresence, motion } from "framer-motion";
 import SellerDashboard from "./pages/SellerDashboard";
 import Sidebar from "./components/navbar/Sidebar";
+import useInactivityLogout from "./utils/useInactivityLogout";
 
 function App() {
+  useInactivityLogout();
   const { bannerIsHidden } = scrollHook();
   const location = useLocation();
   const hiddenPaths = ["/login", "/register"];

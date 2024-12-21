@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 export default function Trending({ products, category = "trending" }) {
   const{product, setProduct} =useProduct()
-  console.log(product)
   return (
     <div className="bg-black p-5 pb-20">
          <h1 className="uppercase text-white text-lg my-5 ml-5">Trending Now</h1>

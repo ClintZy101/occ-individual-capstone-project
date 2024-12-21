@@ -7,7 +7,8 @@ import { useAuthStore } from "../../store/useAuthStore";
 import WelcomeUser from "../modals/WelcomeUser";
 
 const LoginForm = () => {
-  const { setUser, user, token, setToken } = useAuthStore();
+  const { setUser, setToken, setTokenExpiry } = useAuthStore();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -47,8 +48,10 @@ const LoginForm = () => {
         formData
       );
       setUser(response.data.user);
-      setToken(response.data.token)
+      setToken(response.data.token);
+      setTokenExpiry(response.data.tokenExpiry);
 
+      console.log("response", response.data);
       navigate("/"); // Only navigate if login is successful
     } catch (err) {
       setError("Failed to sign in. Please check your credentials.");
