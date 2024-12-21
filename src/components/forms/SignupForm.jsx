@@ -13,10 +13,13 @@ const SignupForm = () => {
     email: "",
     role: "",
     password: "",
+    adminKey: "",
   });
 
+  console.log(formData)
+
   const [error, setError] = useState(null);
-  const [registerResponse, setRegisterResponse] = useState(null)
+  const [registerResponse, setRegisterResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -77,22 +80,19 @@ const SignupForm = () => {
       //   console.log(availabilityResponse.data.message)
       // }
 
+      const registerResponse = await axios.post(
+        `${localhost}/api/auth/register`,
+        formData
+      );
+      setRegisterResponse(registerResponse);
 
-        const registerResponse = await axios.post(
-          `${localhost}/api/auth/register`,
-          formData
-        )
-        setRegisterResponse(registerResponse)
+      console.log("Register response:", registerResponse);
 
-        console.log("Register response:", registerResponse);
-
-        alert(`Email: ${formData.email} registered successfully!`);
-        navigate("/login");
-
+      alert(`Email: ${formData.email} registered successfully!`);
+      navigate("/login");
     } catch (err) {
       setError("Failed to sign up. Please choose a unique email and username");
       console.log(err);
-
     } finally {
       setLoading(false); // Reset loading state
     }
@@ -133,7 +133,27 @@ const SignupForm = () => {
           />
           <label htmlFor="buyer">Buyer</label>
         </div>
+        <div className="flex space-x-5">
+          <input
+            type="radio"
+            id="admin"
+            name="role"
+            value="admin"
+            onChange={handleChange}
+          />
+          <label htmlFor="admin">Admin</label>
+        </div>
       </div>
+      {formData.role === "admin" && (
+        <Input
+          label="Admin Key"
+          type="password"
+          name="adminKey"
+          placeholder="Enter your Admin Key"
+          value={formData.adminKey}
+          onChange={handleChange}
+        />
+      )}
       <Input
         label="Username"
         type="text"

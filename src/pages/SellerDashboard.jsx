@@ -4,9 +4,10 @@ import { IoAnalyticsOutline } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import DashboardMain from "../components/seller-dashboard/DashboardMain";
-import AnalyticsWithCharts from "../components/seller-dashboard/AnalyticsWithCharts";
+import AnalyticsWithCharts from "../components/seller-dashboard/analytics/AnalyticsWithCharts";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import Listings from "../components/seller-dashboard/listings/Listings";
+import OrderList from "../components/seller-dashboard/orders/OrderList";
 // Menu Item Component
 const Menu = ({ Icon, label, handleChosenMenu, chosenMenu }) => {
   return (
@@ -45,7 +46,7 @@ export default function SellerDashboard() {
       case "Listings":
         return <Listings />;
         case "Orders":
-          return <div>Orders</div>
+          return <OrderList />
       case "Analytics":
         return <AnalyticsWithCharts/>;
       default:
