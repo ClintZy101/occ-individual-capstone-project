@@ -3,8 +3,8 @@ import { useAuthStore } from "../store/useAuthStore";
 
 export default function useInactivityLogout() {
   const { signOut, token, tokenExpiry } = useAuthStore();
- console.log('token',token),
- console.log('tokenExpiry',tokenExpiry)
+//  console.log('token',token),
+//  console.log('tokenExpiry',tokenExpiry)
 
   useEffect(() => {
     if (!token || (tokenExpiry && new Date() > new Date(tokenExpiry))) {

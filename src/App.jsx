@@ -21,9 +21,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import SellerDashboard from "./pages/SellerDashboard";
 import Sidebar from "./components/navbar/Sidebar";
 import useInactivityLogout from "./utils/useInactivityLogout";
+import useFetchProducts from "./api/useFetchProducts";
 
 function App() {
-  useInactivityLogout();
+  const { fetchAllProducts, allProducts } = useFetchProducts();
+
   const { bannerIsHidden } = scrollHook();
   const location = useLocation();
   const hiddenPaths = ["/login", "/register"];
@@ -35,6 +37,15 @@ function App() {
   const [sidebarIsActive, setSidebarIsActive] = useState(false);
 
   const handleSidebar = () => setSidebarIsActive(!sidebarIsActive);
+
+  useInactivityLogout();
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+  useEffect(() => {
+    console.log("allProducts", allProducts);
+  }, [allProducts]);
 
   useEffect(() => {
     if (user) {
@@ -62,13 +73,12 @@ function App() {
             sidebarIsActive={sidebarIsActive}
             handleSidebar={handleSidebar}
           />
-           <Sidebar
-              sidebarIsShown={sidebarIsActive}
-              handleSidebar={handleSidebar}
-            />
+          <Sidebar
+            sidebarIsShown={sidebarIsActive}
+            handleSidebar={handleSidebar}
+          />
         </>
       )}
-
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>

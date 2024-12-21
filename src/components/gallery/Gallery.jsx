@@ -3,8 +3,8 @@ import useProduct from "../../store/useProduct";
 import { Link } from "react-router-dom";
 
 export default function Gallery({ products }) {
-  const{product, setProduct} =useProduct()
-  console.log(product)
+  const { setProduct } = useProduct();
+  
   return (
     <div className="bg-black p-5 pb-20 min-h-[700px]">
       {/* <h1 className="uppercase text-white text-lg mb-5">{category}</h1> */}
@@ -16,12 +16,12 @@ export default function Gallery({ products }) {
           >
             <div className="max-h-[270px] overflow-hidden rounded">
               <Link to={`/shop/product/${product.title}`}>
-              <img
-              onClick={()=>setProduct(product)}
-                src={product.src}
-                alt={product.title}
-                className="w-full h-full rounded hover:scale-125 duration-300 cursor-pointer min-h-[300px] aspect-square"
-              />
+                <img
+                  onClick={() => setProduct(product)}
+                  src={product.src}
+                  alt={product.title}
+                  className="w-full h-full rounded hover:scale-125 duration-300 cursor-pointer min-h-[300px] aspect-square"
+                />
               </Link>
             </div>
             <div className="my-4">

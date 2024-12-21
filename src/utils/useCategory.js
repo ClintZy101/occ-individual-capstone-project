@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { products } from "../data/allproducts";
+// import { products } from "../data/allproducts";
+import useAllProducts from "../store/useAllProducts";
 
 export default function useCategory(){
+  const {allProducts} = useAllProducts();
+console.log('allProducts',allProducts)
+  
     const [chosenCategory, setChosenCategory] = useState({
         cat: "All Products",
         link: "products",
@@ -10,43 +14,43 @@ export default function useCategory(){
     useEffect(() => {
         switch (chosenCategory.link) {
           default:
-            setProductsByCategory(products);
+            setProductsByCategory(allProducts);
           case "products":
-            setProductsByCategory(products);
+            setProductsByCategory(allProducts);
             break;
           case "bestsellers":
-            let bestSellers = products.filter((product) =>
+            let bestSellers = allProducts.filter((product) =>
               product.category.includes("bestsellers")
             );
             console.log(bestSellers);
             setProductsByCategory(bestSellers);
             break;
           case "accessories":
-            let accessoryProducts = products.filter((product) =>
+            let accessoryProducts = allProducts.filter((product) =>
               product.category.includes("accessories")
             );
             setProductsByCategory(accessoryProducts);
             break;
           case "speakers&headphones":
-            let speakerAndHeadPhones = products.filter((product) =>
+            let speakerAndHeadPhones = allProducts.filter((product) =>
               product.category.includes("speakers" || "headphones")
             );
             setProductsByCategory(speakerAndHeadPhones);
             break;
           case "homeappliances":
-            let homeAppliances = products.filter((product) =>
+            let homeAppliances = allProducts.filter((product) =>
               product.category.includes("homeappliances")
             );
             setProductsByCategory(homeAppliances);
             break;
           case "smartphones&watches":
-            let smartPhonesAndWatches = products.filter((product) =>
+            let smartPhonesAndWatches = allProducts.filter((product) =>
               product.category.includes("smartphones" || "watches")
             );
             setProductsByCategory(smartPhonesAndWatches);
             break;
           case "sale":
-            let onSale = products.filter((product) =>
+            let onSale = allProducts.filter((product) =>
               product.category.includes("sale")
             );
             setProductsByCategory(onSale);

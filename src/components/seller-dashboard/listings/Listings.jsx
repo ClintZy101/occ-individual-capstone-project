@@ -7,7 +7,7 @@ import axios from "axios";
 import { LOCALHOST } from "../../../api/endpoint";
 import { useAuthStore } from "../../../store/useAuthStore";
 import SingleProductSkeleton from "../../loader/SingleProductListingSkeleton";
-import useFetchProducts from "../../../api/useFetch";
+import useFetchProducts from "../../../api/useFetchProducts";
 
 export default function Listings() {
   const [openAddModal, setOpenAddModal] = useState(false);

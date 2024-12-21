@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { LOCALHOST } from "../../../api/endpoint";
 import { useAuthStore } from "../../../store/useAuthStore";
-import useFetchProducts from "../../../api/useFetch";
+import useFetchProducts from "../../../api/useFetchProducts";
 
 export default function EditProductDialog({
   openEditModal,

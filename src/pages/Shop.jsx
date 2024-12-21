@@ -39,7 +39,7 @@ export default function Shop() {
   ]);
 
   return (
-    <div className="-mt-12  md:flex bg-black -mt-10 p-5 pt-[70px]">
+    <div className=" md:flex bg-black -mt-12 p-5 pt-[70px]">
       {/* Sidebar */}
       <div className="">
         <ProductsGallerySidebar

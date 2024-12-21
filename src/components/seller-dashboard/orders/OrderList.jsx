@@ -7,7 +7,7 @@ export default function OrderList() {
 
   if (isLoading) return <p>Loading orders...</p>;
 
-  if (!orders.length) return <p>No orders found.</p>;
+  if (!orders.length) return <div className="grid"><p className="font-semibold text-xl">Orders</p><p className="">No orders found.</p></div>;
 
   return (
     <div className="p-6 bg-gray-900 text-white">
