@@ -29,14 +29,14 @@ const useCartStore = create((set, get) => ({
   addToCart: (newItem) =>
     set((state) => {
       const existingItem = state.cartItems.find(
-        (item) => item.id === newItem.id
+        (item) => item._id === newItem._id
       );
 
       let updatedCart;
 
       if (existingItem) {
         updatedCart = state.cartItems.map((item) =>
-          item.id === newItem.id
+          item._id === newItem._id
             ? { ...item, quantity: item.quantity + newItem.quantity }
             : item
         );
@@ -52,10 +52,12 @@ const useCartStore = create((set, get) => ({
       return { cartItems: updatedCart };
     }),
 
+   
+
   // Remove item from cart
   removeFromCart: (itemId) =>
     set((state) => {
-      const updatedCart = state.cartItems.filter((item) => item.id !== itemId);
+      const updatedCart = state.cartItems.filter((item) => item._id !== itemId);
       saveToLocalStorage(updatedCart);
       return { cartItems: updatedCart };
     }),
@@ -64,7 +66,7 @@ const useCartStore = create((set, get) => ({
   incrementQuantity: (itemId) =>
     set((state) => {
       let updatedCart = state.cartItems.map((item) =>
-        item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+        item._id === itemId ? { ...item, quantity: item.quantity + 1 } : item
       );
       saveToLocalStorage(updatedCart);
       return { cartItems: updatedCart };
@@ -74,7 +76,7 @@ const useCartStore = create((set, get) => ({
   decrementQuantity: (itemId) =>
     set((state) => {
       let updatedCart = state.cartItems.map((item) =>
-        item.id === itemId && item.quantity > 1
+        item._id === itemId && item.quantity > 1
           ? { ...item, quantity: item.quantity - 1 }
           : item
       );
@@ -86,7 +88,7 @@ const useCartStore = create((set, get) => ({
 
   // Helper to calculate total price of an item
   getItemTotalPrice: (id) => (state) => {
-    const item = state.cartItems.find((item) => item.id === id);
+    const item = state.cartItems.find((item) => item._id === id);
     return item ? item.price * item.quantity : 0;
   },
   // Selector to calculate the total price of all items in the cart

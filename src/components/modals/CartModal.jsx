@@ -12,14 +12,16 @@ export default function CartModal({ isOpen, onClose }) {
     getItemTotalPrice,
   } = useCartStore();
 
-  const calculateTotal = () =>
-    cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+//   const calculateTotal = () =>
+//     cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
   const navigate = useNavigate();
+
   const handleClick = () => {
-  
     onClose();
     navigate("/checkout");
   }
+  console.log(cartItems)
   return (
     <div
       className={`fixed top-0 right-0 h-full w-full sm:w-[300px] bg-white shadow-lg transform ${
@@ -42,7 +44,7 @@ export default function CartModal({ isOpen, onClose }) {
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="flex items-center justify-between mb-4 border-b pb-2"
             >
               <img
@@ -71,7 +73,7 @@ export default function CartModal({ isOpen, onClose }) {
       <div className="p-5 bg-black text-white fixed bottom-0 w-full sm:w-[300px]">
         <div className="flex justify-between mb-3">
           <p>Total:</p>
-          <p>${calculateTotal().toFixed(2)}</p>
+          <p>${getTotalPrice().toFixed(2)}</p>
         </div>
 
         <button

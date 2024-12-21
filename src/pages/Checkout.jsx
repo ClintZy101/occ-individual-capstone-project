@@ -46,7 +46,7 @@ export default function Checkout() {
         )}
         {cartItems.map((item) => (
           <div
-            key={item.id}
+            key={item._id}
             className="grid gap-2   md:flex md:space-x-10 items-center border-y border-y-gray-700 py-2 my-2  px-5"
           >
             <img

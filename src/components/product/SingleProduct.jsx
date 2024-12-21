@@ -39,12 +39,17 @@ export default function SingleProduct() {
 
   // Prepare updated product and add it to cart
   const handleAddToCart = () => {
-    const updatedProduct = { ...product, quantity };
-    addToCart(updatedProduct);
-    setCartIsOpen(true);
-    console.log(updatedProduct)
-  };
+    if (!product) {
+      console.error("No product selected");
+      return;
+    }
 
+    const updatedProduct = { ...product, quantity };
+    addToCart(updatedProduct); 
+    setCartIsOpen(true); 
+    console.log("Product added to cart:", updatedProduct);
+  };
+  
 
   const {addToCart} = useCartStore();
 
