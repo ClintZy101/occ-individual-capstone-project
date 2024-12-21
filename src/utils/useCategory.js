@@ -4,7 +4,7 @@ import useAllProducts from "../store/useAllProducts";
 
 export default function useCategory(){
   const {allProducts} = useAllProducts();
-console.log('allProducts',allProducts)
+// console.log('allProducts',allProducts)
   
     const [chosenCategory, setChosenCategory] = useState({
         cat: "All Products",

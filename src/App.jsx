@@ -10,7 +10,7 @@ import Shop from "./pages/Shop";
 import scrollHook from "./utils/scrollHook";
 import SingleProduct from "./components/product/SingleProduct";
 import Footer from "./components/footer/Footer";
-import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -22,10 +22,12 @@ import SellerDashboard from "./pages/SellerDashboard";
 import Sidebar from "./components/navbar/Sidebar";
 import useInactivityLogout from "./utils/useInactivityLogout";
 import useFetchProducts from "./api/useFetchProducts";
+import useCartStore from "./store/useCartLocalStorage";
+import CartModal from "./components/modals/CartModal";
 
 function App() {
   const { fetchAllProducts, allProducts } = useFetchProducts();
-
+  const {cartIsOpen, setCartIsOpen} = useCartStore();
   const { bannerIsHidden } = scrollHook();
   const location = useLocation();
   const hiddenPaths = ["/login", "/register"];
@@ -64,6 +66,14 @@ function App() {
   return (
     <div className="bg-black min-h-screen">
       {showModal && <WelcomeUser />}
+
+      {/* Cart Modal */}
+      {
+        <CartModal
+          isOpen={cartIsOpen}
+          onClose={() => setCartIsOpen(false)}
+        />
+      }
 
       {shouldShowNavbarAndFooter && (
         <>
@@ -125,7 +135,7 @@ function App() {
             }
           />
           <Route
-            path="/cart"
+            path="/checkout"
             element={
               <motion.div
                 variants={pageVariants}
@@ -134,7 +144,7 @@ function App() {
                 exit="exit"
                 transition={{ duration: 0.5 }}
               >
-                <Cart />
+                <Checkout />
               </motion.div>
             }
           />

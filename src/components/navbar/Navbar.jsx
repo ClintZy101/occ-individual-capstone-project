@@ -88,6 +88,15 @@ export default function Navbar({
               Shop
             </span>
           </Link>
+          <Link to={"/checkout"}>
+            <span
+              className={`${
+                location.pathname === "/checkout" && "bg-gray-200  rounded-md"
+              } hover:underline cursor-pointer py-2 px-5 transition-all ease-out duration-700`}
+            >
+              Checkout
+            </span>
+          </Link>
           {(user?.role === "seller" || user?.role === "admin") && (
             <Link to={"/seller-dashboard"}>
               <span
@@ -102,7 +111,7 @@ export default function Navbar({
           )}
         </div>
         <div className="space-x-3 flex items-center">
-          <Link to={"/cart"}>
+          <Link to={"/checkout"}>
             <span className="relative grid place-items-center mr-2">
               <BsCart className="text-xl" />
               <span className="rounded-full absolute -right-2 -top-2 bg-black w-4 h-4 text-xs text-white grid place-items-center">

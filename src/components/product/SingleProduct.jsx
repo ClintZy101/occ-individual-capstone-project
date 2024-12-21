@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 import LinkBackButton from "../buttons/LinkBackButton";
 import useCartStore from "../../store/useCartLocalStorage";
 
+
 export default function SingleProduct() {
   const { product, setProduct } = useProduct();
+  const{cartIsOpen, setCartIsOpen} = useCartStore()
   const [quantity,setQuantity] = useState(1)
   const [isOpen, setIsOpen] = useState({
     prod_info: false,
@@ -39,8 +41,10 @@ export default function SingleProduct() {
   const handleAddToCart = () => {
     const updatedProduct = { ...product, quantity };
     addToCart(updatedProduct);
+    setCartIsOpen(true);
     console.log(updatedProduct)
   };
+
 
   const {addToCart} = useCartStore();
 
@@ -53,12 +57,7 @@ export default function SingleProduct() {
       </div>
 
       <div className="w-1/2 text-white ">
-      {/* <Link to={'/shop'}>
-        <div className="flex space-x-2 items-center text-right justify-end mb-4 ">
-          <FaArrowLeft />
-          <h2>Back to Shop</h2>
-        </div>
-        </Link> */}
+
         <LinkBackButton text="Back To Shop" endpoint={"/shop"} />
 
         <h2 className=" text-xl ">{product.title}</h2>

@@ -6,6 +6,7 @@ import useCategory from "../utils/useCategory";
 import usePriceRangeStore from "../store/usePriceRange";
 
 
+
 export default function Shop() {
   const {
     chosenCategory,
@@ -47,6 +48,7 @@ export default function Shop() {
           setChosenCategory={setChosenCategory}
         />
       </div>
+
      
 
       {/* Product Gallery */}
@@ -54,10 +56,10 @@ export default function Shop() {
         <h1 className="font-bold text-2xl mb-5">
           {chosenCategory?.cat || "All Products"}
         </h1>
-        <p>
+        {/* <p>
           This is your category description. <br /> It’s a great place to tell
           customers what this category is about.
-        </p>
+        </p> */}
         {filteredProductsByPriceRange.length === 0 && (
           <div className="mt-[100px] text-white text-2xl mx-auto border-gray-100 border p-10 rounded-lg">
             No Items in Price Range!

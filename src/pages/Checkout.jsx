@@ -6,7 +6,7 @@ import LinkBackButton from "../components/buttons/LinkBackButton";
 import { shipping_info } from "../data/policies";
 import useCartStore from "../store/useCartLocalStorage";
 
-export default function Cart() {
+export default function Checkout() {
   const {
     cartItems,
     incrementQuantity,
