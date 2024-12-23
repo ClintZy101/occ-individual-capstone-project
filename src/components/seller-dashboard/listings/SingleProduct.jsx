@@ -63,7 +63,7 @@ export default function SingleProduct({ item }) {
                 <CiEdit className="text-xl hover:text-purple-400 text-gray-500" />
               </span>
               <span
-                onClick={() => toggleInfo(item.id)} // Pass the item's ID
+                onClick={() => toggleInfo(item._id)} // Pass the item's ID
                 className="cursor-pointer"
               >
                 <PiInfoThin className="text-xl hover:text-purple-400 text-gray-500" />
@@ -76,7 +76,7 @@ export default function SingleProduct({ item }) {
         </AnimatePresence>
       </div>
       <AnimatePresence>
-        {openInfo === item.id && ( // Only render if openInfo matches item.id
+        {openInfo === item._id && ( // Only render if openInfo matches item._id
           <motion.div
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function SingleProduct({ item }) {
             className="col-span-full  bg-gray-800 text-white p-4 rounded-md"
           >
             <TiMinusOutline
-              onClick={() => toggleInfo(item.id)}
+              onClick={() => toggleInfo(item._id)}
               className="text-xl text-gray-200 cursor-pointer justify-self-end"
             />
             <p>{item.prod_info}</p>

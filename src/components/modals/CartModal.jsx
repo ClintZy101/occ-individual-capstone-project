@@ -42,11 +42,8 @@ export default function CartModal({ isOpen, onClose }) {
       <div className="mt-[60px] mb-[120px] p-5 overflow-y-auto flex-1 ">
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
-            <div className="border-b border-b-gray-500 py-4 ">
-              <div
-                key={item._id}
-                className="flex items-center justify-between mb-4  pb-2"
-              >
+            <div key={item._id} className="border-b border-b-gray-500 py-4 ">
+              <div className="flex items-center justify-between mb-4  pb-2">
                 <img
                   src={item.src}
                   alt={item.title}
@@ -64,23 +61,28 @@ export default function CartModal({ isOpen, onClose }) {
                 </div>
               </div>
               <div className="flex justify-between items-center">
-              {/* Quantity Control */}
-              <div className="flex space-x-4 items-center border-gray-700 border w-max ">
-                <span
-                  onClick={() => decrementQuantity(item._id)}
-                  className="cursor-pointer hover:bg-black hover:text-white w-8 h-8 grid place-items-center transition duration-300"
-                >
-                  <BiMinus />
+                {/* Quantity Control */}
+                <div className="flex space-x-4 items-center border-gray-700 border w-max ">
+                  <span
+                    onClick={() => decrementQuantity(item._id)}
+                    className="cursor-pointer hover:bg-black hover:text-white w-8 h-8 grid place-items-center transition duration-300"
+                  >
+                    <BiMinus />
+                  </span>
+                  <span>{item.quantity}</span>
+                  <span
+                    onClick={() => incrementQuantity(item._id)}
+                    className="cursor-pointer hover:bg-black hover:text-white w-8 h-8 grid place-items-center transition duration-300"
+                  >
+                    <BiPlus />
+                  </span>
+                </div>
+                <span>
+                  <CiTrash
+                    onClick={() => removeFromCart(item._id)}
+                    className="text-xl hover:text-red-500 cursor-pointer"
+                  />
                 </span>
-                <span>{item.quantity}</span>
-                <span
-                  onClick={() => incrementQuantity(item._id)}
-                  className="cursor-pointer hover:bg-black hover:text-white w-8 h-8 grid place-items-center transition duration-300"
-                >
-                  <BiPlus />
-                </span>
-              </div>
-              <span><CiTrash onClick={() => removeFromCart(item._id)} className="text-xl hover:text-red-500 cursor-pointer" /></span>
               </div>
             </div>
           ))

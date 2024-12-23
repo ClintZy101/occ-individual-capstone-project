@@ -13,6 +13,8 @@
     "@fontsource/ubuntu-mono": "^5.1.0",
     "@heroicons/react": "^2.2.0",
     "@material-tailwind/react": "^2.1.10",
+    "@stripe/react-stripe-js": "^3.1.1",
+    "@stripe/stripe-js": "^5.4.0",
     "apexcharts": "^4.2.0",
     "axios": "^1.7.9",
     "framer-motion": "^11.11.11",

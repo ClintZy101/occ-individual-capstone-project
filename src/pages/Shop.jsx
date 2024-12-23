@@ -4,33 +4,32 @@ import ProductsGallerySidebar from "../components/sidebar/ProductsGallerySidebar
 import Gallery from "../components/gallery/Gallery";
 import useCategory from "../utils/useCategory";
 import usePriceRangeStore from "../store/usePriceRange";
-
-
+import useAllProducts from "../store/useAllProducts";
 
 export default function Shop() {
+  const { allProducts } = useAllProducts();
+  // console.log(allProducts);
   const {
     chosenCategory,
     setChosenCategory,
     productsByCategory,
     setProductsByCategory,
-  } = useCategory();
+  } = useCategory(allProducts);
   const [filteredProductsByPriceRange, setFilteredProductsByPriceRange] =
-  useState([]);
+    useState([]);
 
-
-  const { minValue, maxValue, priceRangeActive, setProductsByPriceRange } =
+  const { minValue, maxValue, productsByPriceRange, setProductsByPriceRange } =
     usePriceRangeStore();
-  
 
   useEffect(() => {
-    // Filter products based on price range
+    // // Filter products based on price range
     let newProductArray = productsByCategory.filter(
       (product) => product.price >= minValue && product.price <= maxValue
     );
-
-    // Update filtered products in Zustand store
-    // setProductsByPriceRange(filteredProducts);
+  
     setFilteredProductsByPriceRange(newProductArray);
+
+
   }, [
     minValue,
     maxValue,
@@ -48,8 +47,6 @@ export default function Shop() {
           setChosenCategory={setChosenCategory}
         />
       </div>
-
-     
 
       {/* Product Gallery */}
       <div className="text-white md:mt-0  grid ">

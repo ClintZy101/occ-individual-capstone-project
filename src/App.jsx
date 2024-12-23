@@ -21,12 +21,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import SellerDashboard from "./pages/SellerDashboard";
 import Sidebar from "./components/navbar/Sidebar";
 import useInactivityLogout from "./utils/useInactivityLogout";
-import useFetchProducts from "./api/useFetchProducts";
 import useCartStore from "./store/useCartLocalStorage";
 import CartModal from "./components/modals/CartModal";
+import useFetchProducts from "./api/useFetchProducts";
 
 function App() {
-  const { fetchAllProducts, allProducts } = useFetchProducts();
+  const {fetchAllProducts} = useFetchProducts();
   const {cartIsOpen, setCartIsOpen} = useCartStore();
   const { bannerIsHidden } = scrollHook();
   const location = useLocation();
@@ -43,19 +43,16 @@ function App() {
   useInactivityLogout();
 
   useEffect(() => {
-    fetchAllProducts();
-  }, []);
-  useEffect(() => {
-    console.log("allProducts", allProducts);
-  }, [allProducts]);
-
-  useEffect(() => {
     if (user) {
       setShowModal(true);
       const timer = setTimeout(() => setShowModal(false), 3000);
       return () => clearTimeout(timer);
     }
   }, [user]);
+
+  useEffect(() => {
+    fetchAllProducts(); // Fetch all products on app load to populate the store with products data   
+  }, []);
 
   const pageVariants = {
     initial: { opacity: 0, y: -50 },
