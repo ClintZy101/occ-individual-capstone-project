@@ -4,6 +4,7 @@ import { CiCircleInfo, CiTrash } from "react-icons/ci";
 import { shipping_info } from "../../data/policies";
 import useCartStore from "../../store/useCartLocalStorage";
 import CheckoutForm from "./CheckoutForm";
+import { motion } from "framer-motion";
 
 export default function CheckoutModal({ isOpen, onClose }) {
   const {
@@ -29,8 +30,14 @@ export default function CheckoutModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
-      <div className="bg-white text-black p-5 rounded-lg w-full  flex flex-col max-h-[90vh]">
+    <motion.div 
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
+      transition={{ duration: 0.4 }}
+      className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
+    >
+      <div className="bg-white text-black p-5 rounded-lg md:w-5/6 flex flex-col max-h-[90vh] ">
         {/* Header */}
         <div className="flex justify-between items-center mb-5">
           <h2 className="text-2xl">Checkout</h2>
@@ -64,7 +71,7 @@ export default function CheckoutModal({ isOpen, onClose }) {
                   />
                   <div>
                     <p className="">{item.title}</p>
-                    <p className="text-lg text-gray-500">${item.price}</p>
+                    <p className="text-lg ">${item.price}</p>
                   </div>
 
                   <div className="flex space-x-10 justify-between items-center w-full md:col-span-3">
@@ -85,7 +92,7 @@ export default function CheckoutModal({ isOpen, onClose }) {
                       </span>
                     </div>
 
-                    <span className="text-xl text-gray-200">
+                    <span className="text-xl">
                       ${item.price * item.quantity}
                     </span>
                     <span
@@ -146,6 +153,6 @@ export default function CheckoutModal({ isOpen, onClose }) {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

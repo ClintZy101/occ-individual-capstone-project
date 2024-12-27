@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import axios from "axios";
 import { LOCALHOST } from "./endpoint";
-import useAllProducts from "../store/useAllProducts";
 
 export default function useFetchProducts() {
-  const {setAllProducts} = useAllProducts();
+
+  const [allProducts, setAllProducts] = useState([]);
   const [userProducts, setUserProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { token } = useAuthStore();
@@ -72,11 +72,13 @@ export default function useFetchProducts() {
   }, [token, trigger]);
 
   return {
+    allProducts,
     userProducts,
     setUserProducts,
     isLoading,
     fetchUserProducts,
     fetchAllProducts,
     setTrigger,
+    setIsLoading,
   };
 }

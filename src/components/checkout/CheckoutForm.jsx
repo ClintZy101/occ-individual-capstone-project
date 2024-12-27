@@ -159,7 +159,7 @@ export default function CheckoutForm() {
       <button
         type="submit"
         disabled={processing || !stripe || !elements}
-        className="px-5 py-2 bg-purple-500 w-full hover:bg-purple-700 text-xl"
+        className="px-5 py-2 bg-purple-500 text-white w-full hover:bg-purple-700 text-xl"
       >
         {processing ? "Processing..." : `Pay $${total}`}
       </button>

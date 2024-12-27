@@ -5,8 +5,13 @@ import LinkBackButton from "../components/buttons/LinkBackButton";
 import { shipping_info } from "../data/policies";
 import useCartStore from "../store/useCartLocalStorage";
 import CheckoutModal from "../components/checkout/CheckoutModal";
+import { AnimatePresence } from "framer-motion";
+import { useAuthStore } from "../store/useAuthStore";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Checkout() {
+  const {user} = useAuthStore();
   const {
     cartItems,
     incrementQuantity,
@@ -19,6 +24,16 @@ export default function Checkout() {
   const [shippingFee, setShippingFee] = useState(10);
   const total = (getTotalPrice() + shippingFee).toFixed(2);
   const freeShippingThreshhold = 1000;
+
+  const navigate = useNavigate();
+
+  const handleCheckoutModal = () => {
+    if(!user){
+      navigate('/login')
+    }else{
+      () => setIsOpen(true)
+    }
+  }
 
   React.useEffect(() => {
     if (total > freeShippingThreshhold) {
@@ -130,13 +145,14 @@ export default function Checkout() {
         </div>
         <button
           className="px-5 py-2 bg-purple-500 w-full hover:bg-purple-700 text-xl"
-          onClick={() => setIsOpen(true)}
+          onClick={handleCheckoutModal}
         >
           Proceed to Checkout
         </button>
       </div>
-
-      <CheckoutModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <AnimatePresence>
+        {isOpen && <CheckoutModal isOpen={isOpen} onClose={() => setIsOpen(false)} />}
+      </AnimatePresence>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/navbar/Navbar";
 import Shop from "./pages/Shop";
 import scrollHook from "./utils/scrollHook";
-import SingleProduct from "./components/product/SingleProduct";
+import SingleProduct from "./pages/SingleProduct";
 import Footer from "./components/footer/Footer";
 import Checkout from "./pages/Checkout";
 import ScrollToTop from "./components/scroll-to-top/ScrollToTop";
@@ -23,11 +23,11 @@ import Sidebar from "./components/navbar/Sidebar";
 import useInactivityLogout from "./utils/useInactivityLogout";
 import useCartStore from "./store/useCartLocalStorage";
 import CartModal from "./components/modals/CartModal";
-import useFetchProducts from "./api/useFetchProducts";
+// import useFetchProducts from "./api/useFetchProducts";
 
 function App() {
-  const {fetchAllProducts} = useFetchProducts();
-  const {cartIsOpen, setCartIsOpen} = useCartStore();
+  // const { fetchAllProducts } = useFetchProducts();
+  const { cartIsOpen, setCartIsOpen } = useCartStore();
   const { bannerIsHidden } = scrollHook();
   const location = useLocation();
   const hiddenPaths = ["/login", "/register"];
@@ -50,9 +50,9 @@ function App() {
     }
   }, [user]);
 
-  useEffect(() => {
-    fetchAllProducts(); // Fetch all products on app load to populate the store with products data   
-  }, []);
+  // useEffect(() => {
+  //   fetchAllProducts(); // Fetch all products on app load to populate the store with products data
+  // }, []);
 
   const pageVariants = {
     initial: { opacity: 0, y: -50 },
@@ -62,15 +62,8 @@ function App() {
 
   return (
     <div className="bg-black min-h-screen">
-      {showModal && <WelcomeUser />}
-
       {/* Cart Modal */}
-      {
-        <CartModal
-          isOpen={cartIsOpen}
-          onClose={() => setCartIsOpen(false)}
-        />
-      }
+      {<CartModal isOpen={cartIsOpen} onClose={() => setCartIsOpen(false)} />}
 
       {shouldShowNavbarAndFooter && (
         <>
@@ -87,108 +80,114 @@ function App() {
         </>
       )}
 
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <Home />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/shop"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <Shop />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/shop/product/:id"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <SingleProduct />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <Checkout />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <Login />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <Register />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/seller-dashboard"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <SellerDashboard />
-              </motion.div>
-            }
-          />
-        </Routes>
-      </AnimatePresence>
+      {showModal ? (
+        <WelcomeUser />
+      ) : (
+        <>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route
+                path="/"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Home />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/shop"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Shop />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/shop/product/:id"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <SingleProduct />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/checkout"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Checkout />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Login />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Register />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/seller-dashboard"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <SellerDashboard />
+                  </motion.div>
+                }
+              />
+            </Routes>
+          </AnimatePresence>
+        </>
+      )}
 
       {shouldShowNavbarAndFooter && <Footer />}
     </div>

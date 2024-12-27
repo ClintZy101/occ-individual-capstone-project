@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import { products } from "../data/allproducts";
 import useAllProducts from "../store/useAllProducts";
 
-export default function useCategory(allProducts) {
+export default function useCategory() {
+const { allProducts } = useAllProducts();
 
   const [chosenCategory, setChosenCategory] = useState({
     cat: "All Products",
@@ -14,6 +14,7 @@ export default function useCategory(allProducts) {
     switch (chosenCategory.link) {
       default:
         setProductsByCategory(allProducts);
+        console.log('allProducts:', allProducts);
       case "products":
         setProductsByCategory(allProducts);
         break;
@@ -21,7 +22,6 @@ export default function useCategory(allProducts) {
         let bestSellers = allProducts.filter((product) =>
           product.category.includes("bestsellers")
         );
-        console.log(bestSellers);
         setProductsByCategory(bestSellers);
         break;
       case "accessories":
