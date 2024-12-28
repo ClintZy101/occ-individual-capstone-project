@@ -73,11 +73,10 @@ export default function ProductsGallerySidebar({ chosenCategory, setChosenCatego
         ))}
       </div>
 
-      {/* <p className="mb-2 font-bold">Filter By</p> */}
-      <div className="border-b-gray-500 border-b py-2 mt-4  grid gap-5 place-items-center">
+      <div className=" pt-4 pb-2  grid gap-5 place-items-center">
         <div
           onClick={() => setSliderIsShown(!sliderIsShown)}
-          className="flex justify-between items-center w-full cursor-pointer"
+          className="flex  justify-between items-center w-full cursor-pointer border-b-gray-500 border-b pb-2"
         >
           <p className=""> Filter By Price</p>
 
@@ -88,7 +87,7 @@ export default function ProductsGallerySidebar({ chosenCategory, setChosenCatego
         <div
           className={`transition-all duration-500 ${
             sliderIsShown
-              ? "opacity-100 max-h-screen grid gap-2"
+              ? "opacity-100 max-h-screen grid gap-2 border-b-gray-500 border-b  pb-2 w-full "
               : "opacity-0 max-h-0 overflow-hidden"
           }`}
         >

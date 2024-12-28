@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import useProduct from "../store/useProduct";
-import {  BiMinus, BiPlus } from "react-icons/bi";
-import { FaArrowLeft } from "react-icons/fa";
+import { BiMinus, BiPlus } from "react-icons/bi";
 import AddToCartButton from "../components/buttons/AddToCartButton";
 import BuyNowButton from "../components/buttons/BuyNowButton";
 import { refund_policy, shipping_info } from "../data/policies";
-import { Link } from "react-router-dom";
-// import useCartStore from "../../store/useCart";
+import { Link, useNavigate } from "react-router-dom";
 import LinkBackButton from "../components/buttons/LinkBackButton";
 import useCartStore from "../store/useCartLocalStorage";
-// import SearchFilter from "../components/SearchFilter";
+import { IoStorefrontOutline } from "react-icons/io5";
+import useSeller from "../store/useSeller";
 
 export default function SingleProduct() {
   const { product, setProduct } = useProduct();
-  const{cartIsOpen, setCartIsOpen} = useCartStore()
-  const [quantity,setQuantity] = useState(1)
+  console.log(product);
+  const { cartIsOpen, setCartIsOpen } = useCartStore();
+  const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState({
     prod_info: false,
     refund_policy: false,
@@ -22,12 +22,12 @@ export default function SingleProduct() {
   });
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredProduct = product && (
-    product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.prod_info.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.user.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredProduct =
+    product &&
+    (product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.prod_info.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.user.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const toggleInfo = (property) => {
     setIsOpen((prevState) => ({
@@ -53,13 +53,18 @@ export default function SingleProduct() {
     }
 
     const updatedProduct = { ...product, quantity };
-    addToCart(updatedProduct); 
-    setCartIsOpen(true); 
+    addToCart(updatedProduct);
+    setCartIsOpen(true);
     console.log("Product added to cart:", updatedProduct);
   };
-  
 
-  const {addToCart} = useCartStore();
+  const { addToCart } = useCartStore();
+  const { setSeller } = useSeller();
+  const navigate = useNavigate();
+  const navigateToSellerStore = () => {
+    setSeller(product.user);
+    navigate(`/shop/seller/${product.user.username}`);
+  };
 
   // console.log(updatedProduct)
   return (
@@ -68,7 +73,15 @@ export default function SingleProduct() {
         {/* <SearchFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
         {filteredProduct && (
           <>
-            <h2 className="mb-5">{product.title}</h2>
+            <div className="md:flex items-center justify-between">
+              <h2 className="mb-5">{product.title}</h2>
+              <span
+                onClick={navigateToSellerStore}
+                className="hover:animate-pulseGlow cursor-pointer rounded-full flex items-center justify-center p-2 transition"
+              >
+                <IoStorefrontOutline className="text-xl" />
+              </span>
+            </div>
             <img src={product.src} alt="" />
           </>
         )}
@@ -85,23 +98,25 @@ export default function SingleProduct() {
             <p className="font-bold text-lg mb-2">Quantity</p>
 
             <div className="flex space-x-4 items-center border-white border w-max ">
-              <span 
-              onClick={handleDecrement}
-              className="cursor-pointer hover:bg-white hover:text-black w-10 h-10 grid place-items-center transition duration-300">
+              <span
+                onClick={handleDecrement}
+                className="cursor-pointer hover:bg-white hover:text-black w-10 h-10 grid place-items-center transition duration-300"
+              >
                 <BiMinus />
               </span>
               <span>{quantity}</span>
-              <span 
-              onClick={handleIncrement}
-              className="cursor-pointer hover:bg-white hover:text-black w-10 h-10 grid place-items-center transition duration-300">
+              <span
+                onClick={handleIncrement}
+                className="cursor-pointer hover:bg-white hover:text-black w-10 h-10 grid place-items-center transition duration-300"
+              >
                 <BiPlus />
               </span>
             </div>
             {/* Buttons */}
             <div className=" sm:space-x-2 mt-10 grid gap-5 sm:flex">
-              <AddToCartButton  handleClick={handleAddToCart}/>
+              <AddToCartButton handleClick={handleAddToCart} />
               <Link to={"/checkout"} className="w-full">
-              <BuyNowButton />
+                <BuyNowButton />
               </Link>
             </div>
 

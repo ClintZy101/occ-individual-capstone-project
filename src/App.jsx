@@ -23,6 +23,7 @@ import Sidebar from "./components/navbar/Sidebar";
 import useInactivityLogout from "./utils/useInactivityLogout";
 import useCartStore from "./store/useCartLocalStorage";
 import CartModal from "./components/modals/CartModal";
+import SellerStore from "./pages/SellerStore";
 // import useFetchProducts from "./api/useFetchProducts";
 
 function App() {
@@ -125,6 +126,20 @@ function App() {
                     transition={{ duration: 0.5 }}
                   >
                     <SingleProduct />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/shop/seller/:id"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <SellerStore />
                   </motion.div>
                 }
               />

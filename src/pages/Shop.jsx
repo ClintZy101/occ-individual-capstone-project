@@ -23,6 +23,7 @@ export default function Shop() {
   const { minValue, maxValue } = usePriceRangeStore();
 
   const [filteredProducts, setFilteredProducts] = useState([]);
+  
   useEffect(() => {
     fetchAllProducts();
   }, []);
