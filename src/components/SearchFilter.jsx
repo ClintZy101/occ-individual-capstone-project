@@ -1,5 +1,5 @@
 import React from "react";
-import { IoSearchOutline } from "react-icons/io5";
+
 
 export default function SearchFilter({ searchTerm, setSearchTerm }) {
   const handleSearchChange = (event) => {
@@ -7,7 +7,7 @@ export default function SearchFilter({ searchTerm, setSearchTerm }) {
   };
 
   return (
-    <div className="flex items-center  border">
+    <div className="flex items-center  border w-5/6 md:w-full mx-auto my-5">
 
       <input
         type="text"

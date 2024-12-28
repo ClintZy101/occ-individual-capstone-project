@@ -35,7 +35,7 @@ export default function ProductsGallerySidebar({ chosenCategory, setChosenCatego
   const BrowseBy = ({ handleCategory, category }) => (
     <p
       onClick={() => handleCategory(category)}
-      className="hover:text-gray-400 cursor-pointer"
+      className= {`${chosenCategory === category ? 'text-gray-500 underline' :"hover:text-gray-400 cursor-pointer"}`}
     >
       {category.cat}
     </p>
