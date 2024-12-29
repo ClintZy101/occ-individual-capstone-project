@@ -24,6 +24,7 @@ import useInactivityLogout from "./utils/useInactivityLogout";
 import useCartStore from "./store/useCartLocalStorage";
 import CartModal from "./components/modals/CartModal";
 import SellerStore from "./pages/SellerStore";
+import BuyerOrders from "./pages/BuyerOrders";
 // import useFetchProducts from "./api/useFetchProducts";
 
 function App() {
@@ -140,6 +141,20 @@ function App() {
                     transition={{ duration: 0.5 }}
                   >
                     <SellerStore />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/account/myorders"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <BuyerOrders />
                   </motion.div>
                 }
               />

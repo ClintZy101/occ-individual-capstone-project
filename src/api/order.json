@@ -1,0 +1,24 @@
+{
+    "buyer_id": "676622e21c4bff27384df176",
+    "cartItems": [
+      {
+        "product_id": "676627f8c0088c5a11a7f65d",
+        "title": "Float Headphones 1200 Wireless",
+        "price": 120,
+        "stock": 200,
+        "category": ["headphones"],
+        "prod_info": "I'm a product detail...",
+        "src": "https://static.wixstatic.com/media/c837a6_b32d4982345746bfae73477bc8d103d1~mv2.jpg/v1/fill/w_1166,h_1166,q_90/c837a6_b32d4982345746bfae73477bc8d103d1~mv2.webp"
+      }
+    ],
+    "shippingAddress": {
+      "name": "clinton taypoc",
+      "address": "AB 002 Botiwtiw, Ambiong, La Trinidad, Benguet",
+      "city": "La Trinidad",
+      "state": "Select State",
+      "postalCode": "2601",
+      "country": "US"
+    },
+    "total": 130.0
+  }
+  

@@ -97,6 +97,15 @@ export default function Navbar({
               Checkout
             </span>
           </Link>
+          <Link to={"/account/myorders"}>
+            <span
+              className={`${
+                location.pathname === "/account/myorders" && "bg-gray-200  rounded-md"
+              } hover:underline cursor-pointer py-2 px-5 transition-all ease-out duration-700`}
+            >
+              My Orders
+            </span>
+          </Link>
           {(user?.role === "seller" || user?.role === "admin") && (
             <Link to={"/seller-dashboard"}>
               <span

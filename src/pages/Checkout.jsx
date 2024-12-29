@@ -8,10 +8,10 @@ import CheckoutModal from "../components/checkout/CheckoutModal";
 import { AnimatePresence } from "framer-motion";
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 export default function Checkout() {
-  const {user} = useAuthStore();
+  const { user } = useAuthStore();
   const {
     cartItems,
     incrementQuantity,
@@ -27,13 +27,20 @@ export default function Checkout() {
 
   const navigate = useNavigate();
 
-  const handleCheckoutModal = () => {
-    if(!user){
-      navigate('/login')
-    }else{
-      () => setIsOpen(true)
+  const handleCheckoutModal = async () => {
+    if (user) {
+      setIsOpen(true);
+      // const response = await axios.post(`${LOCALHOST}api/orders`, {
+      //   user: user._id,
+      //   cartItems,
+      //   shippingAddress,
+      //   total,
+      // });
+      // console.log('response', response.data);
+    } else if (!user) {
+      navigate("/login");
     }
-  }
+  };
 
   React.useEffect(() => {
     if (total > freeShippingThreshhold) {
@@ -151,7 +158,9 @@ export default function Checkout() {
         </button>
       </div>
       <AnimatePresence>
-        {isOpen && <CheckoutModal isOpen={isOpen} onClose={() => setIsOpen(false)} />}
+        {isOpen && (
+          <CheckoutModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        )}
       </AnimatePresence>
     </div>
   );

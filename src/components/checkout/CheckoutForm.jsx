@@ -4,9 +4,11 @@ import useCartStore from "../../store/useCartLocalStorage";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LOCALHOST } from "../../api/endpoint";
+import { useAuthStore } from "../../store/useAuthStore";
 
 export default function CheckoutForm() {
   const { cartItems, getTotalPrice, clearCart } = useCartStore();
+  const { user } = useAuthStore();
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
@@ -20,6 +22,16 @@ export default function CheckoutForm() {
     postalCode: "",
     country: "",
   });
+  const orderData = {
+    buyer_id: user._id,
+    cartItems,
+    shippingAddress,
+    total,
+  };
+  if (orderData) {
+    console.log('oder data:',orderData);
+  }
+
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [succeeded, setSucceeded] = useState(false);
@@ -64,21 +76,24 @@ export default function CheckoutForm() {
           },
         },
       });
-
-      if (paymentResult.error) {
-        alert(`Payment failed: ${paymentResult.error.message}`);
-      } else {
-        alert("Payment successful!");
-        navigate("/account/myorders");
-        clearCart();
-        cardElement.clear();
-        setSucceeded(true);
-      }
+      console.log("paymentResult", paymentResult);
+      alert("Payment successful!");
+      navigate("/account/myorders");
+      clearCart();
+      cardElement.clear();
+      setSucceeded(true);
     } catch (error) {
       console.error("Payment error:", error);
       alert("Payment failed. Please try again.");
     } finally {
       setProcessing(false);
+      const response = await axios.post(`${LOCALHOST}api/orders`, {
+        buyer_id: user._id,
+        cartItems,
+        shippingAddress,
+        total,
+      });
+      console.log("response", response.data);
     }
   };
 
