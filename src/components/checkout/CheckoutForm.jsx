@@ -22,8 +22,9 @@ export default function CheckoutForm() {
     postalCode: "",
     country: "",
   });
+  console.log(user)
   const orderData = {
-    buyer_id: user._id,
+    buyer: user,
     cartItems,
     shippingAddress,
     total,
@@ -87,12 +88,7 @@ export default function CheckoutForm() {
       alert("Payment failed. Please try again.");
     } finally {
       setProcessing(false);
-      const response = await axios.post(`${LOCALHOST}api/orders`, {
-        buyer_id: user._id,
-        cartItems,
-        shippingAddress,
-        total,
-      });
+      const response = await axios.post(`${LOCALHOST}api/orders`, orderData);
       console.log("response", response.data);
     }
   };
