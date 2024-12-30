@@ -103,6 +103,15 @@ export default function OrderList() {
             </p>
 
             <div className="mt-4">
+              <h3 className="font-bold text-lg">Shipping Address:</h3>
+              <p className="text-gray-400">
+                {order.shippingAddress.name}, {order.shippingAddress.address},{" "}
+                {order.shippingAddress.city}, {order.shippingAddress.state},{" "}
+                {order.shippingAddress.postalCode}, {order.shippingAddress.country}
+              </p>
+            </div>
+
+            <div className="mt-4">
               <h3 className="font-bold text-lg">
                 Order Status: {order.status}
               </h3>

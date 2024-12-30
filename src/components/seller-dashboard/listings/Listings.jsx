@@ -51,13 +51,13 @@ export default function Listings() {
   console.log("User Products:", userProducts);
 
   return (
-    <div>
+    <div className="bg-gray-900 p-5">
       <div className="flex justify-between items-center py-2">
-        <p className="font-semibold my-2 text-xl">Listings</p>
+        <p className="font-semibold my-2 text-2xl">My Listing</p>
         <Button
           onClick={handleOpenAddModal}
           variant="gradient"
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-900"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

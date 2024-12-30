@@ -43,9 +43,9 @@ export default function SellerDashboard() {
     switch (chosenMenu) {
       case "Dashboard":
         return <DashboardMain />;
-      case "Listings":
+      case "Listing":
         return <Listings />;
-        case "Orders":
+        case "Customer Orders":
           return <OrderList />
       case "Analytics":
         return <AnalyticsWithCharts/>;
@@ -66,13 +66,13 @@ export default function SellerDashboard() {
         />
         <Menu
           Icon={<BsBoxSeam />}
-          label="Listings"
+          label="Listing"
           handleChosenMenu={handleChosenMenu}
           chosenMenu={chosenMenu}
         />
         <Menu
           Icon={<MdShoppingCartCheckout />}
-          label="Orders"
+          label="Customer Orders"
           handleChosenMenu={handleChosenMenu}
           chosenMenu={chosenMenu}
         />
