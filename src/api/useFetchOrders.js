@@ -6,20 +6,21 @@ import { LOCALHOST } from "../api/endpoint";
 export default function useFetchOrders() {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { token } = useAuthStore();
+  const { token, user } = useAuthStore();
 
   const fetchOrders = async () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.get(`${LOCALHOST}api/products/orders`, {
+      const response = await axios.get(`${LOCALHOST}api/orders/seller/${user._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
       if (response.status === 200) {
-        setOrders(response.data.orders);
+        console.log(response.data)
+        setOrders(response.data);
       } else {
         console.log("No orders found.");
       }
@@ -34,5 +35,5 @@ export default function useFetchOrders() {
     fetchOrders();
   }, []);
 
-  return { orders, isLoading, fetchOrders };
+  return { orders, isLoading, fetchOrders, setIsLoading };
 }

@@ -77,7 +77,7 @@ export default function CheckoutForm() {
           },
         },
       });
-      console.log("paymentResult", paymentResult);
+      // console.log("paymentResult", paymentResult);
       alert("Payment successful!");
       navigate("/account/myorders");
       clearCart();

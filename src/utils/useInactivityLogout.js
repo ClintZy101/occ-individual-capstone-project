@@ -20,9 +20,9 @@ export default function useInactivityLogout() {
       timeout = setTimeout(() => {
         signOut();
         alert("You have been logged out due to inactivity.");
-      }, 3600000); // 1 hour in milliseconds
+      }, 86400000); // 1 day in milliseconds
     };
-
+    
     // Listen for user activity
     window.addEventListener("mousemove", resetTimer);
     window.addEventListener("keydown", resetTimer);

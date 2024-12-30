@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useProduct from "../store/useProduct";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import AddToCartButton from "../components/buttons/AddToCartButton";
@@ -16,7 +16,9 @@ export default function SingleProduct() {
   const { product, setProduct } = useProduct();
   console.log(product);
   const { cartIsOpen, setCartIsOpen } = useCartStore();
-  const [successNotificationIsOpen, setSuccessNotificationIsOpen] = useState(false);
+  const [triggerFromAddToCart, setTriggerFromAddToCart] = useState(0);
+  const [successNotificationIsOpen, setSuccessNotificationIsOpen] =
+    useState(false);
   const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState({
     prod_info: false,
@@ -57,9 +59,10 @@ export default function SingleProduct() {
 
     const updatedProduct = { ...product, quantity };
     addToCart(updatedProduct);
-    setCartIsOpen(true);
     setSuccessNotificationIsOpen(true);
     setTimeout(() => setSuccessNotificationIsOpen(false), 3000);
+    setTimeout(() => setCartIsOpen(true), 1000);
+
     console.log("Product added to cart:", updatedProduct);
   };
 
@@ -71,12 +74,21 @@ export default function SingleProduct() {
     navigate(`/shop/seller/${product.user.username}`);
   };
 
+  const navigateToCheckout = () => {
+    handleAddToCart();
+    navigate("/checkout");
+  };
+
   // console.log(updatedProduct)
   return (
     <div className="flex space-x-10 -mt-12 pt-20 p-10 min-h-[900px] bg-black tracking-widest">
-     <AnimatePresence>
-     {successNotificationIsOpen && <SuccessAddToCart onClose={()=>setSuccessNotificationIsOpen(false)}/>}
-     </AnimatePresence>
+      <AnimatePresence>
+        {successNotificationIsOpen && (
+          <SuccessAddToCart
+            onClose={() => setSuccessNotificationIsOpen(false)}
+          />
+        )}
+      </AnimatePresence>
       <div className="w-1/2 text-white">
         {/* <SearchFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
         {filteredProduct && (
@@ -120,12 +132,11 @@ export default function SingleProduct() {
                 <BiPlus />
               </span>
             </div>
-            {/* Buttons */}
-            <div className=" sm:space-x-2 mt-10 grid gap-5 sm:flex">
+
+            <div className=" mt-10">
               <AddToCartButton handleClick={handleAddToCart} />
-              <Link to={"/checkout"} className="w-full">
-                <BuyNowButton />
-              </Link>
+
+              {/* <BuyNowButton handleClick={navigateToCheckout} /> */}
             </div>
 
             {/* Product Info */}
