@@ -9,11 +9,14 @@ import LinkBackButton from "../components/buttons/LinkBackButton";
 import useCartStore from "../store/useCartLocalStorage";
 import { IoStorefrontOutline } from "react-icons/io5";
 import useSeller from "../store/useSeller";
+import SuccessAddToCart from "../components/modals/SuccessAddToCart";
+import { AnimatePresence } from "framer-motion";
 
 export default function SingleProduct() {
   const { product, setProduct } = useProduct();
   console.log(product);
   const { cartIsOpen, setCartIsOpen } = useCartStore();
+  const [successNotificationIsOpen, setSuccessNotificationIsOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [isOpen, setIsOpen] = useState({
     prod_info: false,
@@ -55,6 +58,8 @@ export default function SingleProduct() {
     const updatedProduct = { ...product, quantity };
     addToCart(updatedProduct);
     setCartIsOpen(true);
+    setSuccessNotificationIsOpen(true);
+    setTimeout(() => setSuccessNotificationIsOpen(false), 3000);
     console.log("Product added to cart:", updatedProduct);
   };
 
@@ -69,6 +74,9 @@ export default function SingleProduct() {
   // console.log(updatedProduct)
   return (
     <div className="flex space-x-10 -mt-12 pt-20 p-10 min-h-[900px] bg-black tracking-widest">
+     <AnimatePresence>
+     {successNotificationIsOpen && <SuccessAddToCart onClose={()=>setSuccessNotificationIsOpen(false)}/>}
+     </AnimatePresence>
       <div className="w-1/2 text-white">
         {/* <SearchFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
         {filteredProduct && (
