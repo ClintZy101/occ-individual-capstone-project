@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthStore } from "../store/useAuthStore";
-import { LOCALHOST } from "../api/endpoint";
+import { LOCALHOST } from "./endpoint";
 
-export default function useFetchOrders() {
+export default function useFetchSellerOrders() {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { token, user } = useAuthStore();

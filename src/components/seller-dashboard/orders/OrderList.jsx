@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useFetchOrders from "../../../api/useFetchOrders";
+import useFetchOrders from "../../../api/useFetchSellerOrders";
 import { useAuthStore } from "../../../store/useAuthStore";
 import axios from "axios";
 import { LOCALHOST } from "../../../api/endpoint";
