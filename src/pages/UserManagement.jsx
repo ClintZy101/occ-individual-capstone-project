@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import useFetchUsers from '../api/useFetchUsers';
 import UsersSkeletonLoader from '../components/loader/UsersSkeletonLoader';
 
-
 export default function UserManagement() {
   const { users, loading, error, createUser, updateUser, deleteUser } = useFetchUsers();
   const [newUser, setNewUser] = useState({ username: '', email: '', role: '' });
   const [editingUser, setEditingUser] = useState(null);
+  const [selectedRole, setSelectedRole] = useState('all');
 
   if (loading) return <UsersSkeletonLoader />;
   if (error) return <p className="text-red-500">Error loading users: {error.message}</p>;
@@ -37,7 +37,7 @@ export default function UserManagement() {
   const getUserRoleColor = (role) => {
     switch (role) {
       case 'admin':
-        return 'text-purple-500';
+        return 'text-orange-500';
       case 'seller':
         return 'text-yellow-500';
       case 'buyer':
@@ -47,20 +47,30 @@ export default function UserManagement() {
     }
   };
 
+  const filteredUsers = selectedRole === 'all' ? users : users.filter(user => user.role === selectedRole);
+
   return (
     <div className="text-white min-h-screen p-5 bg-gray-900">
       <div className="w-full h-20 bg-black flex items-center justify-center mb-5">
         <h1 className="text-2xl font-bold">User Management</h1>
       </div>
+      <div className="flex justify-center mb-5">
+        <button onClick={() => setSelectedRole('all')} className={`px-3 py-1 mx-1 ${selectedRole === 'all' ? 'bg-blue-500' : 'bg-gray-700'} rounded-md`}>All</button>
+        <button onClick={() => setSelectedRole('admin')} className={`px-3 py-1 mx-1 ${selectedRole === 'admin' ? 'bg-blue-500' : 'bg-gray-700'} rounded-md`}>Admin</button>
+        <button onClick={() => setSelectedRole('seller')} className={`px-3 py-1 mx-1 ${selectedRole === 'seller' ? 'bg-blue-500' : 'bg-gray-700'} rounded-md`}>Seller</button>
+        <button onClick={() => setSelectedRole('buyer')} className={`px-3 py-1 mx-1 ${selectedRole === 'buyer' ? 'bg-blue-500' : 'bg-gray-700'} rounded-md`}>Buyer</button>
+      </div>
       <div className="grid gap-6">
-        {users.map(user => (
+        {filteredUsers.map(user => (
           <div key={user._id} className="p-4 bg-gray-800 rounded-md shadow-md flex justify-between items-center">
             <div>
               <h2 className="text-xl font-semibold">{user.username}</h2>
               <p className="text-gray-400">{user.email}</p>
-              <p className={`text-gray-400 ${getUserRoleColor(user.role)}`}>Role: {user.role}</p>
               <p className="text-gray-400">Created At: {new Date(user.createdAt).toLocaleString()}</p>
               <p className="text-gray-400">Updated At: {new Date(user.updatedAt).toLocaleString()}</p>
+            </div>
+            <div>
+              <p className={`text-gray-400 ${getUserRoleColor(user.role)}`}>Role: {user.role}</p>
             </div>
             <div className="flex space-x-2">
               <button onClick={() => handleEditUser(user)} className="px-3 py-1 bg-blue-500 rounded-md">Edit</button>
