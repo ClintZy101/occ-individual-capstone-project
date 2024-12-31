@@ -27,7 +27,9 @@ export default function useFetchSellerOrders() {
     } catch (error) {
       console.error("Error fetching orders:", error);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     }
   };
 

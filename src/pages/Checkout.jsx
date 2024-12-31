@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { CiCircleInfo, CiTrash } from "react-icons/ci";
 import LinkBackButton from "../components/buttons/LinkBackButton";
@@ -8,7 +8,8 @@ import CheckoutModal from "../components/checkout/CheckoutModal";
 import { AnimatePresence } from "framer-motion";
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import CheckoutSkeletonLoader from "../components/loader/CheckoutSkeletonLoader";
+
 
 export default function Checkout() {
   const { user } = useAuthStore();
@@ -20,6 +21,7 @@ export default function Checkout() {
     getTotalPrice,
   } = useCartStore();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [shippingFee, setShippingFee] = useState(10);
   const total = (getTotalPrice() + shippingFee).toFixed(2);
@@ -30,13 +32,6 @@ export default function Checkout() {
   const handleCheckoutModal = async () => {
     if (user) {
       setIsOpen(true);
-      // const response = await axios.post(`${LOCALHOST}api/orders`, {
-      //   user: user._id,
-      //   cartItems,
-      //   shippingAddress,
-      //   total,
-      // });
-      // console.log('response', response.data);
     } else if (!user) {
       navigate("/login");
     }
@@ -49,6 +44,15 @@ export default function Checkout() {
       setShippingFee(10);
     }
   }, [getTotalPrice()]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  },[])
+
+  if(isLoading) return <CheckoutSkeletonLoader />
 
   return (
     <div className="-mt-12 grid justify-center lg:flex gap-5 bg-black pt-[100px] pb-[100px] text-white">

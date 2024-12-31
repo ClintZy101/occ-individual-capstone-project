@@ -3,6 +3,7 @@ import useFetchOrders from "../../../api/useFetchSellerOrders";
 import { useAuthStore } from "../../../store/useAuthStore";
 import axios from "axios";
 import { LOCALHOST } from "../../../api/endpoint";
+import OrdersSkeletonLoader from "../../loader/OrdersSkeletonLoader";
 
 export default function OrderList() {
   const { orders, isLoading, fetchOrders, setIsLoading } = useFetchOrders();
@@ -16,7 +17,7 @@ export default function OrderList() {
   ];
 
   // change to skeleton loader
-  if (isLoading) return <p>Loading orders...</p>;
+  if (isLoading) return <OrdersSkeletonLoader />;
 
   if (!orders.length)
     return (

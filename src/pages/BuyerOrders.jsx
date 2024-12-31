@@ -9,7 +9,7 @@ import {
   FaArrowDown,
 } from "react-icons/fa";
 import useFetchBuyerOrders from "../api/useFetchBuyerOrders";
-import OrdersSkeletonLoader from "../components/skeletons/OrdersSkeletonLoader";
+import OrdersSkeletonLoader from "../components/loader/OrdersSkeletonLoader";
 
 export default function BuyerOrders() {
   const { orders, isLoading } = useFetchBuyerOrders();
