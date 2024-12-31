@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { useAuthStore } from "../../store/useAuthStore";
 
 export default function AccountDropdown({
   wrapperRef,
@@ -9,15 +10,42 @@ export default function AccountDropdown({
   user,
   signOut,
 }) {
-    const navigate = useNavigate();
+  // const { user } = useAuthStore();
+  const navigate = useNavigate();
 
-    const handleNavigate = (id) => {
-        // navigate(`/account/myorders`);
-        setAccountDropdownIsActive(!accountDropdownIsActive)
+  const handleNavigate = (id) => {
+    // navigate(`/account/myorders`);
+    setAccountDropdownIsActive(!accountDropdownIsActive);
+  };
+  const handleLogout = () => {
+    signOut();
+  };
+
+  const LinkButton = ({ title, link }) => (
+    <Link to={link}>
+    <p  
+    onClick={()=>setAccountDropdownIsActive(false)}
+    className="cursor-pointer border border-customBrown text-center py-2 hover:bg-customBrown rounded hover:bg-gray-500">{title}</p>
+    </Link>
+  )
+
+  const renderLinks = () => {
+    switch (user?.role) {
+      case "admin":
+        return (
+          <LinkButton title="User Management" link="/user-management" />
+        );
+      case "seller":
+        return (
+          <LinkButton title="Seller Dashboard" link="/seller-dashboard" />
+        );
+      case "buyer":
+        return (
+          <LinkButton title="My Orders" link="/account/myorders" />
+        );
     }
-    const handleLogout = () => {
-      signOut();
-    }
+  };
+
   return (
     <AnimatePresence>
       {accountDropdownIsActive && (
@@ -36,13 +64,7 @@ export default function AccountDropdown({
             {user?.email}
           </span>
 
-            <p
-            // onClick={()=>handleNavigate(user.uid)}
-              tabIndex="0"
-              className="cursor-pointer border border-customBrown text-center py-2 hover:bg-customBrown rounded"
-            >
-              My Orders & Reviews
-            </p>
+          {renderLinks()}
 
           <span
             tabIndex="1"

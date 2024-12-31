@@ -62,7 +62,7 @@ export default function Navbar({
       >
         <Link to={"/"}>
           <div className={`${location.pathname === "/" && "font-semibold"}`}>
-           <img src="sample-logo.webp" alt="" className="h-10 rounded" />
+           <img src="T-logo.png" alt="" className="h-10 rounded" />
            {/* <p>Tech Hub</p>  */}
           </div>
         </Link>
