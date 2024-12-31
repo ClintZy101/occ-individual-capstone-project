@@ -9,11 +9,12 @@ import {
   FaArrowDown,
 } from "react-icons/fa";
 import useFetchBuyerOrders from "../api/useFetchBuyerOrders";
+import OrdersSkeletonLoader from "../components/skeletons/OrdersSkeletonLoader";
 
 export default function BuyerOrders() {
   const { orders, isLoading } = useFetchBuyerOrders();
 
-  if (isLoading) return <p>Loading orders...</p>;
+  if (isLoading) return <OrdersSkeletonLoader />;
 
   if (!orders.length)
     return (

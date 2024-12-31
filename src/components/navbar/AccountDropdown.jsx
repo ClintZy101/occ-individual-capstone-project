@@ -18,6 +18,7 @@ export default function AccountDropdown({
     setAccountDropdownIsActive(!accountDropdownIsActive);
   };
   const handleLogout = () => {
+    alert("You have been logged out.");
     signOut();
   };
 
