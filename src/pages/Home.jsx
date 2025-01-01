@@ -14,14 +14,11 @@ export default function Home() {
   const trendingProducts = products.slice(0, 4);
   const { user, token, tokenExpiry } = useAuthStore();
   useEffect(()=>{
-console.log('User', user, 'token', token, 'tokenExpiry', tokenExpiry)
+console.log('User', user, 'token', token, 'tokenExpiry', new Date(tokenExpiry) )
   },[])
   return (
     <motion.div 
-    // initial={{ opacity: 0, scale: 0.9 }}
-    // animate={{ opacity: 1, scale: 1 }}
-    // exit={{ opacity: 0, scale: 0.9 }}
-    // transition={{ duration: 0.5 }}
+   
     className="bg-black tracking-widest -mt-12 ">
 
       {/*  Hero */}

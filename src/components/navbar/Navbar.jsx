@@ -67,10 +67,10 @@ export default function Navbar({
           </div>
         </Link>
 
-        <span onClick={handleSidebar} className="cursor-pointer lg:hidden">
+        <span onClick={handleSidebar} className="cursor-pointer xl:hidden">
           <CiMenuBurger className="text-2xl" />
         </span>
-        <div className="lg:flex space-x-8 uppercase hidden">
+        <div className="xl:flex space-x-8 uppercase hidden">
           <Link to={"/"}>
             <span
               className={`${

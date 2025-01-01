@@ -16,16 +16,8 @@ export default function BuyerOrders() {
 
   if (isLoading) return <OrdersSkeletonLoader />;
 
-  if (!orders.length)
-    return (
-      <div className="grid">
-        <p className="font-semibold text-xl">Orders</p>
-        <p className="">No orders found.</p>
-      </div>
-    );
-
   // Sort orders by date, latest on top
-  const sortedOrders = orders.sort(
+  const sortedOrders = orders?.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
 
@@ -55,8 +47,14 @@ export default function BuyerOrders() {
   ];
 
   return (
-    <div className="p-5 bg-gray-900 text-white">
+    <div className="p-5 bg-gray-900 text-white min-h-screen">
       <h1 className="text-2xl font-bold mb-6">My Orders</h1>
+      {orders.length === 0 && (
+        <div className="grid">
+          <p className="font-semibold text-xl">Orders</p>
+          <p className="">No orders found.</p>
+        </div>
+      )}
       <div className="grid gap-6">
         {sortedOrders.map((order) => (
           <div
@@ -97,9 +95,8 @@ export default function BuyerOrders() {
               <h3 className="font-bold text-lg">Order Status:</h3>
               <div className="lg:flex lg:space-x-4 grid gap-2 mt-2">
                 {statusOptions.map((status) => (
-                  <div>
+                  <div  key={status}>
                     <div
-                      key={status}
                       className={`flex items-center space-x-2 p-2 px-8 rounded ${
                         order.status === status
                           ? "bg-blue-500 text-white"

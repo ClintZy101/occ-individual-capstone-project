@@ -58,7 +58,7 @@ export default function Checkout() {
     <div className="-mt-12 grid justify-center lg:flex gap-5 bg-black pt-[100px] pb-[100px] text-white">
       {/* product details */}
       <div className="md:w-3/4 md:grid px-5 w-screen">
-        <h2 className="text-xl text-center mb-5">My Cart</h2>
+        <h2 className="text-2xl font-bold text-center mb-5 ">My Cart</h2>
         {cartItems.length === 0 && (
           <div className="w-full grid place-items-center gap-5">
             <h2 className="w-full text-center text-2xl">
@@ -116,7 +116,7 @@ export default function Checkout() {
 
       {/* order summary */}
       <div className="lg:w-1/4 w-full px-5">
-        <h2 className="text-2xl mb-2">Order Summary</h2>
+        <h2 className="text-2xl mb-2 font-semibold">Order Summary</h2>
         <div className="border-y border-y-gray-700 py-10 grid gap-5">
           <div className="flex items-center justify-between w-full">
             <p className="text-xl">Subtotal</p>

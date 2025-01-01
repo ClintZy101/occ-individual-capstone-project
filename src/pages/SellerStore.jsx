@@ -22,9 +22,10 @@ export default function SellerStore() {
 
   return (
     <div className="text-white p-5 min-h-screen">
-      <div className="flex items-center space-x-5 px-10">
-        <h1 className="font-semibold text-xl">Seller Store: </h1>
+      <div className=" items-center px-10">
+        <h1 className="font-semibold text-xl w-full text-center"> Store Products </h1>
         <p className="text-lg">
+          Seller Name: {""}
           <strong>{seller?.username}</strong>
         </p>
       </div>

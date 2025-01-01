@@ -26,6 +26,7 @@ import CartModal from "./components/modals/CartModal";
 import SellerStore from "./pages/SellerStore";
 import BuyerOrders from "./pages/BuyerOrders";
 import UserManagement from "./pages/UserManagement";
+import UserProfile from './components/user/UserProfile';
 // import useFetchProducts from "./api/useFetchProducts";
 
 function App() {
@@ -226,6 +227,20 @@ function App() {
                     transition={{ duration: 0.5 }}
                   >
                     <UserManagement />
+                  </motion.div>
+                }
+              />
+              <Route
+                path="/user/:userId"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <UserProfile />
                   </motion.div>
                 }
               />
