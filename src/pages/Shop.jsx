@@ -8,7 +8,7 @@ import useFetchProducts from "../api/useFetchProducts";
 import GalleryLoader from "../components/loader/GalleryLoader";
 
 export default function Shop() {
-  const { fetchAllProducts, isLoading, setIsLoading, allProducts } =
+  const { isLoading, setIsLoading, allProducts } =
     useFetchProducts();
   const [searchTerm, setSearchTerm] = useState("");
   const [chosenCategory, setChosenCategory] = useState({
@@ -17,16 +17,12 @@ export default function Shop() {
   });
 
   const [productsByCategory, setProductsByCategory] = useState([{}]);
-  // const { chosenCategory, setChosenCategory, productsByCategory } =
-  //   useCategory();
   console.log(chosenCategory, productsByCategory);
   const { minValue, maxValue } = usePriceRangeStore();
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   
-  useEffect(() => {
-    fetchAllProducts();
-  }, []);
+
 
   useEffect(() => {
     setIsLoading(true);

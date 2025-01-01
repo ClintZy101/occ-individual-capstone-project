@@ -27,10 +27,10 @@ import SellerStore from "./pages/SellerStore";
 import BuyerOrders from "./pages/BuyerOrders";
 import UserManagement from "./pages/UserManagement";
 import UserProfile from './components/user/UserProfile';
-// import useFetchProducts from "./api/useFetchProducts";
+
 
 function App() {
-  // const { fetchAllProducts } = useFetchProducts();
+
   const { cartIsOpen, setCartIsOpen } = useCartStore();
   const { bannerIsHidden } = scrollHook();
   const location = useLocation();
@@ -54,9 +54,6 @@ function App() {
     }
   }, [user]);
 
-  // useEffect(() => {
-  //   fetchAllProducts(); // Fetch all products on app load to populate the store with products data
-  // }, []);
 
   const pageVariants = {
     initial: { opacity: 0, y: -50 },

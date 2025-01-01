@@ -6,11 +6,8 @@ import Gallery from "../components/gallery/Gallery";
 export default function SellerStore() {
   const { seller, setSeller } = useSeller();
   const userIdToFilter = seller?._id;
-  const { fetchAllProducts, allProducts } = useFetchProducts();
+  const { allProducts } = useFetchProducts();
 
-  useEffect(() => {
-    fetchAllProducts();
-  }, []);
 
   const sellerProducts = allProducts.filter(
     (product) => product.user._id === userIdToFilter
