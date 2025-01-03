@@ -27,13 +27,13 @@ export default function Trending({ products, category = "trending" }) {
               <p className="text-white line-clamp-1">{product.title}</p>
               <p className="text-white">${product.price.toFixed(2)}</p>
             </div>
-            <span
+            {/* <span
               className={`${
                 product.on_sale ? "block" : "hidden"
               } ml-5 text-black border-black border px-2 rounded absolute top-2`}
             >
               Sale
-            </span>
+            </span> */}
           </div>
         ))}
       </div>

@@ -246,7 +246,7 @@ const UserProfile = () => {
               )}
             </p>
             <div className="bg-gray-900 rounded-md p-5">
-              <p className="text-xl font-bold">Best Performing Product:</p>
+              <p className="text-xl font-bold">{user.role == 'seller' && 'Best Performing Product:'}{user.role == 'buyer' && 'Favorite Product:'}</p>
               <p className="text-xl">{bestProduct}</p>
             </div>
           </div>

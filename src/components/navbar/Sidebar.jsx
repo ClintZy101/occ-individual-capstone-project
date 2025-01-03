@@ -1,14 +1,22 @@
 import React from "react";
 import { RiCloseLargeFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../store/useAuthStore";
 
 export default function Sidebar({ sidebarIsShown, handleSidebar }) {
+  const {user} = useAuthStore()
+  const dashboard = () =>{
+    if(user.role === "admin" || user.role === "seller")
+      return { name: "Dashboard", link: "/seller-dashboard" }
+  }
+  
   const links = [
     { name: "Home", link: "/" },
     { name: "Shop", link: "/shop" },
-    // { name: "Contact Us", link: "/contactus" },
-    { name: "Cart", link: "/cart" },
-    // { name: "My Orders & Reviews", link: "/account/myorders" },
+    { name: "Checkout", link: "/checkout" },
+    { name: "My Orders ", link: "/account/myorders" },
+    dashboard(),
+
   ];
 
   const navigate = useNavigate();
