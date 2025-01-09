@@ -103,7 +103,7 @@ export default function CheckoutForm() {
           name="name"
           value={shippingAddress.name}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-gray-900"
           required
         />
       </div>
@@ -114,7 +114,7 @@ export default function CheckoutForm() {
           name="address"
           value={shippingAddress.address}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-gray-900"
           required
         />
       </div>
@@ -125,7 +125,7 @@ export default function CheckoutForm() {
           name="city"
           value={shippingAddress.city}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-gray-900"
           required
         />
       </div>
@@ -136,7 +136,7 @@ export default function CheckoutForm() {
           name="state"
           value={shippingAddress.state}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-gray-900"
           required
         />
       </div>
@@ -147,7 +147,7 @@ export default function CheckoutForm() {
           name="postalCode"
           value={shippingAddress.postalCode}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-gray-900"
           required
         />
       </div>
@@ -158,19 +158,19 @@ export default function CheckoutForm() {
           name="country"
           value={shippingAddress.country}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full p-2 border border-gray-300 rounded text-gray-900"
           required
         />
       </div>
       <h2 className="text-2xl mb-5">Payment Details</h2>
-      <div className="mb-4">
-        <CardElement className="p-2 border border-gray-300 rounded" />
+      <div className="mb-4 bg-white text-gray-900">
+        <CardElement className="py-3 px-2 text-white border border-gray-300 rounde" />
       </div>
       {error && <div className="text-red-500 mb-4">{error}</div>}
       <button
         type="submit"
         disabled={processing || !stripe || !elements}
-        className="px-5 py-2 bg-purple-500 text-white w-full hover:bg-purple-700 text-xl"
+        className="px-5 py-2 bg-purple-500 text-gray-300 w-full hover:bg-purple-700 text-xl"
       >
         {processing ? "Processing..." : `Pay $${total}`}
       </button>

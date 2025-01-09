@@ -35,9 +35,9 @@ export default function CheckoutModal({ isOpen, onClose }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 50 }}
       transition={{ duration: 0.4 }}
-      className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50 "
     >
-      <div className="bg-white text-black p-5 rounded-lg md:w-5/6 flex flex-col max-h-[90vh] ">
+      <div className="bg-gray-800 text-white p-5 rounded-lg md:w-5/6 flex flex-col max-h-[90vh]  border-4 border-gray-500 ">
         {/* Header */}
         <div className="flex justify-between items-center mb-5">
           <h2 className="text-2xl">Checkout</h2>

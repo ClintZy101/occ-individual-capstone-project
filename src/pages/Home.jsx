@@ -30,16 +30,16 @@ export default function Home() {
       console.log("email submit:", email);
     }
   };
-  useEffect(() => {
-    console.log(
-      "User",
-      user,
-      "token",
-      token,
-      "tokenExpiry",
-      new Date(tokenExpiry)
-    );
-  }, []);
+  // useEffect(() => {
+  //   console.log(
+  //     "User",
+  //     user,
+  //     "token",
+  //     token,
+  //     "tokenExpiry",
+  //     new Date(tokenExpiry)
+  //   );
+  // }, []);
   return (
     <motion.div className="bg-black tracking-widest -mt-12 ">
       {renderReceivedEmail && <ReceivedEmail />}
