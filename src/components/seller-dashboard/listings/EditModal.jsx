@@ -123,7 +123,7 @@ export default function EditProductDialog({
     <Dialog
       open={openEditModal}
       handler={handleOpenEditModal}
-      className="bg-gray-900 text-white"
+      className="bg-gray-800 text-white border-4 border-gray-500 px-4"
     >
       <DialogHeader className="text-white">Edit Product Details</DialogHeader>
       <DialogBody className="overflow-y-auto max-h-[75vh]">
@@ -165,7 +165,7 @@ export default function EditProductDialog({
           </div>
 
           {/* On Sale */}
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <label className="block text-gray-400">On Sale</label>
             <input
               type="checkbox"
@@ -174,7 +174,7 @@ export default function EditProductDialog({
               onChange={handleChange}
               className="h-4 w-4 rounded border-gray-400 focus:ring-purple-500"
             />
-          </div>
+          </div> */}
 
           {/* Image Section */}
 
@@ -243,10 +243,10 @@ export default function EditProductDialog({
         </form>
       </DialogBody>
       <DialogFooter className="space-x-5">
-        <Button onClick={handleOpenEditModal} color="red">
+        <Button onClick={handleOpenEditModal} color="red" className="hover:bg-red-700">
           Cancel
         </Button>
-        <Button onClick={handleSave} color="blue-gray">
+        <Button onClick={handleSave} color="blue-gray" className="hover:bg-blue-gray-700">
           Save
         </Button>
       </DialogFooter>

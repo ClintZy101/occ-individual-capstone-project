@@ -86,7 +86,7 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
     <Dialog
       open={openAddModal}
       handler={handleOpenAddModal}
-      className="bg-gray-900 text-white"
+      className="bg-gray-800 text-white border-4 border-gray-500 px-4"
     >
       <DialogHeader className="text-white">Add New Product</DialogHeader>
       <DialogBody className="overflow-y-auto max-h-[75vh]">
@@ -130,7 +130,7 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
           </div>
 
           {/* On Sale */}
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <label className="block text-gray-400">On Sale</label>
             <input
               type="checkbox"
@@ -139,7 +139,7 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
               onChange={handleChange}
               className="h-4 w-4 rounded border-gray-400 focus:ring-purple-500"
             />
-          </div>
+          </div> */}
 
           {/* Image Section */}
 
@@ -209,10 +209,10 @@ export default function AddProductModal({ openAddModal, handleOpenAddModal, hand
         </form>
       </DialogBody>
       <DialogFooter className="space-x-5">
-        <Button onClick={handleOpenAddModal} color="red">
+        <Button onClick={handleOpenAddModal} color="red" className="hover:bg-red-700">
           Cancel
         </Button>
-        <Button type="submit" onClick={handleAdd} color="blue">
+        <Button type="submit" onClick={handleAdd} color="blue-gray" className="hover:bg-blue-gray-700">
           Add Product
         </Button>
       </DialogFooter>
