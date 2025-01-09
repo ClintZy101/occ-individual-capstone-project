@@ -7,13 +7,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import useOutsideAlerter from "../../../utils/useOutsideAlerter";
 import { TiMinusOutline } from "react-icons/ti";
 import EditProductDialog from "./EditModal";
+import DeleteProductModal from "./DeleteProductModal";
 
 export default function SingleProduct({ item }) {
   const [showOptions, setShowOptions] = useState(false);
   const [openInfo, setOpenInfo] = useState(null); // Track which item's info is open
-  const [openEditModal, setOpenEditModal] = React.useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false)
 
   const handleOpenEditModal = () => setOpenEditModal(!openEditModal);
+  const handleDeleteModal = () => setOpenDeleteModal(!openDeleteModal)
+
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef, setShowOptions, showOptions);
 
@@ -21,6 +25,7 @@ export default function SingleProduct({ item }) {
     setOpenInfo((prev) => (prev === id ? null : id)); // Toggle based on ID
     setShowOptions(false);
   };
+
 
   return (
     <div className="grid gap-5 grid-cols-5 border-t-[0.5px] border-t-gray-500 py-2 px-2">
@@ -68,7 +73,9 @@ export default function SingleProduct({ item }) {
               >
                 <PiInfoThin className="text-xl hover:text-purple-400 text-gray-500" />
               </span>
-              <span className="cursor-pointer">
+              <span 
+              onClick={handleDeleteModal}
+              className="cursor-pointer">
                 <CiTrash className="text-xl hover:text-red-500 text-gray-500" />
               </span>
             </motion.div>
@@ -93,6 +100,7 @@ export default function SingleProduct({ item }) {
         )}
       </AnimatePresence>
       <EditProductDialog openEditModal={openEditModal} handleOpenEditModal={handleOpenEditModal} item={item}/>
+      <DeleteProductModal isOpen={openDeleteModal} onClose={handleDeleteModal} productName={item.title} productId={item._id}/>
     </div>
   );
 }

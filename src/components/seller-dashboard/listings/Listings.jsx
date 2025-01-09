@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SingleProduct from "./SingleProduct";
-// import { products } from "../../../data/allproducts";
 import AddProductModal from "./AddProductModal";
 import { Button } from "@material-tailwind/react";
 import axios from "axios";
@@ -8,11 +7,13 @@ import { LOCALHOST } from "../../../api/endpoint";
 import { useAuthStore } from "../../../store/useAuthStore";
 import SingleProductSkeleton from "../../loader/SingleProductListingSkeleton";
 import useFetchProducts from "../../../api/useFetchProducts";
+import { SlRefresh } from "react-icons/sl";
 
 export default function Listings() {
   const [openAddModal, setOpenAddModal] = useState(false);
   const { token } = useAuthStore();
-  const {userProducts, isLoading, fetchUserProducts, setTrigger} = useFetchProducts();
+  const { userProducts, isLoading, fetchUserProducts, setTrigger } =
+    useFetchProducts();
 
   const handleOpenAddModal = () => {
     setOpenAddModal((prev) => !prev);
@@ -52,8 +53,17 @@ export default function Listings() {
 
   return (
     <div className="bg-gray-900 p-5">
+      <p className="font-semibold my-2 text-2xl">My Listing</p>
       <div className="flex justify-between items-center py-2">
-        <p className="font-semibold my-2 text-2xl">My Listing</p>
+        <Button
+          variant="gradient"
+          color="blue-gray"
+          onClick={fetchUserProducts}
+          className="flex items-center space-x-2"
+        >
+          <SlRefresh className="text-lg" />
+          <p> Refresh Products</p>
+        </Button>
         <Button
           onClick={handleOpenAddModal}
           variant="gradient"
@@ -91,7 +101,6 @@ export default function Listings() {
             <SingleProductSkeleton />
             <SingleProductSkeleton />
           </div>
-          
         ) : userProducts.length > 0 ? (
           <div>
             {userProducts.map((item) => (

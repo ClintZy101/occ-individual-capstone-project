@@ -16,7 +16,7 @@ export default function EditProductDialog({
   handleOpenEditModal,
   item,
 }) {
-  const { fetchUserProducts, setUserProducts, setTrigger } = useFetchProducts();
+  const { fetchUserProducts, setTrigger } = useFetchProducts();
   const productId = item._id;
   const { token } = useAuthStore();
   const [formData, setFormData] = useState({
@@ -97,24 +97,16 @@ export default function EditProductDialog({
       if (response.status === 200) {
         alert("Product updated successfully!");
         console.log("Updated Product:", response.data.product);
-        // Optimistically update the product list
-        // setUserProducts((prevProducts) =>
-        //   prevProducts.map((product) =>
-        //     product._id === productId ? response.data.product : product
-        //   )
-        // );
-        // set Trigger to fetch data
+        // setTrigger((prev) => prev + 1);
       } else {
         alert(response.data.message || "Failed to update product.");
       }
-      
-      setTrigger((prev) => prev + 1);
     } catch (error) {
       console.error("Error updating product:", error);
       alert(
         error.response?.data?.message || "An error occurred. Please try again."
       );
-    }
+    } 
 
     handleOpenEditModal(); // Close modal after saving
   };

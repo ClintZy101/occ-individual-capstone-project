@@ -71,9 +71,9 @@ export default function useFetchProducts() {
     }
   }, [token, trigger]);
 
-  useEffect(() => {
-    fetchAllProducts();
-  }, []);
+  // useEffect(() => {
+  //   fetchAllProducts();
+  // }, []);
 
   return {
     allProducts,

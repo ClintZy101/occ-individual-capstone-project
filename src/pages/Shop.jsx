@@ -8,7 +8,7 @@ import useFetchProducts from "../api/useFetchProducts";
 import GalleryLoader from "../components/loader/GalleryLoader";
 
 export default function Shop() {
-  const { isLoading, setIsLoading, allProducts } =
+  const { isLoading, setIsLoading, allProducts, fetchAllProducts } =
     useFetchProducts();
   const [searchTerm, setSearchTerm] = useState("");
   const [chosenCategory, setChosenCategory] = useState({
@@ -22,6 +22,9 @@ export default function Shop() {
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   
+  useEffect(()=>{
+    fetchAllProducts(); 
+  },[])
 
 
   useEffect(() => {
