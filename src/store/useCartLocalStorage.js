@@ -80,6 +80,7 @@ const useCartStore = create((set, get) => ({
           ? { ...item, quantity: item.quantity - 1 }
           : item
       );
+      console.log(itemId)
       saveToLocalStorage(updatedCart);
       return {
         cartItems: updatedCart,

@@ -13,10 +13,9 @@ import SuccessAddToCart from "../components/modals/SuccessAddToCart";
 import { AnimatePresence } from "framer-motion";
 
 export default function SingleProduct() {
-  const { product, setProduct } = useProduct();
+  const { product } = useProduct();
   console.log(product);
-  const { cartIsOpen, setCartIsOpen } = useCartStore();
-  const [triggerFromAddToCart, setTriggerFromAddToCart] = useState(0);
+  const { setCartIsOpen } = useCartStore();
   const [successNotificationIsOpen, setSuccessNotificationIsOpen] =
     useState(false);
   const [quantity, setQuantity] = useState(1);

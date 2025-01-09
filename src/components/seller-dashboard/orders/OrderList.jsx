@@ -1,13 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useFetchOrders from "../../../api/useFetchSellerOrders";
-import { useAuthStore } from "../../../store/useAuthStore";
 import axios from "axios";
 import { LOCALHOST } from "../../../api/endpoint";
 import OrdersSkeletonLoader from "../../loader/OrdersSkeletonLoader";
+import { FaBoxOpen, FaCheckCircle, FaClipboardList, FaHourglassHalf, FaTruck } from "react-icons/fa";
 
 export default function OrderList() {
-  const { orders, isLoading, fetchOrders, setIsLoading } = useFetchOrders();
-  const { user } = useAuthStore();
+  const { orders, isLoading, fetchSellerOrders, setIsLoading } = useFetchOrders();
+ console.log(isLoading)
+
+  // Sort orders by date, latest on top
+   const sortedOrders = orders?.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
+  const renderOrderStatusIcon = (status) => {
+      switch (status) {
+        case "Pending":
+          return <div className="flex space-x-2 items-center"><FaHourglassHalf className="text-yellow-500" /> <p className="text-yellow-500">{status}</p></div> ;
+        case "Order Processing":
+          return <div className="flex space-x-2 items-center"> <FaClipboardList className="text-blue-500" /> <p className="text-blue-500">{status}</p></div>;
+        case "Out For Delivery":
+          return <div className="flex space-x-2 items-center"> <FaTruck className="text-orange-500" /> <p className="text-orange-500">{status}</p></div>;  
+        case "Shipped":
+          return <div className="flex space-x-2 items-center"><FaBoxOpen className="text-purple-500" /> <p className="text-purple-500">{status}</p></div>;   
+        case "Completed":
+          return <div className="flex space-x-2 items-center"><FaCheckCircle className="text-green-500" /> <p className="text-green-500">{status}</p></div>;    
+        default:
+          return null;
+      }
+    };
+
   const statusOptions = [
     "Pending",
     "Order Processing",
@@ -26,6 +49,7 @@ export default function OrderList() {
         <p className="">No orders found.</p>
       </div>
     );
+
 
   const handleStatusUpdate = async (orderId, newStatus) => {
     console.log(orderId, newStatus);
@@ -79,9 +103,9 @@ export default function OrderList() {
     <div className="p-6 bg-gray-900 text-white">
       <h1 className="text-2xl font-bold mb-6">Customer Orders</h1>
       <div className="grid gap-6">
-        {orders?.map((order) => (
+        {sortedOrders?.map((order) => (
           <div key={order._id} className="p-4 bg-gray-800 rounded-md shadow-md">
-            <h2 className="text-xl font-semibold">Order #{order._id}</h2>
+            <h2 className="text-xl font-semibold text-blue-200">Order #{order._id}</h2>
             <p className="text-gray-400">Customer: {order.buyer.username}</p>
             <p className="text-gray-400">Email: {order.buyer.email}</p>
             <p className="text-gray-400">
@@ -114,7 +138,7 @@ export default function OrderList() {
 
             <div className="mt-4">
               <h3 className="font-bold text-lg">
-                Order Status: {order.status}
+                Order Status: {renderOrderStatusIcon(order.status)}
               </h3>
               <div className="flex space-x-2">{renderStatusButtons(order)}</div>
             </div>

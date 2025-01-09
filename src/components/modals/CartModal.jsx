@@ -20,7 +20,7 @@ export default function CartModal({ isOpen, onClose }) {
     onClose();
     navigate("/checkout");
   };
-  console.log(cartItems);
+  // console.log(cartItems);
   return (
     <div
       className={`fixed top-0 right-0 h-full w-full sm:w-[300px] bg-white shadow-lg transform ${

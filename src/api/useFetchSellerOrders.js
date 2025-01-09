@@ -3,12 +3,16 @@ import axios from "axios";
 import { useAuthStore } from "../store/useAuthStore";
 import { LOCALHOST } from "./endpoint";
 
+
 export default function useFetchSellerOrders() {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { token, user } = useAuthStore();
+  const [notification, setNotification] =useState(false);
+  const [pendingOrders, setPendingOrders] = useState([])
 
-  const fetchOrders = async () => {
+
+  const fetchSellerOrders = async () => {
     setIsLoading(true);
 
     try {
@@ -34,8 +38,15 @@ export default function useFetchSellerOrders() {
   };
 
   useEffect(() => {
-    fetchOrders();
+    fetchSellerOrders();
   }, []);
+  
+  useEffect(()=>{
+    let filteredOrders = orders?.filter(order => order.status === 'Pending')
+    let activeNotification =  filteredOrders.length > 0 || false
+    setNotification(activeNotification)
+    setPendingOrders(filteredOrders)
+  },[orders])
 
-  return { orders, isLoading, fetchOrders, setIsLoading };
+  return { orders, isLoading, fetchSellerOrders, setIsLoading, pendingOrders, notification };
 }

@@ -27,10 +27,9 @@ import SellerStore from "./pages/SellerStore";
 import BuyerOrders from "./pages/BuyerOrders";
 import UserManagement from "./pages/UserManagement";
 import UserProfile from './components/user/UserProfile';
-
+import Notifications from "./pages/Notifications";
 
 function App() {
-
   const { cartIsOpen, setCartIsOpen } = useCartStore();
   const { bannerIsHidden } = scrollHook();
   const location = useLocation();
@@ -53,6 +52,7 @@ function App() {
       return () => clearTimeout(timer);
     }
   }, [user]);
+
 
 
   const pageVariants = {
@@ -171,6 +171,20 @@ function App() {
                   </motion.div>
                 }
               />
+              {/* <Route
+                path="/notifications"
+                element={
+                  <motion.div
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Notifications />
+                  </motion.div>
+                }
+              /> */}
               <Route
                 path="/login"
                 element={

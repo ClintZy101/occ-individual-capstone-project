@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { BsCart } from "react-icons/bs";
-import { IoCartOutline } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 import useCartStore from "../../store/useCartLocalStorage";
 import GlowButton from "../buttons/GlowButton";
@@ -8,17 +7,24 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { truncateBeforeChar } from "../../utils/helpers";
 import useOutsideAlerter from "../../utils/useOutsideAlerter";
 import AccountDropdown from "./AccountDropdown";
-import { CiMenuBurger } from "react-icons/ci";
-// import useCartStore from "../../store/useCart";
+import { HiOutlineMenuAlt4 } from "react-icons/hi";
+import { GiShoppingCart } from "react-icons/gi";
+import { CiBellOn } from "react-icons/ci";
+import useNotification from "../../store/useNotification";
+
 
 export default function Navbar({
   bannerIsHidden,
   sidebarIsActive,
   handleSidebar,
 }) {
+  // const { notificationIsActive, notificationCount } = useNotification();
+
+  const [notificationCount, setNotificationCount] = useState(0)
   const { user, signOut } = useAuthStore();
   const [userName, setUserName] = useState("");
   const location = useLocation();
+
 
   const getUserName = () => {
     if (user) {
@@ -62,13 +68,16 @@ export default function Navbar({
       >
         <Link to={"/"}>
           <div className={`${location.pathname === "/" && "font-semibold"}`}>
-           <img src="T-logo.png" alt="" className="h-10 rounded" />
-           {/* <p>Tech Hub</p>  */}
+            <img src="T-logo.png" alt="" className="h-10 rounded" />
+            {/* <p>Tech Hub</p>  */}
           </div>
         </Link>
 
-        <span onClick={handleSidebar} className="cursor-pointer xl:hidden">
-          <CiMenuBurger className="text-2xl" />
+        <span
+          onClick={handleSidebar}
+          className="cursor-pointer xl:hidden  rounded-full "
+        >
+          <HiOutlineMenuAlt4 className="text-3xl text-gray-700 hover:text-white hover:bg-black rounded-full p-1 transition duration-300 hover:shadow-xl" />
         </span>
         <div className="xl:flex space-x-8 uppercase hidden">
           <Link to={"/"}>
@@ -98,15 +107,17 @@ export default function Navbar({
               Checkout
             </span>
           </Link>
-          <Link to={"/account/myorders"}>
+          {user &&   <Link to={"/account/myorders"}>
             <span
               className={`${
-                location.pathname === "/account/myorders" && "bg-gray-200  rounded-md"
+                location.pathname === "/account/myorders" &&
+                "bg-gray-200  rounded-md"
               } hover:underline cursor-pointer py-2 px-5 transition-all ease-out duration-700`}
             >
               My Orders
             </span>
-          </Link>
+          </Link>}
+        
           {(user?.role === "seller" || user?.role === "admin") && (
             <Link to={"/seller-dashboard"}>
               <span
@@ -123,12 +134,20 @@ export default function Navbar({
         <div className="space-x-3 flex items-center">
           <Link to={"/checkout"}>
             <span className="relative grid place-items-center mr-2">
-              <BsCart className="text-xl" />
-              <span className="rounded-full absolute -right-2 -top-2 bg-black w-4 h-4 text-xs text-white grid place-items-center">
+              <GiShoppingCart className="text-xl text-gray-600" />
+              <span className="rounded-full absolute -right-2 -top-2 bg-purple-500 w-4 h-4 text-xs text-white grid place-items-center">
                 {cartItems.length === 0 ? "0" : totalQuantity}
               </span>
             </span>
           </Link>
+          {/* <Link to={"/notifications"}>
+            <span className="relative grid place-items-center mr-2">
+              <CiBellOn className="text-xl text-gray-600 " />
+              <span className="rounded-full absolute -right-1 -top-2 bg-blue-500 w-4 h-4 text-xs text-white grid place-items-center">
+                {notificationCount.length === 0 ? "0" : notificationCount}
+              </span>
+            </span>
+          </Link> */}
 
           {user ? (
             <div className={` relative group flex `}>
