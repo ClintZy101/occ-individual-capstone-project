@@ -6,9 +6,12 @@ import { useAuthStore } from "../../store/useAuthStore";
 export default function Sidebar({ sidebarIsShown, handleSidebar }) {
   const {user} = useAuthStore()
   const dashboard = () =>{
-    if(user.role === "admin" || user.role === "seller")
+    if(user?.role === "admin" || user?.role === "seller"){
       return { name: "Dashboard", link: "/seller-dashboard" }
+    } else if(user?.role === "buyer" || user === null){
+      return {}
   }
+}
   
   const links = [
     { name: "Home", link: "/" },
