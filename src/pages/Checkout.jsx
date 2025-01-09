@@ -67,9 +67,9 @@ export default function Checkout() {
             <LinkBackButton text="Back To Shop" endpoint={"/shop"} />
           </div>
         )}
-        {cartItems.map((item) => (
+        {cartItems.map((item, i) => (
           <div
-            key={item._id}
+            key={i}
             className="grid gap-2 md:grid-cols-5 items-center md:border-y border-b border-y-gray-700 py-4 my-2 px-5"
           >
             <img
