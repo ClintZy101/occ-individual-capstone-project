@@ -79,7 +79,7 @@ export default function Navbar({
         >
           <HiOutlineMenuAlt4 className="text-3xl text-gray-700 hover:text-white hover:bg-black rounded-full p-1 transition duration-300 hover:shadow-xl" />
         </span>
-        <div className="xl:flex space-x-8 uppercase hidden">
+        <div className="xl:flex space-x-2 uppercase hidden">
           <Link to={"/"}>
             <span
               className={`${
