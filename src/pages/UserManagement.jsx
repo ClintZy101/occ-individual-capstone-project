@@ -159,7 +159,7 @@ export default function UserManagement() {
           </div>
         ))}
       </div>
-      <div className="mt-10">
+      {/* <div className="mt-10">
         <h2 className="text-xl font-bold mb-2">Create New User</h2>
         <input
           type="text"
@@ -191,8 +191,8 @@ export default function UserManagement() {
         >
           Create User
         </Button>
-      </div>
-      {editingUser && (
+      </div> */}
+      {/* {editingUser && (
         <div className="mt-10">
           <h2 className="text-xl font-bold mb-2">Edit User</h2>
           <input
@@ -232,7 +232,7 @@ export default function UserManagement() {
             Update User
           </Button>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
