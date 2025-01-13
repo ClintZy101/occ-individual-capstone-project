@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useFetchOrders from "../../../api/useFetchSellerOrders";
 import axios from "axios";
-import { LOCALHOST } from "../../../api/endpoint";
+import { API_URL, LOCALHOST } from "../../../api/endpoint";
 import OrdersSkeletonLoader from "../../loader/OrdersSkeletonLoader";
 import { FaBoxOpen, FaCheckCircle, FaClipboardList, FaHourglassHalf, FaTruck } from "react-icons/fa";
 
@@ -57,7 +57,7 @@ export default function OrderList() {
 
     try {
       const response = await axios.put(
-        `${LOCALHOST}api/orders/seller/order-status`,
+        `${API_URL || LOCALHOST}api/orders/seller/order-status`,
         {
           orderId,
           status: newStatus,

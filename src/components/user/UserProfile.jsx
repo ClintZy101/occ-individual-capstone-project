@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { LOCALHOST } from "../../api/endpoint";
+import { API_URL, LOCALHOST } from "../../api/endpoint";
 import { useAuthStore } from "../../store/useAuthStore";
 import SalesActivity from "./SalesActivity";
 import Chart from "react-apexcharts";
@@ -29,7 +29,7 @@ const UserProfile = () => {
       try {
         if (user.role === "buyer") {
           const res = await axios.get(
-            `${LOCALHOST}api/orders/buyer/${userId}`,
+            `${API_URL|| LOCALHOST}api/orders/buyer/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ const UserProfile = () => {
           setOrders(res.data);
         } else if (user.role === "seller" || user.role === "admin") {
           const ordersRes = await axios.get(
-            `${LOCALHOST}api/orders/seller/${userId}`,
+            `${API_URL || LOCALHOST}api/orders/seller/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

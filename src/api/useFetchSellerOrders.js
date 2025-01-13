@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthStore } from "../store/useAuthStore";
-import { LOCALHOST } from "./endpoint";
+import { API_URL, LOCALHOST } from "./endpoint";
 
 
 export default function useFetchSellerOrders() {
@@ -16,7 +16,7 @@ export default function useFetchSellerOrders() {
     setIsLoading(true);
 
     try {
-      const response = await axios.get(`${LOCALHOST}api/orders/seller/${user._id}`, {
+      const response = await axios.get(`${API_URL|| LOCALHOST}api/orders/seller/${user._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

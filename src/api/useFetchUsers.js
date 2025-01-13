@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthStore } from "../store/useAuthStore";
-import { LOCALHOST } from "./endpoint";
+import { LOCALHOST, API_URL} from "./endpoint";
 
 const useFetchUsers = () => {
   const [users, setUsers] = useState([]);
@@ -12,7 +12,7 @@ const useFetchUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`${LOCALHOST}api/users/all`, {
+        const response = await axios.get(`${API_URL || LOCALHOST}api/users/all`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

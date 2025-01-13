@@ -8,7 +8,7 @@ import {
   Input,
 } from "@material-tailwind/react";
 import useFetchProducts from "../../../api/useFetchProducts";
-import { LOCALHOST } from "../../../api/endpoint";
+import { LOCALHOST, API_URL } from "../../../api/endpoint";
 import { useAuthStore } from "../../../store/useAuthStore";
 import axios from "axios";
 
@@ -29,7 +29,7 @@ export default function DeleteProductModal({
   const proceedDelete = async () => {
     try {
       const response = await axios.delete(
-        `${LOCALHOST}api/products/delete/${productId}`,
+        `${API_URL || LOCALHOST}api/products/delete/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

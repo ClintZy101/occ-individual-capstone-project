@@ -7,7 +7,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import axios from "axios";
-import { LOCALHOST } from "../../../api/endpoint";
+import { API_URL, LOCALHOST } from "../../../api/endpoint";
 import { useAuthStore } from "../../../store/useAuthStore";
 import useFetchProducts from "../../../api/useFetchProducts";
 
@@ -84,7 +84,7 @@ export default function EditProductDialog({
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        `${LOCALHOST}api/products/edit/${productId}`,
+        `${API_URL|| LOCALHOST}api/products/edit/${productId}`,
         formData,
         {
           headers: {
@@ -106,7 +106,7 @@ export default function EditProductDialog({
       alert(
         error.response?.data?.message || "An error occurred. Please try again."
       );
-    } 
+    }
 
     handleOpenEditModal(); // Close modal after saving
   };
@@ -235,10 +235,18 @@ export default function EditProductDialog({
         </form>
       </DialogBody>
       <DialogFooter className="space-x-5">
-        <Button onClick={handleOpenEditModal} color="red" className="hover:bg-red-700">
+        <Button
+          onClick={handleOpenEditModal}
+          color="red"
+          className="hover:bg-red-700"
+        >
           Cancel
         </Button>
-        <Button onClick={handleSave} color="blue-gray" className="hover:bg-blue-gray-700">
+        <Button
+          onClick={handleSave}
+          color="blue-gray"
+          className="hover:bg-blue-gray-700"
+        >
           Save
         </Button>
       </DialogFooter>

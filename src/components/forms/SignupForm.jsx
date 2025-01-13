@@ -3,9 +3,7 @@ import Input from "./Input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import GlowButton from "../buttons/GlowButton";
-import { API_ENDPOINTS } from "../../api/endpoint";
-
-const localhost = "http://localhost:1234";
+import { API_URL, LOCALHOST } from "../../api/endpoint";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -64,24 +62,9 @@ const SignupForm = () => {
     try {
       setError(null);
       setLoading(true);
-      // console.log(formData)
-      // check availability before registering user via useEffect
-      // const availabilityResponse = await axios.post(
-      //   `http://localhost:1234/api/auth/check-availability`,
-      //   {
-      //     email: formData.email,
-      //     username: formData.username,
-      //   }
-      // );
-      // console.log(availabilityResponse.data)
-
-      // if(availabilityResponse.status === 400) {
-      //   setError(availabilityResponse.data.message)
-      //   console.log(availabilityResponse.data.message)
-      // }
 
       const registerResponse = await axios.post(
-        `${localhost}/api/auth/register`,
+        `${API_URL || LOCALHOST}/api/auth/register`,
         formData
       );
       setRegisterResponse(registerResponse);
