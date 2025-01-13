@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductsGallerySidebar from "../components/sidebar/ProductsGallerySidebar";
 import Gallery from "../components/gallery/Gallery";
-import useCategory from "../utils/useCategory";
 import usePriceRangeStore from "../store/usePriceRange";
 import SearchFilter from "../components/SearchFilter";
 import useFetchProducts from "../api/useFetchProducts";

@@ -1,8 +1,7 @@
 import React from "react";
 import useProduct from "../../store/useProduct";
 import { Link } from "react-router-dom";
-import GallerySkeletonLoader from "../loader/GalleryProductSkeleton";
-import useAllProducts from "../../store/useAllProducts";
+
 
 export default function Gallery({ products }) {
   const { setProduct } = useProduct();

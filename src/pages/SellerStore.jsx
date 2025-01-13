@@ -6,12 +6,17 @@ import Gallery from "../components/gallery/Gallery";
 export default function SellerStore() {
   const { seller, setSeller } = useSeller();
   const userIdToFilter = seller?._id;
-  const { allProducts } = useFetchProducts();
+  const { allProducts, fetchAllProducts } = useFetchProducts();
 
+ useEffect(() => {
+    fetchAllProducts();
+  }, []);
 
   const sellerProducts = allProducts.filter(
     (product) => product.user._id === userIdToFilter
   );
+  // console.log(allProducts)
+  console.log(sellerProducts, seller._id)
 
   if (!seller) {
     return <div className="text-white p-5 min-h-screen">SellerStore</div>;
