@@ -3,7 +3,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import useCartStore from "../../store/useCartLocalStorage";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { LOCALHOST } from "../../api/endpoint";
+import { LOCALHOST, API_URL } from "../../api/endpoint";
 import { useAuthStore } from "../../store/useAuthStore";
 
 export default function CheckoutForm() {
