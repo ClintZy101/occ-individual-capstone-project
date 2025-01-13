@@ -70,7 +70,7 @@ export default function OrderList() {
     } catch (error) {
       console.error(`Failed to update order ${orderId} status`, error);
     } finally {
-      fetchOrders();
+      fetchSellerOrders();
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
