@@ -27,7 +27,7 @@ const UserProfile = () => {
       try {
         if (user.role === "buyer") {
           const res = await axios.get(
-            `${API_URL|| LOCALHOST}api/orders/buyer/${userId}`,
+            `${LOCALHOST}api/orders/buyer/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const UserProfile = () => {
           setOrders(res.data);
         } else if (user.role === "seller" || user.role === "admin") {
           const ordersRes = await axios.get(
-            `${API_URL || LOCALHOST}api/orders/seller/${userId}`,
+            `${LOCALHOST}api/orders/seller/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

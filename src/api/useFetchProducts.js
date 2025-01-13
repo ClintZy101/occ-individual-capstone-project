@@ -15,7 +15,7 @@ export default function useFetchProducts() {
     setIsLoading(true); // Start loading
 
     try {
-      const response = await axios.get(`${API_URL || LOCALHOST}api/products`);
+      const response = await axios.get(`${LOCALHOST}api/products`);
 
       if (response.status === 200) {
         console.log("All products fetched successfully", response.data);
@@ -42,7 +42,7 @@ export default function useFetchProducts() {
 
     try {
       const response = await axios.get(
-        `${API_URL || LOCALHOST}api/products/user-products`,
+        `${LOCALHOST}api/products/user-products`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Pass the token in the header

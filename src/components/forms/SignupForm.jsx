@@ -64,7 +64,7 @@ const SignupForm = () => {
       setLoading(true);
 
       const registerResponse = await axios.post(
-        `${API_URL || LOCALHOST}/api/auth/register`,
+        `${LOCALHOST}/api/auth/register`,
         formData
       );
       setRegisterResponse(registerResponse);

@@ -12,7 +12,7 @@ const useFetchUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`${API_URL || LOCALHOST}api/users/all`, {
+        const response = await axios.get(`${LOCALHOST}api/users/all`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
