@@ -13,7 +13,7 @@ export default function SellerStore() {
   }, []);
 
   const sellerProducts = allProducts.filter(
-    (product) => product.user._id === userIdToFilter
+    (product) => product.user?._id === userIdToFilter
   );
   // console.log(allProducts)
   console.log(sellerProducts, seller._id)
