@@ -12,7 +12,7 @@ import Gallery from "../gallery/Gallery";
 
 const UserProfile = () => {
   const { user } = useUserProfile();
-  const { allProducts } = useFetchProducts();
+  const { allProducts, fetchAllProducts } = useFetchProducts();
   const { token } = useAuthStore();
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -55,6 +55,8 @@ const UserProfile = () => {
       }
     };
 
+    fetchAllProducts();
+
     const filteredProducts = allProducts.filter(
       (product) => product.user._id === userId
     );
@@ -64,7 +66,7 @@ const UserProfile = () => {
     fetchUserDetails();
   }, [userId, allProducts]);
 
-  console.log(products);
+  // console.log(products);
 
   const chartData = {
     series: [
@@ -162,7 +164,7 @@ const UserProfile = () => {
   }, [orders]);
 
   return (
-    <div className="text-white min-h-screen p-5 bg-gray-900">
+    <div className="text-white min-h-screen p-5 bg-gray-900 pb-[200px]">
       <LinkBackButton
         text="Back To UserManagement"
         endpoint="/user-management"
