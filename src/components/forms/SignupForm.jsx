@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Input from "./Input";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GlowButton from "../buttons/GlowButton";
 import {  API_URL } from "../../api/endpoint";
 
@@ -84,7 +84,7 @@ const SignupForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className=" p-10 py-12 rounded shadow-lg shadow-gray-300 mx-auto w-full bg-black bg-opacity-70 text-white"
+      className=" p-10 pb-12 pt-5 rounded shadow-lg mx-auto w-full bg-black bg-opacity-70 text-white"
     >
       <img
         class="mx-auto h-10 w-auto"
@@ -177,6 +177,11 @@ const SignupForm = () => {
           title={"Sign Up"}
         />
       </div>
+      <Link to={'/login'}>
+          <button className="  mt-7  text-lg  text-white hover:underline   text-center w-full">
+            Already have an account? Sign in!
+          </button>
+          </Link>
     </form>
   );
 };

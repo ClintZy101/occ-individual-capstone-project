@@ -10,7 +10,7 @@ export default function Register() {
         <img
           src="https://images.pexels.com/photos/3184416/pexels-photo-3184416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           alt="shakehands"
-          className="w-full h-full object-cover min-h-[700px]"
+          className="w-full h-full object-cover"
         />
         <div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-white to-transparent blur-lg"></div>
       </div>
@@ -27,11 +27,6 @@ export default function Register() {
         </div>
         <div className="w-5/6  max-w-[700px]">
           <SignupForm />
-        <Link to={'/login'}>
-          <button className="  mt-7 text-lg  text-black hover:underline   text-center w-full">
-            Already have an account? Sign in!
-          </button>
-          </Link>
         </div>
       </div>
     </div>

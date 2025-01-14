@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Input from "./Input";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GlowButton from "../buttons/GlowButton";
 import { useAuthStore } from "../../store/useAuthStore";
 import { API_URL } from "../../api/endpoint";
@@ -64,7 +64,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className=" p-10 py-12 rounded shadow-lg shadow-gray-300 mx-auto w-full bg-black bg-opacity-70 text-white"
+      className=" p-10 py-12 rounded shadow-lg  mx-auto w-full bg-black bg-opacity-70 text-white"
     >
       {/* Sample Logo */}
       <img
@@ -97,6 +97,11 @@ const LoginForm = () => {
           title={"Sign In"}
         />
       </div>
+      <Link to={"/register"}>
+            <button className="my-7 text-lg  text-white hover:underline   text-center w-full">
+              Don't have an account yet? Sign up!
+            </button>
+          </Link>
     </form>
   );
 };
