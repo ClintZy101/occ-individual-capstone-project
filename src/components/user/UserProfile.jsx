@@ -56,9 +56,9 @@ const UserProfile = () => {
     };
 
     fetchAllProducts();
-
-    const filteredProducts = allProducts.filter(
-      (product) => product.user._id === userId
+    
+    const filteredProducts = allProducts?.filter(
+      (product) => product.user?._id === userId
     );
 
     setProducts(filteredProducts);

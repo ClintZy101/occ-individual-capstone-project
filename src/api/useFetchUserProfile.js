@@ -15,13 +15,13 @@ const [isLoading, setIsLoading] = useState(true);
 useEffect(() => {
   const fetchUserProfile = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/users/${userId}`, {
+      const response = await axios.get(`${API_URL}/api/users/${user._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setUser(response.data);
-      const salesResponse = await axios.get(`${API_URL}/api/sales/${userId}`, {
+      const salesResponse = await axios.get(`${API_URL}/api/sales/${user._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -35,7 +35,7 @@ useEffect(() => {
   };
 
   fetchUserProfile();
-}, [userId, token]);
+}, [user, token]);
 
 return{
 

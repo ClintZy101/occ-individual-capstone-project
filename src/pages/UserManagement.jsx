@@ -41,7 +41,7 @@ export default function UserManagement() {
   const navigate = useNavigate();
 
   const handleUser = (user) => {
-    navigate(`/user/${user._id}`);
+    navigate(`/user/${user?._id}`);
     setUser(user);
   };
 
