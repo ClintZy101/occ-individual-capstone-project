@@ -4,24 +4,48 @@ import UsersSkeletonLoader from "../components/loader/UsersSkeletonLoader";
 import { Button } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import useUserProfile from "../store/useUserProfileDetails";
+import AddUser from "../components/user-management/AddUser";
+import EditUser from "../components/user-management/EditUser";
+import DeleteUserModal from "../components/user-management/DeleteUserModal";
 
 export default function UserManagement() {
-  const { users, loading, error, createUser, updateUser, deleteUser } =
+  const { users, isLoading, error, createUser, updateUser, deleteUser } =
     useFetchUsers();
   const { setUser } = useUserProfile();
-  const [newUser, setNewUser] = useState({ username: "", email: "", role: "" });
+  const [newUser, setNewUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    role: "",
+  });
+
+  const [showAddUser, setShowAddUser] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [selectedRole, setSelectedRole] = useState("all");
   const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState('')
 
+  const toggleAddUser = () =>{
+    setShowAddUser(prevState => !prevState)
+  }
+  const toggleEditUser =() =>{
+    setEditingUser(null)
+  }
+  const toggleDeleteModal =(id, user) =>{
+    setShowDeleteModal(prevState=> !prevState)
+    setUserId(id)
+    setUserName(user.username)
+  }
+  console.log(userName)
   const navigate = useNavigate();
 
   const handleUser = (user) => {
     navigate(`/user/${user._id}`);
-    setUser(user)
+    setUser(user);
   };
 
-  if (loading) return <UsersSkeletonLoader />;
+  if (isLoading) return <UsersSkeletonLoader />;
   if (error)
     return <p className="text-red-500">Error loading users: {error.message}</p>;
 
@@ -68,43 +92,67 @@ export default function UserManagement() {
 
   return (
     <div className="text-white min-h-screen p-5 bg-gray-900">
+      {showDeleteModal && <DeleteUserModal handleDeleteUser={handleDeleteUser} isOpen={showDeleteModal} onClose={toggleDeleteModal} userId={userId} userName={userName}/>}
       <div className="w-full h-20 bg-black flex items-center justify-center mb-5">
         <h1 className="text-2xl font-bold">User Management</h1>
       </div>
-      <div className="flex justify-center mb-5">
-        <Button
-          onClick={() => setSelectedRole("all")}
-          className={`px-3 py-2 mx-1 ${
-            selectedRole === "all" ? "bg-blue-500" : "bg-gray-700"
-          } rounded-md`}
-        >
-          All
-        </Button>
-        <Button
-          onClick={() => setSelectedRole("admin")}
-          className={`px-3 py-2 mx-1 ${
-            selectedRole === "admin" ? "bg-blue-500" : "bg-gray-700"
-          } rounded-md`}
-        >
-          Admin
-        </Button>
-        <Button
-          onClick={() => setSelectedRole("seller")}
-          className={`px-3 py-2 mx-1 ${
-            selectedRole === "seller" ? "bg-blue-500" : "bg-gray-700"
-          } rounded-md`}
-        >
-          Seller
-        </Button>
-        <Button
-          onClick={() => setSelectedRole("buyer")}
-          className={`px-3 py-2 mx-1 ${
-            selectedRole === "buyer" ? "bg-blue-500" : "bg-gray-700"
-          } rounded-md`}
-        >
-          Buyer
-        </Button>
+      <div>
+        {showAddUser && (
+          <AddUser
+            handleCreateUser={handleCreateUser}
+            handleInputChange={handleInputChange}
+            newUser={newUser}
+            toggleAddUser={toggleAddUser}
+          />
+        )}
+        {editingUser && <EditUser toggleEditUser={toggleEditUser} handleUpdateUser={handleUpdateUser} setEditingUser={setEditingUser} editingUser={editingUser} />}
       </div>
+      <div className="flex justify-between mb-5">
+        <div className="flex justify-center">
+          <Button
+            onClick={() => setSelectedRole("all")}
+            className={`px-3 py-2 mx-1 ${
+              selectedRole === "all" ? "bg-blue-500" : "bg-gray-700"
+            } rounded-md`}
+          >
+            All
+          </Button>
+          <Button
+            onClick={() => setSelectedRole("admin")}
+            className={`px-3 py-2 mx-1 ${
+              selectedRole === "admin" ? "bg-blue-500" : "bg-gray-700"
+            } rounded-md`}
+          >
+            Admin
+          </Button>
+          <Button
+            onClick={() => setSelectedRole("seller")}
+            className={`px-3 py-2 mx-1 ${
+              selectedRole === "seller" ? "bg-blue-500" : "bg-gray-700"
+            } rounded-md`}
+          >
+            Seller
+          </Button>
+          <Button
+            onClick={() => setSelectedRole("buyer")}
+            className={`px-3 py-2 mx-1 ${
+              selectedRole === "buyer" ? "bg-blue-500" : "bg-gray-700"
+            } rounded-md`}
+          >
+            Buyer
+          </Button>
+        </div>
+        <div>
+        <Button
+            onClick={() => setShowAddUser(true)}
+            className="bg-purple-500"
+          >
+            Add User
+          </Button>
+        </div>
+       
+      </div>
+
       <div className="grid gap-6">
         {filteredUsers.map((user) => (
           <div
@@ -132,7 +180,7 @@ export default function UserManagement() {
               </p>
             </div>
             <div className="grid gap-4">
-              {/* <div className="flex space-x-2">
+              <div className="flex space-x-2">
                 <Button
                   onClick={() => handleEditUser(user)}
                   className="px-3 py-2 bg-blue-500 hover:bg-blue-600 rounded-md"
@@ -140,99 +188,24 @@ export default function UserManagement() {
                   Edit
                 </Button>
                 <Button
-                  onClick={() => handleDeleteUser(user._id)}
+                  onClick={() => toggleDeleteModal(user._id, user)}
                   className="px-3 py-2 bg-red-500 hover:bg-red-600 rounded-md"
                 >
-                  Delete
+                  Delete User
                 </Button>
-              </div> */}
+              </div>
               <div>
-
-                  <Button 
-                  onClick={()=>handleUser(user)}
-                  className="px-3 py-2 bg-green-500 hover:bg-green-600 rounded-md w-full">
-                    View Profile
-                  </Button>
-
+                <Button
+                  onClick={() => handleUser(user)}
+                  className="px-3 py-2 bg-green-500 hover:bg-green-600 rounded-md w-full"
+                >
+                  View Profile
+                </Button>
               </div>
             </div>
           </div>
         ))}
       </div>
-      {/* <div className="mt-10">
-        <h2 className="text-xl font-bold mb-2">Create New User</h2>
-        <input
-          type="text"
-          name="username"
-          value={newUser.username}
-          onChange={handleInputChange}
-          placeholder="Username"
-          className="p-2 bg-gray-800 rounded-md mb-2 w-full"
-        />
-        <input
-          type="email"
-          name="email"
-          value={newUser.email}
-          onChange={handleInputChange}
-          placeholder="Email"
-          className="p-2 bg-gray-800 rounded-md mb-2 w-full"
-        />
-        <input
-          type="text"
-          name="role"
-          value={newUser.role}
-          onChange={handleInputChange}
-          placeholder="Role"
-          className="p-2 bg-gray-800 rounded-md mb-2 w-full"
-        />
-        <Button
-          onClick={handleCreateUser}
-          className="p-2 bg-blue-500 rounded-md w-full "
-        >
-          Create User
-        </Button>
-      </div> */}
-      {/* {editingUser && (
-        <div className="mt-10">
-          <h2 className="text-xl font-bold mb-2">Edit User</h2>
-          <input
-            type="text"
-            name="username"
-            value={editingUser.username}
-            onChange={(e) =>
-              setEditingUser({ ...editingUser, username: e.target.value })
-            }
-            placeholder="Username"
-            className="p-2 bg-gray-800 rounded-md mb-2 w-full"
-          />
-          <input
-            type="email"
-            name="email"
-            value={editingUser.email}
-            onChange={(e) =>
-              setEditingUser({ ...editingUser, email: e.target.value })
-            }
-            placeholder="Email"
-            className="p-2 bg-gray-800 rounded-md mb-2 w-full"
-          />
-          <input
-            type="text"
-            name="role"
-            value={editingUser.role}
-            onChange={(e) =>
-              setEditingUser({ ...editingUser, role: e.target.value })
-            }
-            placeholder="Role"
-            className="p-2 bg-gray-800 rounded-md mb-2 w-full"
-          />
-          <Button
-            onClick={handleUpdateUser}
-            className="p-2 bg-green-500 rounded-md w-full"
-          >
-            Update User
-          </Button>
-        </div>
-      )} */}
     </div>
   );
 }

@@ -5,15 +5,12 @@ export const API_URL =
 
 
 export const API_ENDPOINTS = {
-  login:
-    "https://backend-for-occ-individual-capstone.onrender.com/api/auth/login",
-  register:
-    "https://backend-for-occ-individual-capstone.onrender.com/api/auth/register",
+  login: `${API_URL}/api/auth/login`,
+  register: `${API_URL}/api/auth/register`,
+  deleteUser: `${API_URL}/api/users/delete`, // Add delete user endpoint
   roles: {
-    admin:
-      "https://backend-for-occ-individual-capstone.onrender.com/api/users/admin",
-    seller:
-      "https://backend-for-occ-individual-capstone.onrender.com/api/users/seller",
-    buyer: "https://backend-for-occ-individual-capstone.onrender.com/api/users/buyer",
+    admin: `${API_URL}/api/users/admin`,
+    seller: `${API_URL}/api/users/seller`,
+    buyer: `${API_URL}/api/users/buyer`,
   },
 };
