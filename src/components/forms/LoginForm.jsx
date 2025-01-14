@@ -45,7 +45,7 @@ const LoginForm = () => {
       setLoading(true);
 
       const response = await axios.post(
-        `${LOCALHOST}api/auth/login`,
+        `${LOCALHOST}/api/auth/login`,
         formData
       );
       setUser(response.data.user);

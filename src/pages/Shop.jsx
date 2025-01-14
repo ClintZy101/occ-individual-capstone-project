@@ -35,35 +35,39 @@ export default function Shop() {
           return allProducts.filter((product) =>
             product.category.includes("bestsellers")
           );
-
+    
         case "accessories":
           return allProducts.filter((product) =>
             product.category.includes("accessories")
           );
-
+    
         case "speakers&headphones":
           return allProducts.filter(
             (product) =>
               product.category.includes("speakers") ||
               product.category.includes("headphones")
           );
-
+    
         case "homeappliances":
           return allProducts.filter((product) =>
             product.category.includes("homeappliances")
           );
-
+    
         case "smartphones&watches":
           return allProducts.filter(
             (product) =>
               product.category.includes("smartphones") ||
               product.category.includes("watches")
           );
+    
         case "products":
+            return allProducts;
+    
         default:
           return allProducts;
       }
     };
+    
     const timeoutId = setTimeout(() => {
       const searchableFields = ["title", "prod_info", "category", "user"];
       const matchesCategory = filteredProductsByCategory();
