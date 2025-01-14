@@ -29,7 +29,7 @@ export default function DeleteProductModal({
   const proceedDelete = async () => {
     try {
       const response = await axios.delete(
-        `${LOCALHOST}api/products/delete/${productId}`,
+        `${LOCALHOST}/api/products/delete/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

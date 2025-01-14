@@ -84,7 +84,7 @@ export default function EditProductDialog({
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        `${LOCALHOST}api/products/edit/${productId}`,
+        `${LOCALHOST}/api/products/edit/${productId}`,
         formData,
         {
           headers: {

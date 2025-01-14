@@ -23,7 +23,7 @@ export default function Listings() {
     try {
       // Make a POST request to your backend API
       const response = await axios.post(
-        `${LOCALHOST}api/products/add`,
+        `${LOCALHOST}/api/products/add`,
         newProduct,
         {
           headers: {

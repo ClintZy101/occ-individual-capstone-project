@@ -52,7 +52,7 @@ export default function CheckoutForm() {
       const amountInCents = Math.floor(total * 100); // Convert to cents
 
       const response = await axios.post(
-        `${LOCALHOST}api/payment/create-payment-intent`,
+        `${LOCALHOST}/api/payment/create-payment-intent`,
         {
           amount: amountInCents,
           currency: "usd",
@@ -88,7 +88,7 @@ export default function CheckoutForm() {
       alert("Payment failed. Please try again.");
     } finally {
       setProcessing(false);
-      const response = await axios.post(`${LOCALHOST}api/orders`, orderData);
+      const response = await axios.post(`${LOCALHOST}/api/orders`, orderData);
       console.log("response", response.data);
     }
   };

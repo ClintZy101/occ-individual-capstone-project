@@ -4,7 +4,7 @@ import useFetchProducts from "../api/useFetchProducts";
 import Gallery from "../components/gallery/Gallery";
 
 export default function SellerStore() {
-  const { seller, setSeller } = useSeller();
+  const { seller } = useSeller();
   const userIdToFilter = seller?._id;
   const { allProducts, fetchAllProducts } = useFetchProducts();
 

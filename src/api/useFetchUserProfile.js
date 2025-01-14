@@ -15,13 +15,13 @@ const [isLoading, setIsLoading] = useState(true);
 useEffect(() => {
   const fetchUserProfile = async () => {
     try {
-      const response = await axios.get(`${LOCALHOST}api/users/${userId}`, {
+      const response = await axios.get(`${LOCALHOST}/api/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setUser(response.data);
-      const salesResponse = await axios.get(`${LOCALHOST}api/sales/${userId}`, {
+      const salesResponse = await axios.get(`${LOCALHOST}/api/sales/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

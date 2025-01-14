@@ -6,7 +6,6 @@ import {
   FaBoxOpen,
   FaClipboardList,
   FaHourglassHalf,
-  FaArrowDown,
 } from "react-icons/fa";
 import useFetchBuyerOrders from "../api/useFetchBuyerOrders";
 import OrdersSkeletonLoader from "../components/loader/OrdersSkeletonLoader";

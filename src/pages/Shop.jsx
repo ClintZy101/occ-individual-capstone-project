@@ -16,7 +16,7 @@ export default function Shop() {
   });
 
   const [productsByCategory, setProductsByCategory] = useState([{}]);
-  console.log(chosenCategory, productsByCategory);
+
   const { minValue, maxValue } = usePriceRangeStore();
 
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -59,17 +59,6 @@ export default function Shop() {
               product.category.includes("smartphones") ||
               product.category.includes("watches")
           );
-
-        case "drones":
-          return allProducts.filter((product) =>
-            product.category.includes("drones")
-          );
-
-        case "sale":
-          return allProducts.filter((product) =>
-            product.category.includes("sale")
-          );
-
         case "products":
         default:
           return allProducts;

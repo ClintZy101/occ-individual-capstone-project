@@ -57,7 +57,7 @@ export default function OrderList() {
 
     try {
       const response = await axios.put(
-        `${LOCALHOST}api/orders/seller/order-status`,
+        `${LOCALHOST}/api/orders/seller/order-status`,
         {
           orderId,
           status: newStatus,

@@ -4,8 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import GlowButton from "../buttons/GlowButton";
 import { useAuthStore } from "../../store/useAuthStore";
-import WelcomeUser from "../modals/WelcomeUser";
-import { API_ENDPOINTS, API_URL, LOCALHOST } from "../../api/endpoint";
+import { LOCALHOST } from "../../api/endpoint";
 
 const LoginForm = () => {
   const { setUser, setToken, setTokenExpiry } = useAuthStore();

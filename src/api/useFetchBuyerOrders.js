@@ -14,7 +14,7 @@ export default function useFetchBuyerOrders() {
   const fetchOrders = async () => {
     try {
       const response = await axios.get(
-        `${LOCALHOST}api/orders/buyer/${user._id}`
+        `${LOCALHOST}/api/orders/buyer/${user._id}`
       );
       // console.log(response.data);
       setOrders(response.data);

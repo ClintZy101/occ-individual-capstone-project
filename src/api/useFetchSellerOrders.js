@@ -16,7 +16,7 @@ export default function useFetchSellerOrders() {
     setIsLoading(true);
 
     try {
-      const response = await axios.get(`${LOCALHOST}api/orders/seller/${user._id}`, {
+      const response = await axios.get(`${LOCALHOST}/api/orders/seller/${user._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

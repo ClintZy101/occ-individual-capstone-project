@@ -23,13 +23,4 @@ export const categories = [
         cat: "Smart Phones & Watches",
         link:"smartphones&watches"
     },
-    {
-        cat: "Drones",
-        link:"drones"
-    },
-    {
-        cat: "Sale",
-        link:"sale"
-    },
-   
 ]
