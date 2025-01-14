@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthStore } from "../store/useAuthStore";
-import { API_URL, API_URL } from "./endpoint";
+import { API_URL} from "./endpoint";
 
 const useFetchUsers = () => {
   const [users, setUsers] = useState([]);
