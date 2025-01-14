@@ -3,7 +3,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import useCartStore from "../../store/useCartLocalStorage";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { LOCALHOST, API_URL } from "../../api/endpoint";
+import { API_URL } from "../../api/endpoint";
 import { useAuthStore } from "../../store/useAuthStore";
 
 export default function CheckoutForm() {
@@ -52,7 +52,7 @@ export default function CheckoutForm() {
       const amountInCents = Math.floor(total * 100); // Convert to cents
 
       const response = await axios.post(
-        `${LOCALHOST}/api/payment/create-payment-intent`,
+        `${API_URL}/api/payment/create-payment-intent`,
         {
           amount: amountInCents,
           currency: "usd",
@@ -88,7 +88,7 @@ export default function CheckoutForm() {
       alert("Payment failed. Please try again.");
     } finally {
       setProcessing(false);
-      const response = await axios.post(`${LOCALHOST}/api/orders`, orderData);
+      const response = await axios.post(`${API_URL}/api/orders`, orderData);
       console.log("response", response.data);
     }
   };

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthStore } from "../store/useAuthStore";
-import { LOCALHOST, API_URL } from "./endpoint";
+import { API_URL, API_URL } from "./endpoint";
 
 const useFetchUsers = () => {
   const [users, setUsers] = useState([]);
@@ -11,7 +11,7 @@ const useFetchUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(`${LOCALHOST}/api/users/all`, {
+      const response = await axios.get(`${API_URL}/api/users/all`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -33,7 +33,7 @@ const useFetchUsers = () => {
     setIsLoading(true)
     try {
       const response = await axios.post(
-        `${LOCALHOST}/api/auth/register`,
+        `${API_URL}/api/auth/register`,
         userData
       );
       fetchUsers();
@@ -48,7 +48,7 @@ const useFetchUsers = () => {
   const updateUser = async (userId, updatedData) => {
     setIsLoading(true)
     try {
-      const response = await axios.put(`${LOCALHOST}/api/users/edit/${userId}`, updatedData, {
+      const response = await axios.put(`${API_URL}/api/users/edit/${userId}`, updatedData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -69,7 +69,7 @@ const useFetchUsers = () => {
   const deleteUser = async (userId) => {
     setIsLoading(true)
     try {
-    const response =  await axios.delete(`${LOCALHOST}/api/users/delete/${userId}`, {
+    const response =  await axios.delete(`${API_URL}/api/users/delete/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

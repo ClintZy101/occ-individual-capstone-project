@@ -3,7 +3,7 @@ import SingleProduct from "./SingleProduct";
 import AddProductModal from "./AddProductModal";
 import { Button } from "@material-tailwind/react";
 import axios from "axios";
-import { API_URL, LOCALHOST } from "../../../api/endpoint";
+import { API_URL } from "../../../api/endpoint";
 import { useAuthStore } from "../../../store/useAuthStore";
 import SingleProductSkeleton from "../../loader/SingleProductListingSkeleton";
 import useFetchProducts from "../../../api/useFetchProducts";
@@ -23,7 +23,7 @@ export default function Listings() {
     try {
       // Make a POST request to your backend API
       const response = await axios.post(
-        `${LOCALHOST}/api/products/add`,
+        `${API_URL}/api/products/add`,
         newProduct,
         {
           headers: {

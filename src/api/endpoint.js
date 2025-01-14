@@ -1,4 +1,4 @@
-export const LOCALHOST = 'http://localhost:1234'
+// export const API_URL = 'http://localhost:1234'
 
 export const API_URL =
   "https://backend-for-occ-individual-capstone.onrender.com";

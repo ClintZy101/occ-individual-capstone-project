@@ -3,7 +3,7 @@ import Input from "./Input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import GlowButton from "../buttons/GlowButton";
-import { API_URL, LOCALHOST } from "../../api/endpoint";
+import {  API_URL } from "../../api/endpoint";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -64,7 +64,7 @@ const SignupForm = () => {
       setLoading(true);
 
       const registerResponse = await axios.post(
-        `${LOCALHOST}/api/auth/register`,
+        `${API_URL}/api/auth/register`,
         formData
       );
       setRegisterResponse(registerResponse);

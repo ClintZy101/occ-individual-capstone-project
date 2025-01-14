@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import GlowButton from "../buttons/GlowButton";
 import { useAuthStore } from "../../store/useAuthStore";
-import { LOCALHOST } from "../../api/endpoint";
+import { API_URL } from "../../api/endpoint";
 
 const LoginForm = () => {
   const { setUser, setToken, setTokenExpiry } = useAuthStore();
@@ -45,7 +45,7 @@ const LoginForm = () => {
       setLoading(true);
 
       const response = await axios.post(
-        `${LOCALHOST}/api/auth/login`,
+        `${API_URL}/api/auth/login`,
         formData
       );
       setUser(response.data.user);

@@ -7,7 +7,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import axios from "axios";
-import { API_URL, LOCALHOST } from "../../../api/endpoint";
+import { API_URL } from "../../../api/endpoint";
 import { useAuthStore } from "../../../store/useAuthStore";
 import useFetchProducts from "../../../api/useFetchProducts";
 
@@ -84,7 +84,7 @@ export default function EditProductDialog({
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        `${LOCALHOST}/api/products/edit/${productId}`,
+        `${API_URL}/api/products/edit/${productId}`,
         formData,
         {
           headers: {

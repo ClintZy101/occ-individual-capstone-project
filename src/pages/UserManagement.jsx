@@ -138,7 +138,7 @@ export default function UserManagement() {
             onClick={() => setSelectedRole("buyer")}
             className={`px-3 py-2 mx-1 ${
               selectedRole === "buyer" ? "bg-blue-500" : "bg-gray-700"
-            } rounded-md`}
+            } rounded-md`} 
           >
             Buyer
           </Button>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { API_URL, LOCALHOST } from "./endpoint";
+import { API_URL } from "./endpoint";
 import { useAuthStore } from "../store/useAuthStore";
 
 export default function useFetchBuyerOrders() {
@@ -14,7 +14,7 @@ export default function useFetchBuyerOrders() {
   const fetchOrders = async () => {
     try {
       const response = await axios.get(
-        `${LOCALHOST}/api/orders/buyer/${user._id}`
+        `${API_URL}/api/orders/buyer/${user._id}`
       );
       // console.log(response.data);
       setOrders(response.data);

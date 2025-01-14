@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import axios from "axios";
-import { LOCALHOST, API_URL } from "./endpoint";
+import {  API_URL } from "./endpoint";
 
 export default function useFetchProducts() {
 
@@ -15,7 +15,7 @@ export default function useFetchProducts() {
     setIsLoading(true); // Start loading
 
     try {
-      const response = await axios.get(`${LOCALHOST}/api/products`);
+      const response = await axios.get(`${API_URL}/api/products`);
 
       if (response.status === 200) {
         console.log("All products fetched successfully", response.data);
@@ -42,7 +42,7 @@ export default function useFetchProducts() {
 
     try {
       const response = await axios.get(
-        `${LOCALHOST}/api/products/user-products`,
+        `${API_URL}/api/products/user-products`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Pass the token in the header
