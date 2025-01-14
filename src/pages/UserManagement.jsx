@@ -57,6 +57,7 @@ export default function UserManagement() {
   const handleCreateUser = () => {
     createUser(newUser);
     setNewUser({ username: "", email: "", role: "" });
+    toggleAddUser();
   };
 
   const handleEditUser = (user) => {
